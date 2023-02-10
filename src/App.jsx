@@ -2,7 +2,8 @@ import { useState } from 'react';
 import logo from './logo.svg';
 import { useDbData } from './utils/firebase';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import RestarauntPage from './components/RestarauntPage';
+import RestaurantPage from './components/RestaurantPage';
+import RestaurantList from './components/RestaurantList';
 import './App.css';
 
 const App = () => {
@@ -16,46 +17,21 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>Hello Vite + React!</p>
-          <p>
-            <button onClick={() => setCount(count => count + 1)}>
-              count is: {count}
-            </button>
-          </p>
-          <p>
-            Edit <code>App.jsx</code> and save to test hot module replacement (HMR).
-          </p>
-          <p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-            {' | '}
-            <a
-              className="App-link"
-              href="https://vitejs.dev/guide/features.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Vite Docs
-            </a>
-          </p>
-        </header>
         <div>
-        <Routes>
+          <Routes>
             <Route
-              path="/:restaraunt_id"
-              element={<RestarauntPage
+              path="/"
+              element={<RestaurantList
+              restaurants={Object.values(data.restaurants)}
               />}
             />
-            </Routes>
-            </div>
+            <Route
+              path="/:restaraunt_id"
+              element={<RestaurantPage
+              />}
+            />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

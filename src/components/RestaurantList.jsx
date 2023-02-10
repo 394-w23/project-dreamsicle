@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import logo from '../logo.svg';
 
-const RestarauntPage = () => {
+const RestaurantList = ({restaurants}) => {
     const { id } = useParams();
 
     const [count, setCount] = useState(0);
 
     return (<header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p>Hello Vite + React! {restaurants[0].profile.name}</p>
         <p>
             <button onClick={() => setCount(count => count + 1)}>
                 count is: {count}
@@ -40,4 +40,4 @@ const RestarauntPage = () => {
     </header>);
 }
 
-export default RestarauntPage;
+export default RestaurantList;
