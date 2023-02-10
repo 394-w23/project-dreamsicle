@@ -27,18 +27,18 @@ const app = initializeApp(firebaseConfig);
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(app);
 const storage = getStorage(app);
-const auth = getAuth(app);
+//const auth = getAuth(app);
 
 
-if (import.meta.env.MODE !== 'prod') {
-  connectAuthEmulator(auth, "http://127.0.0.1:9099");
-  connectDatabaseEmulator(database, "127.0.0.1", 9000);
-  signInWithCredential(auth, GoogleAuthProvider.credential(
-    '{"sub": "sbz6ijYT7K1gL4MGXmqfeSnoQ3QR", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
-  ));
+// if (import.meta.env.MODE !== 'prod') {
+//   connectAuthEmulator(auth, "http://127.0.0.1:9099");
+//   connectDatabaseEmulator(database, "127.0.0.1", 9000);
+//   signInWithCredential(auth, GoogleAuthProvider.credential(
+//     '{"sub": "sbz6ijYT7K1gL4MGXmqfeSnoQ3QR", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
+//   ));
 
   // set flag to avoid connecting twice, e.g., because of an editor hot-reload. deprecated issue since emulators used build
-}
+//}
 
 export const useDbData = (path) => {
   const [data, setData] = useState();
@@ -79,56 +79,56 @@ const makeResult = (error) => {
 
 
 // TODO: Make this into a class
-const provider = new GoogleAuthProvider();
-export const FirebaseSignIn = async () => {
+// const provider = new GoogleAuthProvider();
+// export const FirebaseSignIn = async () => {
 
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // ...
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-        console.log(error)
-      });
+//     signInWithPopup(auth, provider)
+//       .then((result) => {
+//         // This gives you a Google Access Token. You can use it to access the Google API.
+//         const credential = GoogleAuthProvider.credentialFromResult(result);
+//         const token = credential.accessToken;
+//         // The signed-in user info.
+//         const user = result.user;
+//         // ...
+//       }).catch((error) => {
+//         // Handle Errors here.
+//         const errorCode = error.code;
+//         const errorMessage = error.message;
+//         // The email of the user's account used.
+//         const email = error.customData.email;
+//         // The AuthCredential type that was used.
+//         const credential = GoogleAuthProvider.credentialFromError(error);
+//         // ...
+//         console.log(error)
+//       });
   
-}
+// }
 
-export const FirebaseLogout = async () => {
-  signOut(auth).then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
-}
-
-
+// export const FirebaseLogout = async () => {
+//   signOut(auth).then(() => {
+//     // Sign-out successful.
+//   }).catch((error) => {
+//     // An error happened.
+//   });
+// }
 
 
 
-export const useAuth = () => {
-  const [user, setUser] = useState();
 
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        setUser(user)
-      } else {
-        setUser()
-      }
-    });
-  }, []);
 
-  return user
-}
+// export const useAuth = () => {
+//   const [user, setUser] = useState();
+
+//   useEffect(() => {
+//     auth.onAuthStateChanged(user => {
+//       if (user) {
+//         setUser(user)
+//       } else {
+//         setUser()
+//       }
+//     });
+//   }, []);
+
+//   return user
+// }
 
