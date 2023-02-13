@@ -1,7 +1,13 @@
-const RestaurantPage = () => {
+import { Link } from "react-router-dom";
+
+const RestaurantPage = ({restaurant, restaurantID}) => {
+    const orderID = '10'
 
     return (
-        <div>Rest</div>
+        <Link to={`/${restaurant.id}/${orderID}`}>
+            <div>Rest</div>
+        </Link>
+
     );
 };
 
