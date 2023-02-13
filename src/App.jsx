@@ -28,6 +28,7 @@ const App = () => {
               element={<RestaurantList
               restaurants={Object.values(data.restaurants)}
               setRestaurant={setRestaurant}
+              setRestaurantID={setRestaurantID}
               />}
             />
             <Route

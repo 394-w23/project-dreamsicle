@@ -4,7 +4,6 @@ import logo from '../logo.svg';
 
 const Restaurant = ({ restaurant, setRestaurantID, setRestaurant }) => {
     const { id } = useParams();
-    const [count, setCount] = useState(0);
     const onClick = () => {
         setRestaurant(restaurant);
         setRestaurantID(restaurant.id)
