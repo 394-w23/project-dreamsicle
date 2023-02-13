@@ -1,5 +1,8 @@
 .restaurant{
-    width: 500 px;
-    color: aliceblue;
-    background-color: aliceblue;
+    margin: 0 5vw 2.5vw 5vw;
+    padding-top: 2.5vw;
+}
+
+.restaurant-details{
+    
 }
