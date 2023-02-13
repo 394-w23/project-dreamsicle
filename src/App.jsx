@@ -19,7 +19,7 @@ const App = () => {
   if (!data) return <h1>No data found</h1>;
 
   return (
-    <div className="App">
+    <div className='App'>
       <BrowserRouter>
         <div>
           <Routes>
