@@ -24,7 +24,7 @@ const RestaurantPage = ({ restaurant, cart, setCart }) => {
   const submitOrder = () => { //////////////////////////////////////////////////////////// CURRENTLY, ITEM IS TECHNICALLY section-item. Remember to fix this
     // console.log("anything") /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // console.log(moment().format())
-    let orders = Object.keys(cart).filter((key, index) => cart[key] > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key]}));
+    let orders = Object.keys(cart).filter((key, index) => cart[key] > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
     // console.log(orders)
 
     let ordersObject = {}
@@ -33,13 +33,13 @@ const RestaurantPage = ({ restaurant, cart, setCart }) => {
 
     // if there are any orders to submit, we should submit; otherwise do nothing
     if (orders.length > 0) {
-      let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject}
+      let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject }
       console.log("before", formData)
       console.log("after", formData)
       updateTransactions(formData)
       setCart({})
     }
-    
+
   }
 
   return (
@@ -52,12 +52,14 @@ const RestaurantPage = ({ restaurant, cart, setCart }) => {
           <MenuSection key={s.id} menu_section={s} cart={cart} setCart={setCart} />
         ))}
       </div>
-      <Link
-        to={`/${restaurant.id}/${transactionID}`}
-        style={{ textDecoration: "none" }}
-      >
-        <Button onClick={submitOrder}>Check out order</Button>
-      </Link>
+      <div className="submit">
+        <Link
+          to={`/${restaurant.id}/${transactionID}`}
+          style={{ textDecoration: "none" }}
+        >
+          <Button className="submit-button" onClick={submitOrder}>Check Out Order</Button>
+        </Link>
+      </div>
     </div>
   );
 };
