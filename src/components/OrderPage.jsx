@@ -58,7 +58,8 @@ const OrderPage = ({ restaurants }) => {
     //TODO: Hardcoded delivery time
     let minutes = 34;
     return (
-        <div className="order-page" onClick={nextState}>
+        <div className="order-page">
+            <Header />
             <div className="table">
                 <Table>
                     <thead>
@@ -71,7 +72,7 @@ const OrderPage = ({ restaurants }) => {
                     <tbody>{rows}</tbody>
                 </Table>
             </div>
-            <div className="timeline">
+            <div className="timeline" onClick={nextState}>
                 <Timeline active={currentState} bulletSize={24} lineWidth={2}>
                     <Timeline.Item bullet={<RiMailSendLine size={12} />} title="Sent">
                         {currentState >= 0 ? <><Text color="dimmed" size="sm">Your order has been sent to {restaurants[transaction.restaurant].profile.name}.</Text>

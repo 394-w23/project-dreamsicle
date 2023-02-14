@@ -45,8 +45,11 @@ const RestaurantPage = ({ restaurant, cart, setCart, setTransactionID }) => {
   return (
     <div className="restaurant-page">
       <Header />
-      <img src={restaurant.profile.photo}></img>
-      <div>{restaurant.profile.description}</div>
+      <div className="restaurant-description">
+        <img src={restaurant.profile.photo}></img>
+        <div>{restaurant.profile.description}</div>
+      </div>
+
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
           <MenuSection key={s.id} menu_section={s} cart={cart} setCart={setCart} />
