@@ -5,6 +5,7 @@ import uuid from 'react-uuid';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 import { useForm } from '@mantine/form';
 import moment from 'moment';
+import Header from './Header';
 
 const RestaurantPage = ({ restaurant, cart, setCart }) => {
   const transactionID = uuid();
@@ -42,7 +43,8 @@ const RestaurantPage = ({ restaurant, cart, setCart }) => {
   }
 
   return (
-    <div>
+    <div className="restaurant-page">
+      <Header />
       <img src={restaurant.profile.photo}></img>
       <div>{restaurant.profile.description}</div>
       <div>
