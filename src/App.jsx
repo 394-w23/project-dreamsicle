@@ -45,7 +45,6 @@ const App = () => {
               path="/:restaraunt_id/:transaction_id"
               element={<OrderPage
                 restaurants={Object.values(data.restaurants)}
-                transactionID={transactionID}
               />}
             />
           </Routes>

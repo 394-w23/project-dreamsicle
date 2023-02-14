@@ -4,7 +4,8 @@ import { useDbData } from '../utils/firebase';
 import OrderItem from "./OrderItem";
 import { useParams } from "react-router";
 
-const OrderPage = ({transactionID, restaurants}) => {
+const OrderPage = ({restaurants}) => {
+    const transactionID = useParams().transaction_id
     console.log(transactionID)
     const [transaction, error] = useDbData(`/transactions/${transactionID}`);
     if (error) return <h1>Error loading data: {error.toString()}</h1>;
