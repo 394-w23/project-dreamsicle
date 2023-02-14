@@ -29,13 +29,11 @@ const RestaurantPage = ({ restaurant, cart, setCart, setTransactionID }) => {
 
     let ordersObject = {}
     orders.forEach(order => ordersObject[order.id] = order)
-    console.log(ordersObject)
+    // console.log(ordersObject)
 
     // if there are any orders to submit, we should submit; otherwise do nothing
     if (orders.length > 0) {
       let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject }
-      console.log("before", formData)
-      console.log("after", formData)
       updateTransactions(formData)
       setCart({})
       setTransactionID(transactionID)

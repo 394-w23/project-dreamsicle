@@ -14,7 +14,6 @@ const App = () => {
   const [cart,setCart] = useState({})
   const [transactionID,setTransactionID] = useState({})
   const [restaurant,setRestaurant] = useState([])
-  console.log(cart)
 
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
@@ -45,8 +44,7 @@ const App = () => {
             <Route
               path="/:restaraunt_id/:transaction_id"
               element={<OrderPage
-                cart={cart}
-                setRestaurantID={setRestaurantID}
+                restaurants={Object.values(data.restaurants)}
                 transactionID={transactionID}
               />}
             />
