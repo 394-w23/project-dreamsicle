@@ -16,7 +16,7 @@ const Restaurant = ({ restaurant, setRestaurantID, setRestaurant }) => {
         <div className='restaurant'>
             <Link to={`/${restaurant.id}`} style={{textDecoration: 'none'}}>
 
-            <Card shadow="sm" p="lg" radius="md" withBorder>
+            <Card onClick={onClick} shadow="sm" p="lg" radius="md" withBorder>
       <Card.Section>
         <Image
           src={restaurant.profile.photo}
@@ -33,7 +33,7 @@ const Restaurant = ({ restaurant, setRestaurantID, setRestaurant }) => {
 
 
       <Group position="apart" mt="md" mb="xs">
-      <Text>Advance notice: {restaurant.profile.advance_notice} </Text>
+      <Text>Advance notice: {restaurant.profile.advance_notice} hours</Text>
       <Text>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound} people</Text>
 
       </Group>
