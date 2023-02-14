@@ -21,7 +21,6 @@ const OrderPage = ({ restaurants }) => {
     let order = [];
     //create a list of all the items in our order
     Object.values(transaction.orders).forEach(i => {
-        menu.forEach(m => console.log(m))
         order.push({ item: menu.filter(menu_item => menu_item.id.toString() === i.item)[0], quantity: i.quantity })
     })
     const nextState = () => {
