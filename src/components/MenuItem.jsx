@@ -31,7 +31,7 @@ const MenuItem = ({ menu_item }) => {
         <Text>
           {menu_item.servings} servings</Text>
       </Group>
-      <QuantitySelector setQuantity={setQuantity}/> 
+      <QuantitySelector setQuantity={setQuantity} quantity={quantity}/> 
     </Card>
 
     // <Card>
