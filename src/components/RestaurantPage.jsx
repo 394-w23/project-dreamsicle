@@ -21,16 +21,18 @@ const RestaurantPage = ({ restaurant, cart, setCart }) => {
   const submitOrder = () => { //////////////////////////////////////////////////////////// CURRENTLY, ITEM IS TECHNICALLY section-item. Remember to fix this
     // console.log("anything") /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // console.log(moment().format())
-    let orders=Object.keys(cart).map((key,index)=>({ id: uuid(), item: key, quantity: cart[key]}));
+    let orders=Object.keys(cart).filter((key,index)=>cart[key]>0).map((key,index)=>({ id: uuid(), item: key, quantity: cart[key]}));
     console.log(orders)
 
-    // Object.keys(cart).map(function(key) {
-    //   form.insertListItem('orders', { id: uuid(), item: key, quantity: cart[key] })
-    // });
-    let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: orders}
-    console.log("before",formData)
-    console.log("after",formData)
-    updateTransactions(formData)
+    // if there are any orders to submit, we should submit; otherwise do nothing
+    if (orders.length>0) {
+      let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: orders}
+      console.log("before",formData)
+      console.log("after",formData)
+      updateTransactions(formData)
+      setCart({})
+    }
+    
   }
 
   return (

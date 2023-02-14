@@ -2,9 +2,10 @@ import Restaurant from "./Restaurant";
 import { useState } from 'react';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import QuantitySelector from "./QuantitySelector";
+import './MenuItem.css';
 
 
-const MenuItem = ({ menu_item, setCart, cart, section_id}) => {
+const MenuItem = ({ menu_item, setCart, cart, section_id }) => {
   const orderID = "10";
   // console.log(restaurant)
 
@@ -13,11 +14,11 @@ const MenuItem = ({ menu_item, setCart, cart, section_id}) => {
   const updateCart = (num) => {
     setQuantity(num)
     let list = cart
-    list[menu_item.id+"-"+section_id] = num ////////////////////////////////////// FIX THIS, CURRENTLY REFERENCING SECTION ID AND MENU ITEM ID, BUT WILL ONLY NEED TO DO MENU ITEM ID WHEN THEY'RE UNIQUE
+    list[menu_item.id + "-" + section_id] = num ////////////////////////////////////// FIX THIS, CURRENTLY REFERENCING SECTION ID AND MENU ITEM ID, BUT WILL ONLY NEED TO DO MENU ITEM ID WHEN THEY'RE UNIQUE
     setCart(list)
   }
 
-  return (
+  return (<div className="menu-item">
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Card.Section>
         <Image
@@ -35,18 +36,11 @@ const MenuItem = ({ menu_item, setCart, cart, section_id}) => {
       <Group position="apart" mt="md" mb="xs">
         <Text>
           {menu_item.servings} servings</Text>
-          <QuantitySelector setQuantity={updateCart} quantity={quantity} />
+        <QuantitySelector setQuantity={updateCart} quantity={quantity} />
       </Group>
-      <Text position="right">Subtotal: ${(isNaN(cart[menu_item.id+"-"+section_id]) ? 0:cart[menu_item.id+"-"+section_id])*menu_item.price}</Text>
+      <Text position="right">Subtotal: ${(isNaN(cart[menu_item.id + "-" + section_id]) ? 0 : cart[menu_item.id + "-" + section_id]) * menu_item.price}</Text>
     </Card>
-
-    // <Card>
-    //   <div>{menu_item.name}</div>
-    //   <div>{menu_item.servings} servings</div>
-    //   <div>${menu_item.price}</div>
-    //   <div>{menu_item.ingredients}</div>
-    //   <img src={menu_item.photo}></img>
-    // </Card>
+  </div>
   );
 };
 

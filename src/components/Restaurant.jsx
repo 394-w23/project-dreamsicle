@@ -6,45 +6,45 @@ import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 
 
 const Restaurant = ({ restaurant, setRestaurantID, setRestaurant }) => {
-    const { id } = useParams();
-    const onClick = () => {
-        setRestaurant(restaurant);
-        setRestaurantID(restaurant.id)
-    }
+  const { id } = useParams();
+  const onClick = () => {
+    setRestaurant(restaurant);
+    setRestaurantID(restaurant.id)
+  }
 
-    return (
-        <div className='restaurant'>
-            <Link to={`/${restaurant.id}`} style={{textDecoration: 'none'}}>
+  return (
+    <div className='restaurant'>
+      <Link to={`/${restaurant.id}`} style={{ textDecoration: 'none' }}>
 
-            <Card onClick={onClick} shadow="sm" p="lg" radius="md" withBorder>
-      <Card.Section>
-        <Image
-          src={restaurant.profile.photo}
-          height={160}
-          alt="Restaurant image"
-        />
-      </Card.Section>
+        <Card onClick={onClick} shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section>
+            <Image
+              src={restaurant.profile.photo}
+              height={160}
+              alt="Restaurant image"
+            />
+          </Card.Section>
 
-      <Group position="apart" mt="md" mb="xs">
-      <Text weight={500}>{restaurant.profile.name}</Text>
-    <Text weight={500}>$$</Text>
-        
-      </Group>
+          <Group position="apart" mt="md" mb="xs">
+            <Text weight={500}>{restaurant.profile.name}</Text>
+            <Text weight={500}>$$</Text>
 
-
-      <Group position="apart" mt="md" mb="xs">
-      <Text>Advance notice: {restaurant.profile.advance_notice} hours</Text>
-      <Text>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound} people</Text>
-
-      </Group>
+          </Group>
 
 
+          <Group position="apart" mt="md" mb="xs">
+            <Text>Advance notice: {restaurant.profile.advance_notice} hours</Text>
+            <Text>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound} people</Text>
+
+          </Group>
 
 
-    </Card>
 
 
-{/*                
+        </Card>
+
+
+        {/*                
                 <div className="">
                     <img className='photo' src={`${restaurant.profile.photo}`}></img>
                 </div>
@@ -59,9 +59,9 @@ const Restaurant = ({ restaurant, setRestaurantID, setRestaurant }) => {
 
                 </div> */}
 
-                
-            </Link>
-        </div>);
+
+      </Link>
+    </div>);
 }
 
 export default Restaurant;
