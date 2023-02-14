@@ -47,7 +47,7 @@ const RestaurantPage = ({ restaurant, cart, setCart }) => {
       <div>{restaurant.profile.description}</div>
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
-          <MenuSection menu_section={s} cart={cart} setCart={setCart} />
+          <MenuSection key={s.id} menu_section={s} cart={cart} setCart={setCart} />
         ))}
       </div>
       <Link
