@@ -13,6 +13,7 @@ const App = () => {
   const [restaurantID,setRestaurantID] = useState([]);
   const [cart,setCart] = useState([])
   const [restaurant,setRestaurant] = useState([])
+  console.log(cart)
 
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
@@ -35,7 +36,8 @@ const App = () => {
               path="/:restaraunt_id"
               element={<RestaurantPage
                 restaurant={restaurant}
-                restaurantID={restaurantID}
+                setCart={setCart}
+                cart={cart}
               />}
             />
             <Route

@@ -4,13 +4,21 @@ import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import QuantitySelector from "./QuantitySelector";
 
 
-const MenuItem = ({ menu_item }) => {
+const MenuItem = ({ menu_item, setCart, cart }) => {
   const orderID = "10";
   // console.log(restaurant)
 
   const [quantity, setQuantity] = useState(0);
-    
-  
+
+  const updateCart = (num) => {
+    setQuantity(num)
+    let list = cart
+    list[menu_item] = num
+    setCart(list)
+    console.log(cart)
+
+  }
+
 
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
@@ -31,7 +39,7 @@ const MenuItem = ({ menu_item }) => {
         <Text>
           {menu_item.servings} servings</Text>
       </Group>
-      <QuantitySelector setQuantity={setQuantity} quantity={quantity}/> 
+      <QuantitySelector setQuantity={updateCart} quantity={quantity} />
     </Card>
 
     // <Card>

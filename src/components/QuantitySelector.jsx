@@ -7,9 +7,7 @@ import { Button, NumberInput, Group, ActionIcon } from '@mantine/core';
 
 const QuantitySelector = ({ quantity, setQuantity }) => {
     const { number } = useParams();
-    // const [value, setValue] = useState<number | ''>(0);
-    // const handlers = useRef<NumberInputHandlers>();
-    // console.log(quantity);
+
     const onClick = () => {
         setRestaurant(restaurant);
         setRestaurantID(restaurant.id)
@@ -27,7 +25,7 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
         <div>
         <Group spacing={5}>
       <ActionIcon size={42} variant="default" onClick={() => subtract()}>
-        –
+        -
       </ActionIcon>
 
       <NumberInput

@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
 import { Button } from "@mantine/core";
 
-const RestaurantPage = ({ restaurant, restaurantID }) => {
+const RestaurantPage = ({ restaurant, cart,setCart }) => {
   const orderID = "10";
-  // console.log(restaurant)
 
   return (
     <div>
@@ -12,7 +11,7 @@ const RestaurantPage = ({ restaurant, restaurantID }) => {
       <div>{restaurant.profile.description}</div>
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
-          <MenuSection menu_section={s} />
+          <MenuSection menu_section={s} cart= {cart} setCart={setCart}/>
         ))}
       </div>
       <Link
