@@ -5,9 +5,11 @@ import uuid from 'react-uuid';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 import { useForm } from '@mantine/form';
 import moment from 'moment';
+import { useParams } from "react-router-dom";
 import Header from './Header';
 
 const RestaurantPage = ({ restaurant, cart, setCart, setTransactionID }) => {
+  const restaurantID = useParams().restaurant_id
   const transactionID = uuid();
   const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
@@ -21,8 +23,7 @@ const RestaurantPage = ({ restaurant, cart, setCart, setTransactionID }) => {
     },
   });
 
-  const submitOrder = () => { //////////////////////////////////////////////////////////// CURRENTLY, ITEM IS TECHNICALLY section-item. Remember to fix this
-    // console.log("anything") /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
+  const submitOrder = () => {     // console.log("anything") /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // console.log(moment().format())
     let orders = Object.keys(cart).filter((key, index) => cart[key] > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
     // console.log(orders)

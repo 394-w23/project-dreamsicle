@@ -33,7 +33,7 @@ const App = () => {
               />}
             />
             <Route
-              path="/:restaraunt_id"
+              path="/:restaurant_id"
               element={<RestaurantPage
                 restaurant={restaurant}
                 setCart={setCart}
