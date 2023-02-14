@@ -8,27 +8,33 @@ import moment from 'moment';
 
 const RestaurantPage = ({ restaurant, cart, setCart }) => {
   const transactionID = uuid();
-  const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`)
+  const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
+
   let form = useForm({
     initialValues: {
       id: transactionID,
       datetime: '',
       restaurant: restaurant.id,
       user: 0, ////////////////////////////////////////////////////////////////// HARD CODED USER
-      orders: []
+      orders: {}
     },
   });
+
   const submitOrder = () => { //////////////////////////////////////////////////////////// CURRENTLY, ITEM IS TECHNICALLY section-item. Remember to fix this
     // console.log("anything") /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // console.log(moment().format())
-    let orders=Object.keys(cart).filter((key,index)=>cart[key]>0).map((key,index)=>({ id: uuid(), item: key, quantity: cart[key]}));
-    console.log(orders)
+    let orders = Object.keys(cart).filter((key, index) => cart[key] > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key]}));
+    // console.log(orders)
+
+    let ordersObject = {}
+    orders.forEach(order => ordersObject[order.id] = order)
+    console.log(ordersObject)
 
     // if there are any orders to submit, we should submit; otherwise do nothing
-    if (orders.length>0) {
-      let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: orders}
-      console.log("before",formData)
-      console.log("after",formData)
+    if (orders.length > 0) {
+      let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject}
+      console.log("before", formData)
+      console.log("after", formData)
       updateTransactions(formData)
       setCart({})
     }
