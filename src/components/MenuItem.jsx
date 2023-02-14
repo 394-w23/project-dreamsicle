@@ -14,6 +14,8 @@ const MenuItem = ({ menu_item, setCart, cart, section_id }) => {
   const updateCart = (num) => {
     setQuantity(num)
     let list = cart
+    
+    //TODO: Fix this
     list[menu_item.id + "-" + section_id] = num ////////////////////////////////////// FIX THIS, CURRENTLY REFERENCING SECTION ID AND MENU ITEM ID, BUT WILL ONLY NEED TO DO MENU ITEM ID WHEN THEY'RE UNIQUE
     setCart(list)
   }

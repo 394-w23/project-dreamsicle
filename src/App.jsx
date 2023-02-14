@@ -12,6 +12,7 @@ const App = () => {
   const [data, error] = useDbData("/");
   const [restaurantID,setRestaurantID] = useState([]);
   const [cart,setCart] = useState({})
+  const [transactionID,setTransactionID] = useState({})
   const [restaurant,setRestaurant] = useState([])
   console.log(cart)
 
@@ -38,6 +39,7 @@ const App = () => {
                 restaurant={restaurant}
                 setCart={setCart}
                 cart={cart}
+                setTransactionID={setTransactionID}
               />}
             />
             <Route
@@ -45,6 +47,7 @@ const App = () => {
               element={<OrderPage
                 cart={cart}
                 setRestaurantID={setRestaurantID}
+                transactionID={transactionID}
               />}
             />
           </Routes>

@@ -7,7 +7,7 @@ import { useForm } from '@mantine/form';
 import moment from 'moment';
 import Header from './Header';
 
-const RestaurantPage = ({ restaurant, cart, setCart }) => {
+const RestaurantPage = ({ restaurant, cart, setCart, setTransactionID }) => {
   const transactionID = uuid();
   const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
@@ -38,6 +38,7 @@ const RestaurantPage = ({ restaurant, cart, setCart }) => {
       console.log("after", formData)
       updateTransactions(formData)
       setCart({})
+      setTransactionID(transactionID)
     }
 
   }
