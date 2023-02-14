@@ -44,7 +44,7 @@ const OrderPage = ({ restaurants }) => {
         <div className="order-page" onClick={nextState}>
             <div>
                 {currentState === "" && <div>Order Received!</div>}
-                {order.map(itemObj => <OrderItem item={itemObj.item} quantity={itemObj.quantity} />)}
+                {order.map(itemObj => <OrderItem key={itemObj.item.id} item={itemObj.item} quantity={itemObj.quantity} />)}
             </div>
             {
             currentState === "preparing" ?
