@@ -13,7 +13,7 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
         setRestaurantID(restaurant.id)
     };
     const add = () => {
-        setQuantity(quantity + 1)
+        setQuantity(isNaN(quantity) ? 1 : quantity+1)
         // setCount(count + 1)
     };
     const subtract = () => {

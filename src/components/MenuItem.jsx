@@ -4,7 +4,7 @@ import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import QuantitySelector from "./QuantitySelector";
 
 
-const MenuItem = ({ menu_item, setCart, cart }) => {
+const MenuItem = ({ menu_item, setCart, cart, section_id}) => {
   const orderID = "10";
   // console.log(restaurant)
 
@@ -13,12 +13,9 @@ const MenuItem = ({ menu_item, setCart, cart }) => {
   const updateCart = (num) => {
     setQuantity(num)
     let list = cart
-    list[menu_item] = num
+    list[menu_item.id+"-"+section_id] = num ////////////////////////////////////// FIX THIS, CURRENTLY REFERENCING SECTION ID AND MENU ITEM ID, BUT WILL ONLY NEED TO DO MENU ITEM ID WHEN THEY'RE UNIQUE
     setCart(list)
-    console.log(cart)
-
   }
-
 
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
@@ -38,8 +35,9 @@ const MenuItem = ({ menu_item, setCart, cart }) => {
       <Group position="apart" mt="md" mb="xs">
         <Text>
           {menu_item.servings} servings</Text>
+          <QuantitySelector setQuantity={updateCart} quantity={quantity} />
       </Group>
-      <QuantitySelector setQuantity={updateCart} quantity={quantity} />
+      <Text position="right">Subtotal: ${(isNaN(cart[menu_item.id+"-"+section_id]) ? 0:cart[menu_item.id+"-"+section_id])*menu_item.price}</Text>
     </Card>
 
     // <Card>

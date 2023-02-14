@@ -11,7 +11,7 @@ const App = () => {
   const [count, setCount] = useState(0);
   const [data, error] = useDbData("/");
   const [restaurantID,setRestaurantID] = useState([]);
-  const [cart,setCart] = useState([])
+  const [cart,setCart] = useState({})
   const [restaurant,setRestaurant] = useState([])
   console.log(cart)
 
