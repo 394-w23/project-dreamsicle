@@ -1,9 +1,16 @@
 import Restaurant from "./Restaurant";
+import { useState } from 'react';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import QuantitySelector from "./QuantitySelector";
+
 
 const MenuItem = ({ menu_item }) => {
   const orderID = "10";
   // console.log(restaurant)
+
+  const [quantity, setQuantity] = useState(0);
+    
+  
 
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
@@ -17,13 +24,14 @@ const MenuItem = ({ menu_item }) => {
 
       <Group position="apart" mt="md" mb="xs">
         <Text weight={500}>{menu_item.name}</Text>
-        <Text weight={500}>{menu_item.price}</Text>
+        <Text weight={500}>${menu_item.price}</Text>
       </Group>
 
       <Group position="apart" mt="md" mb="xs">
         <Text>
           {menu_item.servings} servings</Text>
       </Group>
+      <QuantitySelector setQuantity={setQuantity}/> 
     </Card>
 
     // <Card>
