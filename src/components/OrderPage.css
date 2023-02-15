@@ -1,4 +1,6 @@
 .order-page {
+    height: 100%;
+    min-height: 88vh;
     margin-top: 8vh;
 }
 

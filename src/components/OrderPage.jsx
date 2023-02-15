@@ -43,7 +43,7 @@ const OrderPage = ({ restaurants }) => {
     rows.push(<tr key={0}>
         <td><span style={{ fontWeight: 'bold' }}>Total</span></td>
         <td></td>
-        <td><span style={{ fontWeight: 'bold' }}>${total_price}</span></td>
+        <td><span style={{ fontWeight: 'bold'}}>${total_price}</span></td>
     </tr>)
 
     // const rows=order.map(itemObj => <OrderItem key={itemObj.item.id} item={itemObj.item} quantity={itemObj.quantity} />)
@@ -74,8 +74,8 @@ const OrderPage = ({ restaurants }) => {
             </div>
             <div className="timeline" onClick={nextState}>
                 <Timeline active={currentState} bulletSize={24} lineWidth={2}>
-                    <Timeline.Item bullet={<RiMailSendLine size={12} />} title="Sent">
-                        {currentState >= 0 ? <><Text color="dimmed" size="sm">Your order has been sent to {restaurants[transaction.restaurant].profile.name}.</Text>
+                    <Timeline.Item bullet={<RiMailSendLine size={12} />} title="Submitted">
+                        {currentState >= 0 ? <><Text color="dimmed" size="sm">Your order has been submitted to {restaurants[transaction.restaurant].profile.name}!</Text>
                             <Text size="xs" mt={4}>2 hours ago</Text></> : <></>}
 
                     </Timeline.Item>
@@ -87,19 +87,19 @@ const OrderPage = ({ restaurants }) => {
                     </Timeline.Item>
 
                     <Timeline.Item bullet={<GiCookingPot size={12} />} title="Preparing">
-                        {currentState >= 2 ? <><Text color="dimmed" size="sm">{restaurants[transaction.restaurant].profile.name} is currently preparing your order.</Text>
+                        {currentState >= 2 ? <><Text color="dimmed" size="sm">{restaurants[transaction.restaurant].profile.name} is currently preparing your order!</Text>
                             <Text size="xs" mt={4}>34 minutes ago</Text></> : <></>}
 
                     </Timeline.Item>
 
                     <Timeline.Item bullet={<RiTruckLine size={12} />} title="Delivering">
-                        {currentState >= 3 ? <><Text color="dimmed" size="sm">The delivery driver is on their way to your location.</Text>
+                        {currentState >= 3 ? <><Text color="dimmed" size="sm">The delivery driver is on their way to your location!</Text>
                             <Text size="xs" mt={4}>12 minutes ago</Text></> : <></>}
 
                     </Timeline.Item>
 
                     <Timeline.Item bullet={<FaRegSmileBeam size={12} />} title="Delivered">
-                        {currentState >= 4 ? <><Text color="dimmed" size="sm">Your order has been marked as delivered.</Text>
+                        {currentState >= 4 ? <><Text color="dimmed" size="sm">Your order has been delivered!</Text>
                             <Text size="xs" mt={4}>12 minutes ago</Text></> : <></>}
 
                     </Timeline.Item>
