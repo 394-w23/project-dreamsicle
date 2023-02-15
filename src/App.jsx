@@ -8,12 +8,8 @@ import './App.css';
 import OrderPage from './components/OrderPage';
 
 const App = () => {
-  const [count, setCount] = useState(0);
   const [data, error] = useDbData("/");
-  const [restaurantID,setRestaurantID] = useState([]);
   const [cart,setCart] = useState({})
-  const [transactionID,setTransactionID] = useState({})
-  const [restaurant,setRestaurant] = useState([])
 
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
@@ -28,18 +24,14 @@ const App = () => {
               path="/"
               element={<RestaurantList
               restaurants={Object.values(data.restaurants)}
-              setRestaurant={setRestaurant}
-              setRestaurantID={setRestaurantID}
               />}
             />
             <Route
               path="/:restaurant_id"
               element={<RestaurantPage
-                restaurant={restaurant}
                 restaurants={Object.values(data.restaurants)}
                 setCart={setCart}
                 cart={cart}
-                setTransactionID={setTransactionID}
               />}
             />
             <Route

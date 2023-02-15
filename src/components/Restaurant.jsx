@@ -5,18 +5,13 @@ import './Restaurant.css';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 
 
-const Restaurant = ({ restaurant, setRestaurantID, setRestaurant }) => {
-  const { id } = useParams();
-  const onClick = () => {
-    setRestaurant(restaurant);
-    setRestaurantID(restaurant.id)
-  }
+const Restaurant = ({ restaurant}) => {
 
   return (
     <div className='restaurant'>
       <Link to={`/${restaurant.id}`} style={{ textDecoration: 'none' }}>
 
-        <Card onClick={onClick} shadow="sm" p="lg" radius="md" withBorder>
+        <Card shadow="sm" p="lg" radius="md" withBorder>
           <Card.Section>
             <Image
               src={restaurant.profile.photo}
