@@ -8,8 +8,12 @@ import moment from 'moment';
 import { useParams } from "react-router-dom";
 import Header from './Header';
 
-const RestaurantPage = ({ restaurant, cart, setCart, setTransactionID }) => {
+const RestaurantPage = ({ restaurants, cart, setCart, setTransactionID }) => {
   const restaurantID = useParams().restaurant_id
+  const restaurant = restaurants.filter(r => r.id.toString() === restaurantID)[0]
+  console.log(restaurantID)
+  console.log(restaurants)
+  console.log(restaurant)
   const transactionID = uuid();
   const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 

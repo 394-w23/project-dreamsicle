@@ -36,6 +36,7 @@ const App = () => {
               path="/:restaurant_id"
               element={<RestaurantPage
                 restaurant={restaurant}
+                restaurants={Object.values(data.restaurants)}
                 setCart={setCart}
                 cart={cart}
                 setTransactionID={setTransactionID}
