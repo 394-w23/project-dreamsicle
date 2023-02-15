@@ -21,6 +21,7 @@ const Restaurant = ({ restaurant, setRestaurantID, setRestaurant }) => {
             <Image
               src={restaurant.profile.photo}
               height={160}
+             
               alt="Restaurant image"
             />
           </Card.Section>
@@ -28,19 +29,11 @@ const Restaurant = ({ restaurant, setRestaurantID, setRestaurant }) => {
           <Group position="apart" mt="md" mb="xs">
             <Text weight={500}>{restaurant.profile.name}</Text>
             <Text weight={500}>$$</Text>
-
           </Group>
-
-
           <Group position="apart" mt="md" mb="xs">
             <Text>Advance notice: {restaurant.profile.advance_notice} hours</Text>
             <Text>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound} people</Text>
-
           </Group>
-
-
-
-
         </Card>
 
 

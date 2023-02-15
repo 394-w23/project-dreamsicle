@@ -46,7 +46,7 @@ const RestaurantPage = ({ restaurant, cart, setCart, setTransactionID }) => {
     <div className="restaurant-page">
       <Header />
       <div className="restaurant-description">
-        <img src={restaurant.profile.photo}></img>
+        <img src={restaurant.profile.photo} style={{width: '20em'}} ></img> 
         <div>{restaurant.profile.description}</div>
       </div>
 
