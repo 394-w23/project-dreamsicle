@@ -15,6 +15,7 @@ const App = () => {
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
 
+  let restaurants = Object.values(data.restaurants)
   return (
     <div className='App'>
       <BrowserRouter>
@@ -23,13 +24,13 @@ const App = () => {
             <Route
               path="/"
               element={<RestaurantList
-              restaurants={Object.values(data.restaurants)}
+              restaurants={restaurants}
               />}
             />
             <Route
               path="/:restaurant_id"
               element={<RestaurantPage
-                restaurants={Object.values(data.restaurants)}
+                restaurants={restaurants}
                 setCart={setCart}
                 cart={cart}
               />}
@@ -37,7 +38,7 @@ const App = () => {
             <Route
               path="/:restaraunt_id/:transaction_id"
               element={<OrderPage
-                restaurants={Object.values(data.restaurants)}
+                restaurants={restaurants}
               />}
             />
           </Routes>
