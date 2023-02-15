@@ -40,7 +40,7 @@ const MenuItem = ({ menu_item, setCart, cart, section_id }) => {
           {menu_item.servings} servings</Text>
         <QuantitySelector setQuantity={updateCart} quantity={quantity} />
       </Group>
-      <Text position="right">Subtotal: ${(isNaN(cart[menu_item.id + "-" + section_id]) ? 0 : cart[menu_item.id + "-" + section_id]) * menu_item.price}</Text>
+      <Text position="right">Subtotal: ${(isNaN(cart[menu_item.id]) ? 0 : cart[menu_item.id]) * menu_item.price}</Text>
     </Card>
   </div>
   );
