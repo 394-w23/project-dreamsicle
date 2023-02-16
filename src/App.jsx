@@ -6,6 +6,7 @@ import RestaurantPage from './components/RestaurantPage';
 import RestaurantList from './components/RestaurantList';
 import './App.css';
 import OrderPage from './components/OrderPage';
+import LoginPage from './components/LoginPage';
 
 const App = () => {
   const [data, error] = useDbData("/");
@@ -21,8 +22,13 @@ const App = () => {
       <BrowserRouter>
         <div>
           <Routes>
-            <Route
+          <Route
               path="/"
+              element={<LoginPage
+              />}
+            />
+            <Route
+              path="/browse"
               element={<RestaurantList
               restaurants={restaurants}
               />}
