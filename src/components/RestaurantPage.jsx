@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
-import { Button, Text, Group } from "@mantine/core";
+import { Button, Text, Group, Modal } from "@mantine/core";
 import uuid from 'react-uuid';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 import { useForm } from '@mantine/form';
@@ -10,6 +11,8 @@ import Header from './Header';
 import BackButton from "./BackButton.jsx";
 
 const RestaurantPage = ({ restaurants, cart, setCart}) => {
+  const [cartOpen, setOpen] = useState(false);
+
   const restaurantID = useParams().restaurant_id
   const restaurant = restaurants.filter(r => r.id.toString() === restaurantID)[0]
   console.log(restaurantID)
@@ -49,13 +52,14 @@ const RestaurantPage = ({ restaurants, cart, setCart}) => {
   return (
     <div className="restaurant-page">
       <Header />
+
       <Group position="apart" mt="md" mb="xs">
         <BackButton/>
         <Text className="restaurant-address">{restaurant.profile.contact_info.address.street}, {restaurant.profile.contact_info.address.city}</Text>
       </Group>
       
       <div className="restaurant-description">
-        <img src={restaurant.profile.photo} style={{width: '20em'}} ></img> 
+        <img className="restaurant-logo" src={restaurant.profile.photo} style={{width: '20em'}} ></img> 
         <div>{restaurant.profile.description}</div>
       </div>
       
