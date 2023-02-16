@@ -7,12 +7,14 @@ import Header from './Header';
 import "./RestaurantPage.css";
 
 
+
 const RestaurantList = ({ restaurants}) => {
     const { id } = useParams();
 
     return (
         <div>
             <Header />
+            
             <div className='restaurant-list'>
                 {restaurants.map(r => <Restaurant key={r.id} restaurant={r} />)}
             </div>

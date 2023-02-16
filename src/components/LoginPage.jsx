@@ -22,7 +22,7 @@ export default function LoginPage({setCurrDisplay}) {
   
     return (
         <div data-cy="login-page" className="login">
-            <img src="/people.jpg" height="300" />
+            <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWM4ZmJiNGVkNjIyZjk3ZDdiNzdlMzM5ZmNhNjU5NDIxZDY3MGFjMSZjdD1z/kC9CzOnDVMj2QGIwEh/giphy.gif" height="300" />
             <Text >Welcome to</Text>
             <Title>CaterMe</Title>
             <Text style={{ marginTop: 20 }}>Find your caterer!</Text>

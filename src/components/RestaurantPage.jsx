@@ -7,6 +7,7 @@ import { useForm } from '@mantine/form';
 import moment from 'moment';
 import { useParams } from "react-router-dom";
 import Header from './Header';
+import BackButton from "./BackButton.jsx";
 
 const RestaurantPage = ({ restaurants, cart, setCart}) => {
   const restaurantID = useParams().restaurant_id
@@ -52,7 +53,7 @@ const RestaurantPage = ({ restaurants, cart, setCart}) => {
         <img src={restaurant.profile.photo} style={{width: '20em'}} ></img> 
         <div>{restaurant.profile.description}</div>
       </div>
-
+      <BackButton/>
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
           <MenuSection key={s.id} menu_section={s} cart={cart} setCart={setCart} />
