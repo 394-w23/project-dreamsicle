@@ -14,8 +14,12 @@ import Cart from './Cart.jsx';
 import ItemDetails from './ItemDetails.jsx';
 
 const RestaurantPage = ({ restaurants, cart, setCart }) => {
+  let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
   const [cartOpened, setCartOpened] = useState(false);
+  const [updateOrders, orderResult] = useDbUpdate(`/users/${userId}/cart/orders`);
   const [itemDetails, setItemDetails] = useState({});
+  const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
+  const [cartData, cartError] = useDbData(`/users/${userId}/cart/`);
 
   const restaurantID = useParams().restaurant_id
   const restaurant = restaurants.filter(r => r.id.toString() === restaurantID)[0]
@@ -34,6 +38,15 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
       orders: {}
     },
   });
+
+  if (restaurantID !== cartData.restaurant) {
+    let cartForm = useForm({
+      initialValues: {
+        restaurant: restaurantID,
+        orders: {}
+      },
+    });
+  }
 
   const submitOrder = () => {     // console.log("anything") /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // console.log(moment().format())
@@ -100,9 +113,9 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
   return (
     <div className="restaurant-page">
       <Header />
-<Cart cartOpened={cartOpened} setCartOpened={setCartOpened} rows={rows}/>
+      <Cart updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened} rows={rows} />
 
- { itemDetails && <ItemDetails menu_item={itemDetails} cart={cart} setCart={setCart} setItemDetails={setItemDetails} setCart={setCart}/>}
+      <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cart={cart} setCart={setCart} setItemDetails={setItemDetails} />
 
       <Group position="apart" mt="md" mb="xs">
         <BackButton />
@@ -120,7 +133,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
 
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
-          <MenuSection key={s.id} setItemDetails={setItemDetails} menu_section={s} cart={cart} setCart={setCart} />
+          <MenuSection key={s.id} setItemDetails={setItemDetails} setItemDetailsOpened={setItemDetailsOpened} menu_section={s} cart={cart} setCart={setCart} />
         ))}
       </div>
       <div className="submit">

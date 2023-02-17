@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Text, Group, Modal, Table, Drawer } from "@mantine/core";
 
-export default function Cart({cartOpened, setCartOpened, rows}) {
+export default function Cart({ updateOrders, cartOpened, setCartOpened, rows}) {
 
   return (
    

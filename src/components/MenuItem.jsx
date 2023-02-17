@@ -5,7 +5,7 @@ import QuantitySelector from "./QuantitySelector";
 import './MenuItem.css';
 
 
-const MenuItem = ({ menu_item, setCart, cart, setItemDetails }) => {
+const MenuItem = ({ menu_item, setCart, cart, setItemDetails, setItemDetailsOpened }) => {
   const orderID = "10";
   // console.log(restaurant)
 
@@ -20,7 +20,12 @@ const MenuItem = ({ menu_item, setCart, cart, setItemDetails }) => {
     setCart(list)
   }
 
-  return (<div className="menu-item" onClick={setItemDetails(menu_item)}>
+  const openItemDetails = () => {
+    setItemDetails(menu_item);
+    setItemDetailsOpened(true);
+  };
+
+  return (<div className="menu-item" onClick={openItemDetails}>
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Card.Section>
         <Image
