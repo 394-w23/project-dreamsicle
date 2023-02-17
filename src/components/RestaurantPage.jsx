@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
-import { Button, Text, Group, Modal, Table } from "@mantine/core";
+import { Button, Text, Group, Modal, Table, Drawer } from "@mantine/core";
 import uuid from 'react-uuid';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 import { useForm } from '@mantine/form';
@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import Header from './Header';
 import BackButton from "./BackButton.jsx";
 import { FaShoppingCart } from "@react-icons/all-files/Fa/FaShoppingCart"
+import Cart from './Cart.jsx';
 
 const RestaurantPage = ({ restaurants, cart, setCart }) => {
   const [cartOpened, setCartOpened] = useState(false);
@@ -97,25 +98,8 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
   return (
     <div className="restaurant-page">
       <Header />
+<Cart cartOpened={cartOpened} setCartOpened={setCartOpened} rows={rows}/>
 
-      <Modal
-        opened={cartOpened}
-        onClose={() => setCartOpened(false)}
-        title="Introduce yourself!"
-      >
-        <div className="table">
-          <Table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Quanity</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>{rows}</tbody>
-          </Table>
-        </div>
-      </Modal>
 
       <Group position="apart" mt="md" mb="xs">
         <BackButton />
