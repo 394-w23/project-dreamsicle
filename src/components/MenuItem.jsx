@@ -20,6 +20,7 @@ const MenuItem = ({ menu_item, setCart, cart, section_id }) => {
     setCart(list)
   }
 
+
   return (<div className="menu-item">
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Card.Section>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
 import { Button, Text, Group, Modal, Table } from "@mantine/core";
@@ -10,9 +10,13 @@ import { useParams } from "react-router-dom";
 import Header from './Header';
 import BackButton from "./BackButton.jsx";
 import { FaShoppingCart } from "@react-icons/all-files/Fa/FaShoppingCart"
+import Cart from './Cart.jsx';
 
 const RestaurantPage = ({ restaurants, cart, setCart }) => {
   const [cartOpened, setCartOpened] = useState(false);
+
+  const [rows2, setRows2] = useState([]);
+
 
   const restaurantID = useParams().restaurant_id
   const restaurant = restaurants.filter(r => r.id.toString() === restaurantID)[0]
@@ -74,10 +78,21 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
   let total_price = 0
   Object.values(cartOrders).forEach(i => {
     console.log(i)
-    console.log(cart[i.item.id])
+    // console.log(cart[i.item.id])
     console.log(i.price)
     total_price += cart[i.item.id] * i.item.price;
   });
+
+  /**
+   * data = {
+   * restaurant: id,
+   *  item: {id: string, name:string, price: num}, quantity: num,}
+   */
+
+  
+
+
+
 
   let rows = cartOrders.map((itemObj) => (
     <tr key={itemObj.item.id}>
@@ -98,24 +113,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
     <div className="restaurant-page">
       <Header />
 
-      <Modal
-        opened={cartOpened}
-        onClose={() => setCartOpened(false)}
-        title="Introduce yourself!"
-      >
-        <div className="table">
-          <Table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Quanity</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>{rows}</tbody>
-          </Table>
-        </div>
-      </Modal>
+    <Cart cartOpened={cartOpened} setCartOpened={setCartOpened}/>
 
       <Group position="apart" mt="md" mb="xs">
         <BackButton />
@@ -138,7 +136,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
       </div>
       <div className="submit">
         <Link
-          to={`/${restaurant.id}/${transactionID}`}
+          // to={`/${restaurant.id}/${transactionID}`}
           style={{ textDecoration: "none" }}
         >
           <Button className="submit-button" onClick={submitOrder}>Check Out Order</Button>
