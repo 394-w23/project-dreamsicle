@@ -7,7 +7,7 @@ export default function Cart({cartOpened, setCartOpened, rows}) {
    
     <Drawer
     opened={cartOpened}
-    onClose={setCartOpened}
+    onClose={() => setCartOpened(false)}
     title="Your cart"
     position="bottom"
   >

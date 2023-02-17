@@ -11,9 +11,11 @@ import Header from './Header';
 import BackButton from "./BackButton.jsx";
 import { FaShoppingCart } from "@react-icons/all-files/Fa/FaShoppingCart"
 import Cart from './Cart.jsx';
+import ItemDetails from './ItemDetails.jsx';
 
 const RestaurantPage = ({ restaurants, cart, setCart }) => {
   const [cartOpened, setCartOpened] = useState(false);
+  const [itemDetails, setItemDetails] = useState({});
 
   const restaurantID = useParams().restaurant_id
   const restaurant = restaurants.filter(r => r.id.toString() === restaurantID)[0]
@@ -100,6 +102,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
       <Header />
 <Cart cartOpened={cartOpened} setCartOpened={setCartOpened} rows={rows}/>
 
+ { itemDetails && <ItemDetails menu_item={itemDetails} cart={cart} setCart={setCart} setItemDetails={setItemDetails} setCart={setCart}/>}
 
       <Group position="apart" mt="md" mb="xs">
         <BackButton />
@@ -117,7 +120,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
 
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
-          <MenuSection key={s.id} menu_section={s} cart={cart} setCart={setCart} />
+          <MenuSection key={s.id} setItemDetails={setItemDetails} menu_section={s} cart={cart} setCart={setCart} />
         ))}
       </div>
       <div className="submit">
