@@ -13,14 +13,7 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
     const [quantity, setQuantity] = useState(0);
 
     const addToCart = () => {
-        let form = useForm({
-            initialValues: {
-                restaurant: restaurant.id,
-                orders: {}
-            },
-        });
-
-        let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({
+        let orders = Object.keys(cart.orders).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({
             id: uuid(), item: key, quantity: cart[key]
         }));
 

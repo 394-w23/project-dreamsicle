@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
 import { Button, Text, Group, Modal, Table, Drawer } from "@mantine/core";
@@ -17,6 +17,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
   const [cartOpened, setCartOpened] = useState(false);
   const [updateOrders, orderResult] = useDbUpdate(`/users/${userId}/cart/orders`);
+  const [updateCart, cartResult] = useDbUpdate(`/users/${userId}/cart/`);
   const [itemDetails, setItemDetails] = useState({});
   const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
   const [cartData, cartError] = useDbData(`/users/${userId}/cart/`);
@@ -29,24 +30,15 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
   const transactionID = uuid();
   const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
-  let form = useForm({
-    initialValues: {
-      id: transactionID,
-      datetime: '',
-      restaurant: restaurant.id,
-      user: 0, ////////////////////////////////////////////////////////////////// HARD CODED USER
-      orders: {}
-    },
-  });
-
-  if (restaurantID !== cartData.restaurant) {
-    let cartForm = useForm({
-      initialValues: {
-        restaurant: restaurantID,
-        orders: {}
-      },
-    });
-  }
+  useEffect(() => {
+    if (!cartData || (restaurantID !== cartData.restaurant)) {
+      updateCart({
+          restaurant: restaurantID,
+          orders: {}
+        })
+        // setCart(cartData);
+    }
+  }, [])
 
   const submitOrder = () => {     // console.log("anything") /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // console.log(moment().format())
@@ -70,50 +62,15 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
     setCartOpened(true);
   };
 
-  /////////////////////////////// NEED A WAY TO CLEAR CART FOR WHEN YOU GO BACK AND RE-ENTER
-  // let clearCart = () => {
-  //   setCart({});
-  //   cartOrders = []
-  // };
-
   const menu = []
   //flattens the menu_sections for a given restaurant
   Object.values(restaurants[restaurantID].menu_sections).forEach(section =>
     section.items.forEach(item => menu.push(item)));
 
-  let cartOrders = []
-  //create a list of all the items in our order
-  Object.values(cart).forEach(i => {
-    cartOrders = Object.keys(cart).filter((key, index) => cart[key] > 0).map((key, index) => ({ item: (menu.filter(menu_item => menu_item.id.toString() === key)[0]), quantity: cart[key] }));
-  });
-
-  let total_price = 0
-  Object.values(cartOrders).forEach(i => {
-    console.log(i)
-    console.log(cart[i.item.id])
-    console.log(i.price)
-    total_price += cart[i.item.id] * i.item.price;
-  });
-
-  let rows = cartOrders.map((itemObj) => (
-    <tr key={itemObj.item.id}>
-      <td>{itemObj.item.name}</td>
-      <td>{itemObj.quantity}</td>
-      <td>${itemObj.item.price * itemObj.quantity}</td>
-    </tr>
-  ));
-
-  rows.push(<tr key={0}>
-    <td><span style={{ fontWeight: 'bold' }}>Total</span></td>
-    <td></td>
-    <td><span style={{ fontWeight: 'bold' }}>${total_price}</span></td>
-  </tr>)
-
-
   return (
     <div className="restaurant-page">
       <Header />
-      <Cart updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened} rows={rows} />
+      <Cart updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened}/>
 
       <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cart={cart} setCart={setCart} setItemDetails={setItemDetails} />
 

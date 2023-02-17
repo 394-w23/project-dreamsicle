@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Text, Group, Modal, Table, Drawer } from "@mantine/core";
 
-export default function Cart({ updateOrders, cartOpened, setCartOpened, rows}) {
+export default function Cart({ updateOrders, cartOpened, setCartOpened}) {
 
   return (
    
@@ -21,7 +21,7 @@ export default function Cart({ updateOrders, cartOpened, setCartOpened, rows}) {
             <th>Price</th>
           </tr>
         </thead>
-        <tbody>{rows}</tbody>
+        {/* <tbody>{rows}</tbody> */}
       </Table>
     </div>
 
