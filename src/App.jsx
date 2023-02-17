@@ -10,13 +10,18 @@ import LoginPage from './components/LoginPage';
 
 const App = () => {
   const [data, error] = useDbData("/");
-  const [cart,setCart] = useState({})
+  // const [cart,setCart] = useState({})
 
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
+  const userId = 0; ///////////////////////////////////////////////////////////change later
 
   let restaurants = Object.values(data.restaurants)
+  // let users = Object.values(data.users).filter(user =>(user.id===userId))
+  let user = data.users[userId]
+  // console.log("User test:", user)  
+
   return (
     <div className='App'>
       <BrowserRouter>
@@ -37,8 +42,9 @@ const App = () => {
               path="/:restaurant_id"
               element={<RestaurantPage
                 restaurants={restaurants}
-                setCart={setCart}
-                cart={cart}
+                cart={user.cart}
+                // setCart={setCart}
+                // cart={cart}
               />}
             />
             <Route

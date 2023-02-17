@@ -13,20 +13,21 @@ import { FaShoppingCart } from "@react-icons/all-files/Fa/FaShoppingCart"
 import Cart from './Cart.jsx';
 import ItemDetails from './ItemDetails.jsx';
 
-const RestaurantPage = ({ restaurants, cart, setCart }) => {
+const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
   const [cartOpened, setCartOpened] = useState(false);
   const [updateOrders, orderResult] = useDbUpdate(`/users/${userId}/cart/orders`);
   const [updateCart, cartResult] = useDbUpdate(`/users/${userId}/cart/`);
   const [itemDetails, setItemDetails] = useState({});
   const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
-  const [cartData, cartError] = useDbData(`/users/${userId}/cart/`);
+  const [cartData,setCartData] = useState(cart);
+  // const [cartData, cartError] = useDbData(`/users/${userId}/cart/`);
 
   const restaurantID = useParams().restaurant_id
   const restaurant = restaurants.filter(r => r.id.toString() === restaurantID)[0]
-  console.log(restaurantID)
-  console.log(restaurants)
-  console.log(restaurant)
+  // console.log(restaurantID)
+  // console.log(restaurants)
+  // console.log(restaurant)
   const transactionID = uuid();
   const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
@@ -53,7 +54,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
     if (orders.length > 0) {
       let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject }
       updateTransactions(formData)
-      setCart({})
+      setCartData({})
     }
 
   }
@@ -72,7 +73,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
       <Header />
       <Cart updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened}/>
 
-      <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cart={cart} setCart={setCart} setItemDetails={setItemDetails} />
+      <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cart={cart} setCartData={setCartData} setItemDetails={setItemDetails} />
 
       <Group position="apart" mt="md" mb="xs">
         <BackButton />
@@ -90,7 +91,7 @@ const RestaurantPage = ({ restaurants, cart, setCart }) => {
 
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
-          <MenuSection key={s.id} setItemDetails={setItemDetails} setItemDetailsOpened={setItemDetailsOpened} menu_section={s} cart={cart} setCart={setCart} />
+          <MenuSection key={s.id} setItemDetails={setItemDetails} setItemDetailsOpened={setItemDetailsOpened} menu_section={s} cart={cart} setCartData={setCartData} />
         ))}
       </div>
       <div className="submit">
