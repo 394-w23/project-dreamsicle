@@ -24,7 +24,7 @@ export default function LoginPage({setCurrDisplay}) {
         <div data-cy="login-page" className="login">
             <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWM4ZmJiNGVkNjIyZjk3ZDdiNzdlMzM5ZmNhNjU5NDIxZDY3MGFjMSZjdD1z/kC9CzOnDVMj2QGIwEh/giphy.gif" height="300" />
             <Text >Welcome to</Text>
-            <Title>CaterMe</Title>
+            <Title>Platter Pal</Title>
             <Text style={{ marginTop: 20 }}>Find your caterer!</Text>
             <div style={{ height: 70 }}></div>
             <Link to={"/browse"}><Button leftIcon={<RiGoogleFill data-testid="sign-in"/>}>Sign in with Google</Button></Link>
