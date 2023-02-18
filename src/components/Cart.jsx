@@ -5,18 +5,50 @@ import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 
 export default function Cart({ restaurant, cartData, updateOrders, cartOpened, setCartOpened }) {
   const theme = useMantineTheme();
-  let rows=[]
+
+
+
+  const restaurantDetailsHelper = (order, restaurant) => {
+    let menuSections = restaurant.menu_sections;
+    let item;
+    try {
+      for (let menuSectionIndex = 0; menuSectionIndex < menuSections.length; menuSectionIndex++) {
+        let menuSectionItems = menuSections[menuSectionIndex].items
+        console.log(menuSectionItems, "---- ")
+        for (let itemIndex = 0; itemIndex < menuSectionItems.length; itemIndex++) {
+
+          if (menuSectionItems[itemIndex].id == order.item) {
+            item = menuSectionItems[itemIndex]
+            break
+          }
+        }
+        break
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    return item
+  }
+
+
+  let rows = []
   if (cartData.orders) {
+
+
+    console.log(Object.values(cartData.orders)[0])
+
+    restaurantDetailsHelper(Object.values(cartData.orders)[0], restaurant);
+
     rows = Object.values(cartData.orders).map((order) => (
       <tr key={order.id}>
         <td>{order.item}</td>
         <td>{order.quantity}</td>
         <td>${0}</td>
-        <td><Button compact variant="subtle"><FaTrash/></Button></td>
+        <td><Button compact variant="subtle"><FaTrash /></Button></td>
       </tr>))
-      console.log(rows)
+    console.log(rows)
   }
-  
+
   const submitOrder = () => {     //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
 
@@ -43,7 +75,7 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
       overlayOpacity={0.55}
       overlayBlur={3}
       padding="lg"
-      
+
     >
 
       <div className="table">
