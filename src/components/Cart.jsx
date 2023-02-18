@@ -96,12 +96,16 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
           <tbody>{rows}</tbody>
         </Table>
       </div>
+      <div style={{textAlign: "center"}}>
+
+    
       <Link
         to={`/browse`} //placeholder
         style={{ textDecoration: "none" }}
       >
-        <Button className="submit-button" onClick={submitOrder}>Complete purchase</Button>
+        <Button  className="submit-button" onClick={submitOrder}>Complete purchase</Button>
       </Link>
+      </div>
 
     </Drawer>
   )

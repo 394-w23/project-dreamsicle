@@ -76,7 +76,9 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
                     </Group>
                     <Text position="right">Subtotal: ${quantity * itemDetails.price}</Text>
                 </Card>
+                <div style={{textAlign: "center", marginTop: 20}}>
                 <Button className="submit-button" onClick={addToCart}>Add To Cart</Button>
+                </div>
                 {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Minimum Order" color="red">
                     You must order at least 1 to add to cart!
                 </Alert>}
