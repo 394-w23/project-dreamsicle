@@ -1,40 +1,47 @@
 import Restaurant from "./Restaurant";
 import { useState } from 'react';
-import { Card, Image, Text, Badge, Drawer, Group, Button, useMantineTheme } from '@mantine/core';
+import { Card, Image, Text, Badge, Alert, Drawer, Group, Button, useMantineTheme } from '@mantine/core';
 import QuantitySelector from "./QuantitySelector";
 import { useDbUpdate } from "../utils/firebase";
 import './MenuItem.css';
 import { useForm } from "@mantine/form";
 import uuid from 'react-uuid';
+import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 
 
 const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDetailsOpened, setCartData, cartData, setItemDetails }) => {
     const theme = useMantineTheme();
     const id = 0 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO: Hardcoded user ID
     const [quantity, setQuantity] = useState(0);
+    const [raiseAlert, setRaiseAlert] = useState(false);
 
     const addToCart = () => {
-        const new_uuid=uuid();
+        const new_uuid = uuid();
         // console.log("quantity before new_order",quantity)
-        const new_order={id: new_uuid, item: itemDetails.id, quantity: quantity}
-        if (cartData.orders) {
-            // append to existing orders
-            const new_data={...cartData, orders: {...cartData.orders,[new_uuid]:new_order}};
-            // console.log("new_data to existing orders",new_data)
-            setCartData(new_data)
-            updateOrders({...cartData.orders,[new_uuid]:new_order})
+        if (quantity === 0) {
+            setRaiseAlert(true)
         } else {
-            // create new orders attribute thingy
-            const new_data={...cartData, orders: {[new_uuid]:new_order}}
-            // console.log("new_data to nonexisting orders",new_data)
-            setCartData(new_data)
-            updateOrders({[new_uuid]:new_order})
+            const new_order = { id: new_uuid, item: itemDetails.id, quantity: quantity }
+            if (cartData.orders) {
+                // append to existing orders
+                const new_data = { ...cartData, orders: { ...cartData.orders, [new_uuid]: new_order } };
+                // console.log("new_data to existing orders",new_data)
+                setCartData(new_data)
+                updateOrders({ ...cartData.orders, [new_uuid]: new_order })
+            } else {
+                // create new orders attribute thingy
+                const new_data = { ...cartData, orders: { [new_uuid]: new_order } }
+                // console.log("new_data to nonexisting orders",new_data)
+                setCartData(new_data)
+                updateOrders({ [new_uuid]: new_order })
+            }
+            // console.log(cartData.orders)
+            setQuantity(0)
+            setItemDetailsOpened(false)
+            setRaiseAlert(false)
         }
-        // console.log(cartData.orders)
-        setQuantity(0)
-        setItemDetailsOpened(false)
     }
-    
+
     return (
         <Drawer
             opened={itemDetailsOpened}
@@ -66,9 +73,12 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
                             {itemDetails.servings} servings</Text>
                         <QuantitySelector setQuantity={setQuantity} quantity={quantity} />
                     </Group>
-                    <Text position="right">Subtotal: ${quantity*itemDetails.price}</Text>
+                    <Text position="right">Subtotal: ${quantity * itemDetails.price}</Text>
                 </Card>
                 <Button className="submit-button" onClick={addToCart}>Add To Cart</Button>
+                {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Minimum Order" color="red">
+                    You must order at least 1 to add to cart!
+                </Alert>}
             </div>
         </Drawer>
     );
