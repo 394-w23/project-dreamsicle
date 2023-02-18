@@ -16,13 +16,12 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
         let menuSectionItems = menuSections[menuSectionIndex].items
         console.log(menuSectionItems, "---- ")
         for (let itemIndex = 0; itemIndex < menuSectionItems.length; itemIndex++) {
-
           if (menuSectionItems[itemIndex].id == order.item) {
             item = menuSectionItems[itemIndex]
             break
           }
         }
-        break
+        // break
       }
     } catch (e) {
       console.log(e)
@@ -41,6 +40,7 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
     rows = Object.values(cartData.orders).map((order) => 
       {
         let item = restaurantDetailsHelper(order, restaurant);
+        console.log("item",item)
         return(
       <tr key={order.id}>
         <td>{item.name}</td>
