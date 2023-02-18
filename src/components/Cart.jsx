@@ -32,7 +32,12 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
 
 
   let rows = []
+
+  console.log(cartData.orders, " =-------- ", restaurant)
   if (cartData.orders) {
+
+ 
+
     rows = Object.values(cartData.orders).map((order) => 
       {
         let item = restaurantDetailsHelper(order, restaurant);
@@ -42,7 +47,8 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
         <td>{order.quantity}</td>
         <td>${item.price * order.quantity}</td>
         <td><Button compact variant="subtle"><FaTrash /></Button></td>
-      </tr>)
+      </tr>
+      )
       }
       )
     console.log(rows)

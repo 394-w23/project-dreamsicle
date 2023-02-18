@@ -34,7 +34,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
   const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
   useEffect(() => {
-    
+
     if (!cartData || (restaurantID !== cartData.restaurant)) {
       console.log("resetting cart")
       const newRestaurantCart={
@@ -44,7 +44,9 @@ const RestaurantPage = ({ restaurants, cart }) => {
       updateCart(newRestaurantCart)
       setCartData(newRestaurantCart);
     }
-  }, [])
+  }, [cartData])
+
+
 
   let openCart = () => {
     setCartOpened(true);
@@ -58,6 +60,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
   return (
     <div className="restaurant-page">
       <Header />
+
       <Cart restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened}/>
 
       <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cartData={cartData} setCartData={setCartData} setItemDetails={setItemDetails} />
