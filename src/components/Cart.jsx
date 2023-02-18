@@ -42,6 +42,8 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
       overlayOpacity={0.55}
       overlayBlur={3}
+      padding="lg"
+      
     >
 
       <div className="table">

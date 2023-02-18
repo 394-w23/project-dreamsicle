@@ -52,6 +52,7 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
             overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
             overlayOpacity={0.55}
             overlayBlur={3}
+            padding="lg"
         >
             <div className="menu-item">
                 <Card shadow="sm" p="lg" radius="md" withBorder>
