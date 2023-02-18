@@ -46,21 +46,6 @@ const RestaurantPage = ({ restaurants, cart }) => {
     }
   }, [])
 
-  const submitOrder = () => {     //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
-    let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
-
-    let ordersObject = {}
-    orders.forEach(order => ordersObject[order.id] = order)
-
-    // if there are any orders to submit, we should submit; otherwise do nothing
-    if (orders.length > 0) {
-      let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject }
-      updateTransactions(formData)
-      setCartData({})
-    }
-
-  }
-
   let openCart = () => {
     setCartOpened(true);
   };
@@ -73,16 +58,12 @@ const RestaurantPage = ({ restaurants, cart }) => {
   return (
     <div className="restaurant-page">
       <Header />
-      <Cart updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened}/>
+      <Cart restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened}/>
 
       <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cartData={cartData} setCartData={setCartData} setItemDetails={setItemDetails} />
 
       <Group position="apart" mt="md" mb="xs">
         <BackButton />
-        <Button onClick={openCart}>
-          <FaShoppingCart size="20" />
-        </Button>
-
         <Text className="restaurant-address">{restaurant.profile.contact_info.address.street}, {restaurant.profile.contact_info.address.city}</Text>
       </Group>
 
@@ -96,13 +77,8 @@ const RestaurantPage = ({ restaurants, cart }) => {
           <MenuSection key={s.id} setItemDetails={setItemDetails} setItemDetailsOpened={setItemDetailsOpened} menu_section={s} cartData={cartData} setCartData={setCartData} />
         ))}
       </div>
-      <div className="submit">
-        <Link
-          to={`/${restaurant.id}/${transactionID}`}
-          style={{ textDecoration: "none" }}
-        >
-          <Button className="submit-button" onClick={submitOrder}>Check Out Order</Button>
-        </Link>
+      <div className="open-cart">
+          <Button leftIcon={<FaShoppingCart size="20" />} className="submit-button" onClick={openCart}>Check Out Order</Button>
       </div>
     </div>
   );

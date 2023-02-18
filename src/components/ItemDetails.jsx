@@ -1,6 +1,6 @@
 import Restaurant from "./Restaurant";
 import { useState } from 'react';
-import { Card, Image, Text, Badge, Drawer, Group, Button } from '@mantine/core';
+import { Card, Image, Text, Badge, Drawer, Group, Button, useMantineTheme } from '@mantine/core';
 import QuantitySelector from "./QuantitySelector";
 import { useDbUpdate } from "../utils/firebase";
 import './MenuItem.css';
@@ -9,6 +9,7 @@ import uuid from 'react-uuid';
 
 
 const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDetailsOpened, setCartData, cartData, setItemDetails }) => {
+    const theme = useMantineTheme();
     const id = 0 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO: Hardcoded user ID
     const [quantity, setQuantity] = useState(0);
 
@@ -41,6 +42,9 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
             title="Item Details"
             position="bottom"
             size="93%"
+            overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
+            overlayOpacity={0.55}
+            overlayBlur={3}
         >
             <div className="menu-item">
                 <Card shadow="sm" p="lg" radius="md" withBorder>
@@ -62,7 +66,7 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
                             {itemDetails.servings} servings</Text>
                         <QuantitySelector setQuantity={setQuantity} quantity={quantity} />
                     </Group>
-                    <Text position="right">Subtotal: Nothing yet</Text>
+                    <Text position="right">Subtotal: ${quantity*itemDetails.price}</Text>
                 </Card>
                 <Button className="submit-button" onClick={addToCart}>Add To Cart</Button>
             </div>
