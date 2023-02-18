@@ -15,40 +15,42 @@ import ItemDetails from './ItemDetails.jsx';
 
 const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
-  const [cartOpened, setCartOpened] = useState(false);
+  
   const [updateOrders, orderResult] = useDbUpdate(`/users/${userId}/cart/orders`);
   const [updateCart, cartResult] = useDbUpdate(`/users/${userId}/cart/`);
-  const [itemDetails, setItemDetails] = useState({});
+
   const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
+  const [itemDetails, setItemDetails] = useState({});
+
+  const [cartOpened, setCartOpened] = useState(false);
   const [cartData,setCartData] = useState(cart);
   // const [cartData, cartError] = useDbData(`/users/${userId}/cart/`);
-
+  // console.log("cart",cart)
+  // console.log("cartData",cartData)
   const restaurantID = useParams().restaurant_id
   const restaurant = restaurants.filter(r => r.id.toString() === restaurantID)[0]
-  // console.log(restaurantID)
-  // console.log(restaurants)
-  // console.log(restaurant)
+
   const transactionID = uuid();
   const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
   useEffect(() => {
+    
     if (!cartData || (restaurantID !== cartData.restaurant)) {
-      updateCart({
-          restaurant: restaurantID,
-          orders: {}
-        })
-        // setCart(cartData);
+      console.log("resetting cart")
+      const newRestaurantCart={
+        restaurant: restaurantID,
+        orders: {}
+      }
+      updateCart(newRestaurantCart)
+      setCartData(newRestaurantCart);
     }
   }, [])
 
-  const submitOrder = () => {     // console.log("anything") /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
-    // console.log(moment().format())
+  const submitOrder = () => {     //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
-    // console.log(orders)
 
     let ordersObject = {}
     orders.forEach(order => ordersObject[order.id] = order)
-    // console.log(ordersObject)
 
     // if there are any orders to submit, we should submit; otherwise do nothing
     if (orders.length > 0) {
@@ -73,7 +75,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
       <Header />
       <Cart updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened}/>
 
-      <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cart={cart} setCartData={setCartData} setItemDetails={setItemDetails} />
+      <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cartData={cartData} setCartData={setCartData} setItemDetails={setItemDetails} />
 
       <Group position="apart" mt="md" mb="xs">
         <BackButton />
@@ -91,7 +93,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
-          <MenuSection key={s.id} setItemDetails={setItemDetails} setItemDetailsOpened={setItemDetailsOpened} menu_section={s} cart={cart} setCartData={setCartData} />
+          <MenuSection key={s.id} setItemDetails={setItemDetails} setItemDetailsOpened={setItemDetailsOpened} menu_section={s} cartData={cartData} setCartData={setCartData} />
         ))}
       </div>
       <div className="submit">

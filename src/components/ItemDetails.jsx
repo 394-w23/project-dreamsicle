@@ -5,37 +5,35 @@ import QuantitySelector from "./QuantitySelector";
 import { useDbUpdate } from "../utils/firebase";
 import './MenuItem.css';
 import { useForm } from "@mantine/form";
+import uuid from 'react-uuid';
 
 
-const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDetailsOpened, setCartData, cart, setItemDetails }) => {
+const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDetailsOpened, setCartData, cartData, setItemDetails }) => {
     const id = 0 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO: Hardcoded user ID
-
     const [quantity, setQuantity] = useState(0);
 
     const addToCart = () => {
-        let orders = Object.keys(cart.orders).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({
-            id: uuid(), item: key, quantity: cart[key]
-        }));
-
-        let ordersObject = {}
-        orders.forEach(order => ordersObject[order.id] = order)
-
-        // if there are any orders to submit, we should submit; otherwise do nothing
-        if (orders.length > 0) {
-            let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject }
-            updateOrder(formData)
+        const new_uuid=uuid();
+        // console.log("quantity before new_order",quantity)
+        const new_order={id: new_uuid, item: itemDetails.id, quantity: quantity}
+        if (cartData.orders) {
+            // append to existing orders
+            const new_data={...cartData, orders: {...cartData.orders,[new_uuid]:new_order}};
+            // console.log("new_data to existing orders",new_data)
+            setCartData(new_data)
+            updateOrders({...cartData.orders,[new_uuid]:new_order})
+        } else {
+            // create new orders attribute thingy
+            const new_data={...cartData, orders: {[new_uuid]:new_order}}
+            // console.log("new_data to nonexisting orders",new_data)
+            setCartData(new_data)
+            updateOrders({[new_uuid]:new_order})
         }
-
+        // console.log(cartData.orders)
+        setQuantity(0)
+        setItemDetailsOpened(false)
     }
-    const updateCart = (num) => {
-        setQuantity(num)
-        let list = cart
-
-        //TODO: Fix this
-        list[itemDetails.id] = num ////////////////////////////////////// FIX THIS, CURRENTLY REFERENCING SECTION ID AND MENU ITEM ID, BUT WILL ONLY NEED TO DO MENU ITEM ID WHEN THEY'RE UNIQUE
-        setCartData(list)
-    }
-
+    
     return (
         <Drawer
             opened={itemDetailsOpened}
@@ -62,9 +60,9 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
                     <Group position="apart" mt="md" mb="xs">
                         <Text>
                             {itemDetails.servings} servings</Text>
-                        <QuantitySelector setQuantity={updateCart} quantity={quantity} />
+                        <QuantitySelector setQuantity={setQuantity} quantity={quantity} />
                     </Group>
-                    <Text position="right">Subtotal: ${(isNaN(cart[itemDetails.id]) ? 0 : cart[itemDetails.id]) * itemDetails.price}</Text>
+                    <Text position="right">Subtotal: Nothing yet</Text>
                 </Card>
                 <Button className="submit-button" onClick={addToCart}>Add To Cart</Button>
             </div>

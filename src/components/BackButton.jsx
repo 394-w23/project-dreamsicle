@@ -6,7 +6,7 @@ import { RiArrowLeftLine } from "@react-icons/all-files/ri/RiArrowLeftLine"
 const BackButton = () => {
 
   let BackUrl = useParams()[0];
-  console.log("useParams()", useParams());
+  // console.log("useParams()", useParams());
 
   return (<div style={{ display: "flex" }}>
     <div >

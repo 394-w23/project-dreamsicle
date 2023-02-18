@@ -5,21 +5,7 @@ import QuantitySelector from "./QuantitySelector";
 import './MenuItem.css';
 
 
-const MenuItem = ({ menu_item, setCartData, cart, setItemDetails, setItemDetailsOpened }) => {
-  const orderID = "10";
-  // console.log(restaurant)
-
-  const [quantity, setQuantity] = useState(0);
-
-  const updateCart = (num) => {
-    setQuantity(num)
-    let list = cart
-    
-    //TODO: Fix this
-    list[menu_item.id] = num ////////////////////////////////////// FIX THIS, CURRENTLY REFERENCING SECTION ID AND MENU ITEM ID, BUT WILL ONLY NEED TO DO MENU ITEM ID WHEN THEY'RE UNIQUE
-    setCartData(list)
-  }
-
+const MenuItem = ({ menu_item, setCartData, cartData, setItemDetails, setItemDetailsOpened }) => {
   const openItemDetails = () => {
     setItemDetails(menu_item);
     setItemDetailsOpened(true);
