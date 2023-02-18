@@ -1,12 +1,13 @@
-import React from 'react';
-import { Button, Text, Group, Modal, Table, Drawer, useMantineTheme } from "@mantine/core";
+import React, { useState } from 'react';
+import { Button, Text, Group, Modal, Table, Drawer, useMantineTheme, Title, Checkbox, Radio } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
+import Cards from 'react-credit-cards-2';
+import 'react-credit-cards-2/es/styles-compiled.css';
 
 export default function Cart({ restaurant, cartData, updateOrders, cartOpened, setCartOpened }) {
   const theme = useMantineTheme();
-
-
+  const [wantReturnableItems, setWantReturnableItems] = useState("No")
 
   const restaurantDetailsHelper = (order, restaurant) => {
     let menuSections = restaurant.menu_sections;
@@ -96,14 +97,39 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
           <tbody>{rows}</tbody>
         </Table>
       </div>
-      <div style={{textAlign: "center"}}>
 
+      <Radio.Group
+      name="favoriteFramework"
+      label="Would you like to rent some returnable utensils?"
+      // description="This is anonymous"
+      value={wantReturnableItems}
+      onChange={setWantReturnableItems}
+      orientation='vertical'
+    >
+      <Radio value="Yes" label="Yes" />
+      <Radio value="No" label="No" />
+    </Radio.Group>
+
+      <div style={{textAlign: "center", paddingTop: 20}}>
+      
     
+        <Title size="medium">Card on file</Title>
+        
+
+      <Cards
+        number={"1234123412341234"}
+        expiry={"04/19"}
+        cvc={"000"}
+        name={"Your Name"}
+        focused={"number"}
+        previe={true}
+        issuer={"Visa"}
+      />
       <Link
         to={`/browse`} //placeholder
         style={{ textDecoration: "none" }}
       >
-        <Button  className="submit-button" onClick={submitOrder}>Complete purchase</Button>
+        <Button className="submit-button" style={{marginTop: 20}} onClick={submitOrder}>Complete purchase</Button>
       </Link>
       </div>
 
