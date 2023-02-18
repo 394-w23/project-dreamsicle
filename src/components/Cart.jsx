@@ -33,19 +33,18 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
 
   let rows = []
   if (cartData.orders) {
-
-
-    console.log(Object.values(cartData.orders)[0])
-
-    restaurantDetailsHelper(Object.values(cartData.orders)[0], restaurant);
-
-    rows = Object.values(cartData.orders).map((order) => (
+    rows = Object.values(cartData.orders).map((order) => 
+      {
+        let item = restaurantDetailsHelper(order, restaurant);
+        return(
       <tr key={order.id}>
-        <td>{order.item}</td>
+        <td>{item.name}</td>
         <td>{order.quantity}</td>
-        <td>${0}</td>
+        <td>${item.price * order.quantity}</td>
         <td><Button compact variant="subtle"><FaTrash /></Button></td>
-      </tr>))
+      </tr>)
+      }
+      )
     console.log(rows)
   }
 
