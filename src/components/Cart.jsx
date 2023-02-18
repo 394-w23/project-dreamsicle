@@ -5,13 +5,18 @@ import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 
 export default function Cart({ restaurant, cartData, updateOrders, cartOpened, setCartOpened }) {
   const theme = useMantineTheme();
-  const rows = Object.values(cartData.orders).map((order) => (
-    <tr key={order.id}>
-      <td>{order.item}</td>
-      <td>{order.quantity}</td>
-      <td>${0}</td>
-      <td><Button compact variant="subtle"><FaTrash/></Button></td>
-    </tr>))
+  let rows=[]
+  if (cartData.orders) {
+    rows = Object.values(cartData.orders).map((order) => (
+      <tr key={order.id}>
+        <td>{order.item}</td>
+        <td>{order.quantity}</td>
+        <td>${0}</td>
+        <td><Button compact variant="subtle"><FaTrash/></Button></td>
+      </tr>))
+      console.log(rows)
+  }
+  
   const submitOrder = () => {     //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
 
