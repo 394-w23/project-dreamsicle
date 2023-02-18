@@ -36,22 +36,21 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
   console.log(cartData.orders, " =-------- ", restaurant)
   if (cartData.orders) {
 
- 
 
-    rows = Object.values(cartData.orders).map((order) => 
-      {
-        let item = restaurantDetailsHelper(order, restaurant);
-        console.log("item",item)
-        return(
-      <tr key={order.id}>
-        <td>{item.name}</td>
-        <td>{order.quantity}</td>
-        <td>${item.price * order.quantity}</td>
-        <td><Button compact variant="subtle"><FaTrash /></Button></td>
-      </tr>
+
+    rows = Object.values(cartData.orders).map((order) => {
+      let item = restaurantDetailsHelper(order, restaurant);
+      console.log("item", item)
+      return (
+        <tr key={order.id}>
+          <td>{item.name}</td>
+          <td>{order.quantity}</td>
+          <td>${item.price * order.quantity}</td>
+          <td><Button compact variant="subtle"><FaTrash /></Button></td>
+        </tr>
       )
-      }
-      )
+    }
+    )
     console.log(rows)
   }
 
@@ -99,38 +98,34 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
       </div>
 
       <Radio.Group
-      name="favoriteFramework"
-      label="Would you like to rent some returnable utensils?"
-      // description="This is anonymous"
-      value={wantReturnableItems}
-      onChange={setWantReturnableItems}
-      orientation='vertical'
-    >
-      <Radio value="Yes" label="Yes" />
-      <Radio value="No" label="No" />
-    </Radio.Group>
-
-      <div style={{textAlign: "center", paddingTop: 20}}>
-      
-    
-        <Title size="medium">Card on file</Title>
-        
-
-      <Cards
-        number={"1234123412341234"}
-        expiry={"04/19"}
-        cvc={"000"}
-        name={"Your Name"}
-        focused={"number"}
-        previe={true}
-        issuer={"Visa"}
-      />
-      <Link
-        to={`/browse`} //placeholder
-        style={{ textDecoration: "none" }}
+        name="favoriteFramework"
+        label="Would you like to rent some returnable utensils?"
+        // description="This is anonymous"
+        value={wantReturnableItems}
+        onChange={setWantReturnableItems}
+        orientation='vertical'
       >
-        <Button className="submit-button" style={{marginTop: 20}} onClick={submitOrder}>Complete purchase</Button>
-      </Link>
+        <Radio value="Yes" label="Yes" />
+        <Radio value="No" label="No" />
+      </Radio.Group>
+
+      <div style={{ textAlign: "center", paddingTop: 20 }}>
+        <Title size="medium">Card on file</Title>
+        <Cards
+          number={"1234123412341234"}
+          expiry={"04/19"}
+          cvc={"000"}
+          name={"Your Name"}
+          focused={"number"}
+          previe={true}
+          issuer={"Visa"}
+        />
+        <Link
+          to={`/browse`} //placeholder
+          style={{ textDecoration: "none" }}
+        >
+          <Button className="submit-button" style={{ marginTop: 20 }} onClick={submitOrder}>Complete purchase</Button>
+        </Link>
       </div>
 
     </Drawer>

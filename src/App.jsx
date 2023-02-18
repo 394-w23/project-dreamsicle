@@ -7,6 +7,7 @@ import RestaurantList from './components/RestaurantList';
 import './App.css';
 import OrderPage from './components/OrderPage';
 import LoginPage from './components/LoginPage';
+import ReturnPage from './components/ReturnPage';
 
 const App = () => {
   const [data, error] = useDbData("/");
@@ -51,8 +52,14 @@ const App = () => {
               path="/:restaraunt_id/:transaction_id"
               element={<OrderPage
                 restaurants={restaurants}
+              />}/>
+              {/* TODO: put the actual route */}
+            <Route
+              path="/returns"
+              element={<ReturnPage
               />}
             />
+            
           </Routes>
         </div>
       </BrowserRouter>
