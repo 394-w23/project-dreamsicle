@@ -72,6 +72,7 @@ const OrderPage = ({ restaurants }) => {
                     <tbody>{rows}</tbody>
                 </Table>
             </div>
+            
             <div className="timeline" onClick={nextState}>
                 <Timeline active={currentState} bulletSize={24} lineWidth={2}>
                     <Timeline.Item bullet={<RiMailSendLine size={12} />} title="Submitted">
