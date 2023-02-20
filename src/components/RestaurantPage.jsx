@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
-import { Button, Text, Group, Modal, Table, Drawer } from "@mantine/core";
+import { Button, Text, Group, Modal, Table } from "@mantine/core";
 import uuid from 'react-uuid';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 import { useForm } from '@mantine/form';
@@ -12,10 +12,11 @@ import BackButton from "./BackButton.jsx";
 import { FaShoppingCart } from "@react-icons/all-files/Fa/FaShoppingCart"
 import Cart from './Cart.jsx';
 import ItemDetails from './ItemDetails.jsx';
+import RestaurantDrawer from './RestaurantDrawer.jsx';
 
 const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
-  
+
   const [updateOrders, orderResult] = useDbUpdate(`/users/${userId}/cart/orders`);
   const [updateCart, cartResult] = useDbUpdate(`/users/${userId}/cart/`);
 
@@ -23,7 +24,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
   const [itemDetails, setItemDetails] = useState({});
 
   const [cartOpened, setCartOpened] = useState(false);
-  const [cartData,setCartData] = useState(cart);
+  const [cartData, setCartData] = useState(cart);
   // const [cartData, cartError] = useDbData(`/users/${userId}/cart/`);
   // console.log("cart",cart)
   // console.log("cartData",cartData)
@@ -37,7 +38,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
     if (!cartData || (restaurantID !== cartData.restaurant)) {
       console.log("resetting cart")
-      const newRestaurantCart={
+      const newRestaurantCart = {
         restaurant: restaurantID,
         orders: {}
       }
@@ -61,7 +62,11 @@ const RestaurantPage = ({ restaurants, cart }) => {
     <div className="restaurant-page">
       <Header />
 
-      <Cart restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened}/>
+      <RestaurantDrawer setCartOpened={setCartOpened} cartOpened={cartOpened}>
+
+        <Cart restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened} />
+
+      </RestaurantDrawer>
 
       <ItemDetails updateOrders={updateOrders} itemDetails={itemDetails} itemDetailsOpened={itemDetailsOpened} setItemDetailsOpened={setItemDetailsOpened} cartData={cartData} setCartData={setCartData} setItemDetails={setItemDetails} />
 
@@ -81,7 +86,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
         ))}
       </div>
       <div className="open-cart">
-          <Button leftIcon={<FaShoppingCart size="20" />} className="submit-button" onClick={openCart}>View Cart</Button>
+        <Button leftIcon={<FaShoppingCart size="20" />} className="submit-button" onClick={openCart}>View Cart</Button>
       </div>
     </div>
   );

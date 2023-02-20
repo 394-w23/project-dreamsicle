@@ -37,7 +37,8 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
     console.log(rows)
   }
 
-  const submitOrder = () => {     //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
+  const gotoCheckout = () => {
+    setCartOpened(false) //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
     // let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
 
     // let ordersObject = {}
@@ -53,19 +54,7 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
   }
   return (
 
-    <Drawer
-      opened={cartOpened}
-      onClose={() => setCartOpened(false)}
-      title="Your cart"
-      position="bottom"
-      size="93%"
-      overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
-      overlayOpacity={0.55}
-      overlayBlur={3}
-      padding="lg"
-
-    >
-
+    <div>
       <div className="table">
         <Table>
           <thead>
@@ -107,10 +96,10 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
           to={`/browse`} //placeholder
           style={{ textDecoration: "none" }}
         >
-          <Button className="submit-button" style={{ marginTop: 20 }} onClick={submitOrder}>Go to checkout</Button>
+          <Button className="submit-button" style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
         </Link>
       </div>
+    </div>
 
-    </Drawer>
   )
 }
