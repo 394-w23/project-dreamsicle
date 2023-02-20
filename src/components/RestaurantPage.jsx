@@ -81,7 +81,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
         ))}
       </div>
       <div className="open-cart">
-          <Button leftIcon={<FaShoppingCart size="20" />} className="submit-button" onClick={openCart}>Check Out Order</Button>
+          <Button leftIcon={<FaShoppingCart size="20" />} className="submit-button" onClick={openCart}>View Cart</Button>
       </div>
     </div>
   );

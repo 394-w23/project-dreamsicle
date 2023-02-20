@@ -124,7 +124,7 @@ export default function Cart({ restaurant, cartData, updateOrders, cartOpened, s
           to={`/browse`} //placeholder
           style={{ textDecoration: "none" }}
         >
-          <Button className="submit-button" style={{ marginTop: 20 }} onClick={submitOrder}>Complete purchase</Button>
+          <Button className="submit-button" style={{ marginTop: 20 }} onClick={submitOrder}>Go to checkout</Button>
         </Link>
       </div>
 
