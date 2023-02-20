@@ -13,6 +13,7 @@ import { FaShoppingCart } from "@react-icons/all-files/Fa/FaShoppingCart"
 import Cart from './Cart.jsx';
 import ItemDetails from './ItemDetails.jsx';
 import RestaurantDrawer from './RestaurantDrawer.jsx';
+import Checkout from './Checkout.jsx';
 
 const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
@@ -22,6 +23,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
   const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
   const [itemDetails, setItemDetails] = useState({});
+  const [drawerState, setDrawerState] = useState("cart");
 
   const [cartOpened, setCartOpened] = useState(false);
   const [cartData, setCartData] = useState(cart);
@@ -64,7 +66,10 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
       <RestaurantDrawer setCartOpened={setCartOpened} cartOpened={cartOpened}>
 
-        <Cart restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened} />
+        {
+          drawerState === "checkout" ? <Checkout restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened} />
+            : <Cart restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened} />
+        }
 
       </RestaurantDrawer>
 
