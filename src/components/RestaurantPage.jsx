@@ -23,7 +23,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
   const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
   const [itemDetails, setItemDetails] = useState({});
-  const [drawerState, setDrawerState] = useState("cart");
+  const [drawerState, setDrawerState] = useState("");
 
   const [cartOpened, setCartOpened] = useState(false);
   const [cartData, setCartData] = useState(cart);
@@ -52,7 +52,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
 
   let openCart = () => {
-    setCartOpened(true);
+    setDrawerState("cart");
   };
 
   const menu = []
@@ -64,11 +64,11 @@ const RestaurantPage = ({ restaurants, cart }) => {
     <div className="restaurant-page">
       <Header />
 
-      <RestaurantDrawer setCartOpened={setCartOpened} cartOpened={cartOpened}>
+      <RestaurantDrawer setDrawerState={setDrawerState} drawerState={drawerState}>
 
         {
-          drawerState === "checkout" ? <Checkout restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened} />
-            : <Cart restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} cartOpened={cartOpened} setCartOpened={setCartOpened} />
+          drawerState === "checkout" ? <Checkout restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} setDrawerState={setDrawerState} />
+            : <Cart restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} setDrawerState={setDrawerState} />
         }
 
       </RestaurantDrawer>

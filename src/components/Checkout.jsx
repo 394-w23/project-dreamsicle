@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import uuid from 'react-uuid';
 import { Button, Text, Group, Modal, Table, Drawer, useMantineTheme, Title, Checkbox, Radio } from "@mantine/core";
+import { useForm } from '@mantine/form';
+import { useDbUpdate } from "../utils/firebase";
 import { Link } from "react-router-dom";
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import Cards from 'react-credit-cards-2';
@@ -7,9 +10,22 @@ import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 
 
-export default function Checkout({ restaurant, cartData, updateOrders, cartOpened, setCartOpened }) {
+export default function Checkout({ restaurant, cartData, updateOrders, setDrawerState }) {
     const theme = useMantineTheme();
     const [wantReturnableItems, setWantReturnableItems] = useState("No")
+    const transactionID = uuid();
+    const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
+
+    let form = useForm({
+        initialValues: {
+          id: transactionID,
+          datetime: '',
+          restaurant: restaurant.id,
+          user: 0, ////////////////////////////////////////////////////////////////// HARD CODED USER
+          orders: cartData
+        },
+      });
+
 
     const restaurantDetailsHelper = menuItemParser
 
@@ -37,19 +53,19 @@ export default function Checkout({ restaurant, cartData, updateOrders, cartOpene
         console.log(rows)
     }
 
-    const gotoCheckout = () => {
-        setCartOpened(false) //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
-        // let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
+    const placeOrder= () => {
+        setDrawerState("") //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
+        let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
 
-        // let ordersObject = {}
-        // orders.forEach(order => ordersObject[order.id] = order)
+        let ordersObject = {}
+        orders.forEach(order => ordersObject[order.id] = order)
 
-        // // if there are any orders to submit, we should submit; otherwise do nothing
-        // if (orders.length > 0) {
-        //   let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject }
-        //   updateTransactions(formData)
-        //   setCartData({})
-        // }
+        // if there are any orders to submit, we should submit; otherwise do nothing
+        if (orders.length > 0) {
+          let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject }
+          updateTransactions(formData)
+          setCartData({})
+        }
 
     }
     return (
@@ -93,10 +109,10 @@ export default function Checkout({ restaurant, cartData, updateOrders, cartOpene
                     issuer={"Visa"}
                 />
                 <Link
-                    to={`/browse`} //placeholder
+                    to={`/${restaurant.id}/${transactionID}`} //placeholder
                     style={{ textDecoration: "none" }}
                 >
-                    <Button className="submit-button" style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
+                    <Button className="submit-button" style={{ marginTop: 20 }} onClick={placeOrder}>Place Order</Button>
                 </Link>
             </div>
         </div>)
