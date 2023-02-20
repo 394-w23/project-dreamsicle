@@ -10,6 +10,7 @@ import { RiCheckboxCircleLine } from "@react-icons/all-files/ri/RiCheckboxCircle
 import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"
 import { FaRegSmileBeam } from "@react-icons/all-files/fa/FaRegSmileBeam"
 import { GiCookingPot } from "@react-icons/all-files/gi/GiCookingPot"
+import { menuItemParser } from "../utils/helper";
 
 const OrderPage = ({ restaurants }) => {
     const transactionID = useParams().transaction_id
@@ -27,8 +28,9 @@ const OrderPage = ({ restaurants }) => {
     let order = [];
     //create a list of all the items in our order
     Object.values(transaction.orders).forEach(i => {
-        order.push({ item: menu.filter(menu_item => menu_item.id.toString() === i.item)[0], quantity: i.quantity })
+        order.push({ item: menuItemParser(i,restaurants[transaction.restaurant]), quantity: i.quantity })
     })
+
     let total_price = 0
     Object.values(transaction.orders).forEach(i => {
         total_price += i.quantity * (menu.filter(menu_item => menu_item.id.toString() === i.item)[0].price)

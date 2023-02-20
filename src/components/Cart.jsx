@@ -4,31 +4,14 @@ import { Link } from "react-router-dom";
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/es/styles-compiled.css';
+import { menuItemParser } from '../utils/helper';
+
 
 export default function Cart({ restaurant, cartData, updateOrders, cartOpened, setCartOpened }) {
   const theme = useMantineTheme();
   const [wantReturnableItems, setWantReturnableItems] = useState("No")
 
-  const restaurantDetailsHelper = (order, restaurant) => {
-    let menuSections = restaurant.menu_sections;
-    let item;
-    try {
-      for (let menuSectionIndex = 0; menuSectionIndex < menuSections.length; menuSectionIndex++) {
-        let menuSectionItems = menuSections[menuSectionIndex].items
-        console.log(menuSectionItems, "---- ")
-        for (let itemIndex = 0; itemIndex < menuSectionItems.length; itemIndex++) {
-          if (menuSectionItems[itemIndex].id == order.item) {
-            item = menuSectionItems[itemIndex]
-            break
-          }
-        }
-        // break
-      }
-    } catch (e) {
-      console.log(e)
-    }
-    return item
-  }
+  const restaurantDetailsHelper = menuItemParser
 
 
   let rows = []
