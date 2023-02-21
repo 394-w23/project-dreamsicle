@@ -11,7 +11,6 @@ import { menuItemParser } from '../utils/helper';
 import moment from 'moment';
 
 export default function Checkout({ restaurant, cartData,updateCart, setCartData, setDrawerState }) {
-    const theme = useMantineTheme();
     const [wantReturnableItems, setWantReturnableItems] = useState("No")
     const transactionID = uuid();
     const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);

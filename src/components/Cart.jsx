@@ -10,9 +10,6 @@ import OrderTable from './OrderTable';
 
 
 export default function Cart({ restaurant, cartData, setCartData, updateOrders, setDrawerState }) {
-  const theme = useMantineTheme();
-  const [wantReturnableItems, setWantReturnableItems] = useState("No")
-
   const restaurantDetailsHelper = menuItemParser
 
 
