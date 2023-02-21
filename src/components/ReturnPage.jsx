@@ -6,6 +6,7 @@ import { RiMailSendLine } from '@react-icons/all-files/ri/RiMailSendLine';
 import { RiTruckLine } from '@react-icons/all-files/ri/RiTruckLine';
 import React, { useState } from 'react'
 import Header from './Header'
+import Navbar from './Navbar';
 
 export default function ReturnPage() {
 
@@ -41,7 +42,7 @@ export default function ReturnPage() {
         </Checkbox.Group>
       </Card>
 
-      <div style={{textAlign: "center", paddingBottom: 20}}>
+      <div style={{ textAlign: "center", paddingBottom: 20 }}>
         <Button >Start Return</Button>
       </div>
       <div className="timeline" onClick={nextState}>
@@ -77,6 +78,8 @@ export default function ReturnPage() {
           </Timeline.Item>
         </Timeline>
       </div>
+
+      <Navbar />
     </div>
   )
 }
