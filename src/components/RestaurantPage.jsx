@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
-import { Button, Text, Group, Modal, Table } from "@mantine/core";
+import { Button, Text, Group, Modal, Table, Alert } from "@mantine/core";
 import uuid from 'react-uuid';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 import { useForm } from '@mantine/form';
@@ -14,6 +14,8 @@ import Cart from './Cart.jsx';
 import ItemDetails from './ItemDetails.jsx';
 import RestaurantDrawer from './RestaurantDrawer.jsx';
 import Checkout from './Checkout.jsx';
+import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
+
 
 const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
@@ -22,6 +24,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
   const [updateCart, cartResult] = useDbUpdate(`/users/${userId}/cart/`);
 
   const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
+  const [raiseAlert, setRaiseAlert] = useState(false);
   const [itemDetails, setItemDetails] = useState({});
   const [drawerState, setDrawerState] = useState("");
 
@@ -52,7 +55,12 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
 
   let openCart = () => {
-    setDrawerState("cart");
+    if(cartData.orders && Object.values(cartData.orders).length>0) {
+      setRaiseAlert(false)
+      setDrawerState("cart");
+    } else {
+      setRaiseAlert(true);
+    }
   };
 
   const menu = []
@@ -93,6 +101,9 @@ const RestaurantPage = ({ restaurants, cart }) => {
       <div className="open-cart">
         <Button leftIcon={<FaShoppingCart size="20" />} className="submit-button" onClick={openCart}>View Cart</Button>
       </div>
+      {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Minimum Order" color="red">
+                    You must add at least one item to cart!
+                </Alert>}
     </div>
   );
 };

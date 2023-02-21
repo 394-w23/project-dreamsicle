@@ -10,9 +10,6 @@ import OrderTable from './OrderTable';
 
 
 export default function Cart({ restaurant, cartData, setCartData, updateOrders, setDrawerState }) {
-  const theme = useMantineTheme();
-  const [wantReturnableItems, setWantReturnableItems] = useState("No")
-
   const restaurantDetailsHelper = menuItemParser
 
 
@@ -50,7 +47,8 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
     updateOrders({
       [order.id]: null,
     });
-    if (cartData.orders.length === 0) {
+    console.log("length thing",cartData.orders.length)
+    if (Object.values(cartData.orders).length === 0) {
       setDrawerState("")
     }
   }

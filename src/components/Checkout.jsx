@@ -9,9 +9,9 @@ import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 import moment from 'moment';
+import OrderTable from './OrderTable';
 
 export default function Checkout({ restaurant, cartData,updateCart, setCartData, setDrawerState }) {
-    const theme = useMantineTheme();
     const [wantReturnableItems, setWantReturnableItems] = useState("No")
     const transactionID = uuid();
     const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
@@ -67,19 +67,7 @@ export default function Checkout({ restaurant, cartData,updateCart, setCartData,
     return (
 
         <div>
-            <div className="table">
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Quanity</th>
-                            <th>Price</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>{rows}</tbody>
-                </Table>
-            </div>
+            <OrderTable restaurant={restaurant} cartData={cartData} />
 
             <Radio.Group
                 name="favoriteFramework"
