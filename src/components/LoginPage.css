@@ -1,7 +1,7 @@
-.login{
-    height: 100 vh; 
+.login {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
+    color: black;
 }

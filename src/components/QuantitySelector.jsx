@@ -7,18 +7,11 @@ import { Button, NumberInput, Group, ActionIcon } from '@mantine/core';
 
 const QuantitySelector = ({ quantity, setQuantity }) => {
   const { number } = useParams();
-
-  const onClick = () => {
-    setRestaurant(restaurant);
-    setRestaurantID(restaurant.id)
-  };
   const add = () => {
     setQuantity(isNaN(quantity) ? 1 : quantity + 1)
-    // setCount(count + 1)
   };
   const subtract = () => {
     setQuantity(quantity > 0 ? quantity - 1 : 0)
-    // setCount(count > 0 ? count - 1 : 0)   
   };
 
   return (
@@ -31,7 +24,7 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
         <NumberInput
           hideControls
           value={quantity}
-          onChange={(val) => setQuantity(val)}
+          onChange={(quantity) => setQuantity(quantity)}
           // handlersRef={handlers}
           min={0}
           styles={{ input: { width: '54px', textAlign: 'center' } }}
@@ -40,9 +33,6 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
           +
         </ActionIcon>
       </Group>
-      {/* <Button onClick={add}>+</Button> 
-       <div>{count}</div>
-       <Button onClick={subtract}>-</Button> */}
     </div>
   );
 }

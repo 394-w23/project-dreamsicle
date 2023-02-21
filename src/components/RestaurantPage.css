@@ -19,4 +19,24 @@
     /* padding-left:  2.5; */
     background: white;
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.restaurant-logo {
+    max-height: 200px;
+    margin-bottom: 12px;
+}
+
+.restaurant-address {
+    padding: 1vh;
+    /* padding-left:  2.5; */
+    background: white;
+    border-radius: 12px;
+}
+
+.open-cart{
+    margin-top: 20px;
+    text-align: center;
 }
