@@ -13,6 +13,7 @@ const Navbar = () => {
                 to={`/browse`}
                 className="nav-button"
                 key={"hobbies"}
+                style={{ textDecoration: "none" }}
                 // underline={selection == "hobbies"}
                 id={"hobbies"}
                 onClick={(e) => setSelection(e.target.id)}
@@ -27,6 +28,7 @@ const Navbar = () => {
                 key={"events"}
                 // underline={selection == "events"}
                 id={"events"}
+                style={{ textDecoration: "none" }}
                 onClick={(e) => setSelection(e.target.id)}>
                 Returns
             </Link>
