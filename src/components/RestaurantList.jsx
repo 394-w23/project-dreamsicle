@@ -16,7 +16,7 @@ const RestaurantList = ({ restaurants }) => {
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
     const [currTagFilter, setCurrTagFilter] = useState("")
 
-    const setFilter = (filter) => {
+    const setTagFilter = (filter) => {
         let tempList = restaurants.filter(restaurant => restaurant.profile.tags.includes(filter))
         if (filter === currTagFilter) {
             setCurrTagFilter("")
