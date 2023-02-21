@@ -11,6 +11,8 @@ import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"
 import { FaRegSmileBeam } from "@react-icons/all-files/fa/FaRegSmileBeam"
 import { GiCookingPot } from "@react-icons/all-files/gi/GiCookingPot"
 import { menuItemParser } from "../utils/helper";
+import OrderTable from "./OrderTable";
+
 
 const OrderPage = ({ restaurants }) => {
     const transactionID = useParams().transaction_id
@@ -71,7 +73,7 @@ const OrderPage = ({ restaurants }) => {
                             <th>Price</th>
                         </tr>
                     </thead>
-                    <tbody>{rows}</tbody>
+                    <tbody><OrderTable/></tbody>
                 </Table>
             </div>
             <div className="timeline" onClick={nextState}>

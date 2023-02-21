@@ -5,6 +5,8 @@ import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
+import OrderTable from './OrderTable';
+
 
 
 export default function Cart({ restaurant, cartData, updateOrders, setDrawerState }) {
@@ -53,7 +55,7 @@ export default function Cart({ restaurant, cartData, updateOrders, setDrawerStat
               <th></th>
             </tr>
           </thead>
-          <tbody>{rows}</tbody>
+          <tbody><OrderTable cartData={cartData}/></tbody>
         </Table>
       <Button className="submit-button" style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
       </div>

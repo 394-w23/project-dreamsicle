@@ -52,11 +52,14 @@ export default function Checkout({ restaurant, cartData, updateOrders, setDrawer
         setDrawerState("") //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
 
         // if there are any orders to submit, we should submit; otherwise do nothing
-        if (cartData.orders.length > 0) {
+        if (Object.values(cartData.orders).length > 0) {
             let formData={...form.values,datetime:moment().format(),id:transactionID,orders:cartData.orders}
             updateTransactions(formData)
             // setCartData({})
+
         }
+        console.log("Checkout cart data length: -------", Object.values(cartData.orders).length > 0)
+       
 
     }
     return (
