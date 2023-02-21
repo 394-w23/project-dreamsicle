@@ -18,7 +18,6 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
 
   let rows = []
 
-  console.log(cartData.orders, " =-------- ", restaurant)
   if (cartData.orders) {
 
 
