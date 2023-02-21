@@ -20,7 +20,7 @@ const RestaurantList = ({ restaurants}) => {
                 {restaurants.map(r => <Restaurant key={r.id} restaurant={r} />)}
             </div>
 
-            <Navbar />
+            {/* <Navbar /> */}
         </div>
     );
 
