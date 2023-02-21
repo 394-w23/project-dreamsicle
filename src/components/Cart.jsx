@@ -46,7 +46,7 @@ export default function Cart({ restaurant, cartData, updateOrders, setDrawerStat
 
     <div>
       <div className="table">
-        <OrderTable restaurant={restaurant} cartData={cartData}/>
+        <OrderTable deletable restaurant={restaurant} cartData={cartData}/>
       <Button className="submit-button" style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
       </div>
     </div>
