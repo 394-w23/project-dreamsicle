@@ -67,7 +67,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
       <RestaurantDrawer setDrawerState={setDrawerState} drawerState={drawerState}>
 
         {
-          drawerState === "checkout" ? <Checkout restaurant={restaurant} cartData={cartData} updateOrders={updateOrders} setDrawerState={setDrawerState} />
+          drawerState === "checkout" ? <Checkout restaurant={restaurant} setCartData={setCartData} cartData={cartData} updateCart={updateCart} setDrawerState={setDrawerState} />
             : <Cart restaurant={restaurant} updateOrders={updateOrders} setCartData={setCartData}cartData={cartData} setDrawerState={setDrawerState} />
         }
 

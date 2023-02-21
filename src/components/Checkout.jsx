@@ -10,7 +10,7 @@ import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 import moment from 'moment';
 
-export default function Checkout({ restaurant, cartData, updateOrders, setDrawerState }) {
+export default function Checkout({ restaurant, cartData,updateCart, setCartData, setDrawerState }) {
     const theme = useMantineTheme();
     const [wantReturnableItems, setWantReturnableItems] = useState("No")
     const transactionID = uuid();
@@ -34,7 +34,6 @@ export default function Checkout({ restaurant, cartData, updateOrders, setDrawer
     if (cartData.orders) {
         rows = Object.values(cartData.orders).map((order) => {
             let item = restaurantDetailsHelper(order, restaurant);
-            // console.log("item", item)
             return (
                 <tr key={order.id}>
                     <td>{item.name}</td>
@@ -45,7 +44,6 @@ export default function Checkout({ restaurant, cartData, updateOrders, setDrawer
             )
         }
         )
-        // console.log(rows)
     }
 
     const placeOrder = () => {
@@ -55,8 +53,12 @@ export default function Checkout({ restaurant, cartData, updateOrders, setDrawer
         if (Object.values(cartData.orders).length > 0) {
             let formData={...form.values,datetime:moment().format(),id:transactionID,orders:cartData.orders}
             updateTransactions(formData)
-            // setCartData({})
-
+            const newRestaurantCart = {
+                restaurant: restaurant.id,
+                orders: {}
+              }
+              updateCart(newRestaurantCart)
+              setCartData(newRestaurantCart);
         }
         console.log("Checkout cart data length: -------", Object.values(cartData.orders).length > 0)
        
