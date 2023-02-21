@@ -26,6 +26,7 @@ const RestaurantList = ({ restaurants }) => {
             setFilteredRestaurants(tempList)
         }
     }
+
     const setTimeFilter = (date) => {
         let desiredDate
 
@@ -38,16 +39,20 @@ const RestaurantList = ({ restaurants }) => {
         })
         setFilteredRestaurants(tempList)
     }
+
     const setOrderSize = (size) => {
-        let tempList = restaurants.filter(restaurant => restaurant.profile.upper_order_bound >= size && size >= restaurant.profile.lower_order_bound)
+        let tempList = restaurants.filter(restaurant =>
+            restaurant.profile.upper_order_bound >= size && size >= restaurant.profile.lower_order_bound)
         setFilteredRestaurants(tempList)
     }
 
     return (
         <div>
             <Header />
-            <div className='tags'><SizeFilter setOrderSize={setOrderSize} /><TimeFilter setTimeFilter={setTimeFilter} />
-            {tags.map(tag => <FilterItem key={tag} tag={tag} setTagFilter={setTagFilter} />)}</div>
+            <div className='tags'>
+                <SizeFilter setOrderSize={setOrderSize} />
+                <TimeFilter setTimeFilter={setTimeFilter} />
+                {tags.map(tag => <FilterItem key={tag} tag={tag} setTagFilter={setTagFilter} />)}</div>
             <div className='restaurant-list'>
                 {filteredRestaurants.map(r => <Restaurant key={r.id} restaurant={r} />)}
             </div>
