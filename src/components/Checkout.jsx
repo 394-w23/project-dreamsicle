@@ -8,7 +8,7 @@ import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
-
+import moment from 'moment';
 
 export default function Checkout({ restaurant, cartData, updateOrders, setDrawerState }) {
     const theme = useMantineTheme();
@@ -16,30 +16,25 @@ export default function Checkout({ restaurant, cartData, updateOrders, setDrawer
     const transactionID = uuid();
     const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
-    let form = useForm({
-        initialValues: {
-          id: transactionID,
-          datetime: '',
-          restaurant: restaurant.id,
-          user: 0, ////////////////////////////////////////////////////////////////// HARD CODED USER
-          orders: cartData
-        },
-      });
-
-
     const restaurantDetailsHelper = menuItemParser
 
+    let form = useForm({
+        initialValues: {
+            id: transactionID,
+            datetime: "",
+            restaurant: restaurant.id,
+            user: 0, ////////////////////////////////////////////////////////////////// HARD CODED USER
+            orders: {}
+        },
+    });
 
     let rows = []
 
-    console.log(cartData.orders, " =-------- ", restaurant)
+    // console.log(cartData.orders, " =-------- ", restaurant)
     if (cartData.orders) {
-
-
-
         rows = Object.values(cartData.orders).map((order) => {
             let item = restaurantDetailsHelper(order, restaurant);
-            console.log("item", item)
+            // console.log("item", item)
             return (
                 <tr key={order.id}>
                     <td>{item.name}</td>
@@ -50,21 +45,17 @@ export default function Checkout({ restaurant, cartData, updateOrders, setDrawer
             )
         }
         )
-        console.log(rows)
+        // console.log(rows)
     }
 
-    const placeOrder= () => {
+    const placeOrder = () => {
         setDrawerState("") //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
-        let orders = Object.keys(cart).filter((key, index) => cart[key].quantity > 0).map((key, index) => ({ id: uuid(), item: key, quantity: cart[key] }));
-
-        let ordersObject = {}
-        orders.forEach(order => ordersObject[order.id] = order)
 
         // if there are any orders to submit, we should submit; otherwise do nothing
-        if (orders.length > 0) {
-          let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: ordersObject }
-          updateTransactions(formData)
-          setCartData({})
+        if (cartData.orders.length > 0) {
+            let formData={...form.values,datetime:moment().format(),id:transactionID,orders:cartData.orders}
+            updateTransactions(formData)
+            // setCartData({})
         }
 
     }
