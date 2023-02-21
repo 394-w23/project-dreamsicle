@@ -1,5 +1,11 @@
 .restaurant-list {
     /* background-color: gray;
     color: gray; */
+}
+
+.tags{
+    display: flex;
+    flex-direction: row;
     margin-top: 8vh;
+    overflow-x: scroll;
 }
