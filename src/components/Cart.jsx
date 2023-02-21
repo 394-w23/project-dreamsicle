@@ -9,7 +9,7 @@ import OrderTable from './OrderTable';
 
 
 
-export default function Cart({ restaurant, cartData, updateOrders, setDrawerState }) {
+export default function Cart({ restaurant, cartData, setCartData, updateOrders, setDrawerState }) {
   const theme = useMantineTheme();
   const [wantReturnableItems, setWantReturnableItems] = useState("No")
 
@@ -25,7 +25,6 @@ export default function Cart({ restaurant, cartData, updateOrders, setDrawerStat
 
     rows = Object.values(cartData.orders).map((order) => {
       let item = restaurantDetailsHelper(order, restaurant);
-      console.log("item", item)
       return (
         <tr key={order.id}>
           <td>{item.name}</td>
@@ -36,18 +35,32 @@ export default function Cart({ restaurant, cartData, updateOrders, setDrawerStat
       )
     }
     )
-    console.log(rows)
   }
 
   const gotoCheckout = () => {
     setDrawerState("checkout") //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
   }
+  const removeOrder = (order) => {
+    let tempCart = cartData
+    console.log("Befor", tempCart.orders)
+    delete tempCart.orders[order.id]
+    console.log("Do something", tempCart.orders)
+    console.log("Arf", tempCart.orders)
+    setCartData(tempCart)
+    // tempCart.orders[order.id] = null
+    updateOrders({
+      [order.id]: null,
+    });
+    if (cartData.orders.length === 0) {
+      setDrawerState("")
+    }
+  }
   return (
 
     <div>
       <div className="table">
-        <OrderTable deletable restaurant={restaurant} cartData={cartData}/>
-      <Button className="submit-button" style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
+        <OrderTable deletable restaurant={restaurant} removeOrder={removeOrder} cartData={cartData} />
+        <Button className="submit-button" style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
       </div>
     </div>
 

@@ -3,7 +3,7 @@ import { Button, Table } from "@mantine/core";
 import { menuItemParser } from '../utils/helper'
 
 
-export default function OrderTable({ restaurant, cartData, deletable }) {
+export default function OrderTable({ restaurant, cartData, deletable,removeOrder }) {
   let rows = []
   // console.log(cartData.orders, " =-------- ", restaurant)
 
@@ -22,7 +22,7 @@ export default function OrderTable({ restaurant, cartData, deletable }) {
         <td>{item.name}</td>
         <td>{order.quantity}</td>
         <td>${item.price * order.quantity}</td>
-        {deletable && <td><Button compact variant="subtle"><FaTrash /></Button></td>}
+        {deletable && <td><Button compact variant="subtle" onClick={() => removeOrder(order)}><FaTrash /></Button></td>}
       </tr>
     )
   });

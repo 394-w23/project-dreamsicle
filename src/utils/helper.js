@@ -3,8 +3,6 @@ import { Button,  Table } from "@mantine/core";
 
 
 export const menuItemParser = (order, restaurant) => {
-    console.log(restaurant)
-    console.log("Ordr",order)
     let menuSections = restaurant.menu_sections;
     let item;
     try {
