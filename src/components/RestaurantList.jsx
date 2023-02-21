@@ -14,31 +14,27 @@ import SizeFilter from './SizeFilter';
 
 const RestaurantList = ({ restaurants }) => {
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
-    const [currFilter, setcurrFilter] = useState("")
+    const [currTagFilter, setCurrTagFilter] = useState("")
+
     const setFilter = (filter) => {
         let tempList = restaurants.filter(restaurant => restaurant.profile.tags.includes(filter))
-        if (filter === currFilter) {
-            setcurrFilter("")
+        if (filter === currTagFilter) {
+            setCurrTagFilter("")
             setFilteredRestaurants(restaurants)
         } else {
-            setcurrFilter(filter)
+            setCurrTagFilter(filter)
             setFilteredRestaurants(tempList)
         }
     }
     const setTimeFilter = (date) => {
-        let dt = new Date()
         let desiredDate
 
         let tempList = restaurants.filter(restaurant => {
-            dt = new Date()
             desiredDate = new Date(date)
             //Remove advance notice time from inputted to see if it is far enough in the future
             desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
             //If the date is still in the future (there is enough time to fulfill order)
-            console.log("Min Restaurant Time", restaurant.profile.advance_notice)
-            console.log("Order would need to be placed by", desiredDate)
-            console.log(desiredDate > dt)
-            return (desiredDate > dt)
+            return (desiredDate > new Date())
         })
         setFilteredRestaurants(tempList)
     }
@@ -50,7 +46,8 @@ const RestaurantList = ({ restaurants }) => {
     return (
         <div>
             <Header />
-            <div className='tags'><SizeFilter setOrderSize={setOrderSize} /><TimeFilter setTimeFilter={setTimeFilter} />{tags.map(tag => <FilterItem key={tag} tag={tag} setFilter={setFilter} />)}</div>
+            <div className='tags'><SizeFilter setOrderSize={setOrderSize} /><TimeFilter setTimeFilter={setTimeFilter} />
+            {tags.map(tag => <FilterItem key={tag} tag={tag} setTagFilter={setTagFilter} />)}</div>
             <div className='restaurant-list'>
                 {filteredRestaurants.map(r => <Restaurant key={r.id} restaurant={r} />)}
             </div>
