@@ -7,7 +7,7 @@ const date = new Date()
 date.setHours(date.getHours()+ 25); ///////////////////////////////////////TODO: Hardwired User Inputted date object here
     return(
         <div onClick={() => setTimeFilter(date)} className="filter-tag">
-        <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>TIME FILTER</Badge>
+        <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>TIME FILTER(1 day)</Badge>
         </div>
 
     );
