@@ -1,16 +1,16 @@
-.filter-item{
-display: flex;
-flex-direction: column;
-width: 40px;
-margin: auto;
-border: 3px solid black;
-height: 40px;
-overflow-x: hidden;
-overflow-y: hidden;
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    margin: auto;
+    border: 3px solid black;
+    height: 40px;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-.filter-tag{
+.filter-tag {
     display: flex;
     flex-direction: column;
     margin: 5px;
-    }
+}

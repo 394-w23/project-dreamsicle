@@ -17,8 +17,9 @@ import FilterSelector from './FilterSelector';
 
 const RestaurantList = ({ restaurants }) => {
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
-    const [currTagFilter, setCurrTagFilter] = useState("");
+    // const [currTagFilter, setCurrTagFilter] = useState("");
     const [currTagFilters, setCurrTagFilters] = useState([]);
+    const [tempFilters, setTempFilters] = useState(currTagFilters);
     const [filterOpen, setFilterOpen] = useState(false);
 
     const setTagFilter = (filters) => {
@@ -41,6 +42,12 @@ const RestaurantList = ({ restaurants }) => {
         setFilteredRestaurants(filteredList);
         setCurrTagFilters(filters);
     }
+
+    const removeFilterTag = (tag) => {
+        let tagFilters = currTagFilters.filter(f => f !== tag);
+        setTempFilters(tagFilters);
+        setTagFilter(tagFilters);
+    };
 
     const setTimeFilter = (date) => {
         let desiredDate
@@ -73,12 +80,12 @@ const RestaurantList = ({ restaurants }) => {
                 <FaFilter></FaFilter>
                 <div className="filter-name">Filter</div>
             </Button>
-            <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} currTagFilters={currTagFilters} />
+            <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>
                 <SizeFilter setOrderSize={setOrderSize} />
                 <TimeFilter setTimeFilter={setTimeFilter} />
-                {tags.filter(tag => currTagFilters.includes(tag)).map(tag => <FilterItem key={tag} tag={tag} setTagFilter={setTagFilter} />)}
+                {tags.filter(tag => currTagFilters.includes(tag)).map(tag => <FilterItem key={tag} tag={tag} removeFilterTag={removeFilterTag} />)}
             </div>
 
             <div className='restaurant-list'>
