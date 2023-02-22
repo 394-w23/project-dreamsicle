@@ -2,22 +2,19 @@
 import { Button, Checkbox, Drawer, useMantineTheme } from '@mantine/core';
 import { useState } from 'react';
 
-const FilterSelector = ({ setFilterOpen, filterOpen, tags, setTagFilter }) => {
-    const [filters, setFilters] = useState([]);
+const FilterSelector = ({ setFilterOpen, filterOpen, tags, setTagFilter, currTagFilters }) => {
+    const [filters, setFilters] = useState(currTagFilters);
 
     const theme = useMantineTheme();
     
     const updateFilters = (tag) => {
         if (filters.includes(tag)) {
-            filters.splice(filters.indexOf(tag), 1);
+            // filters.splice(filters.indexOf(tag), 1);
+            setFilters(filters.filter((f => f !== tag)));
         } else {
-            filters.push(tag);
+            // filters.push(tag);
+            setFilters([...filters, tag])
         }
-        isChecked(tag)
-    };
-
-    const isChecked = (tag) => {
-        return filters.includes(tag);
     };
 
     return (
@@ -35,10 +32,10 @@ const FilterSelector = ({ setFilterOpen, filterOpen, tags, setTagFilter }) => {
                 padding="lg"
 
             >
-                { tags.map(tag => <Checkbox label={tag} key={tag} tag={tag} onClick={() => updateFilters(tag)} />) }
+                { tags.map(tag => <Checkbox checked={filters.includes(tag)} onChange={(event) => event.currentTarget.checked} label={tag} key={tag} tag={tag} onClick={() => updateFilters(tag)} />) }
 
                 <Button onClick={() => setTagFilter(filters)}>Apply</Button>
-                
+
             </Drawer>
 
             {/* <div onClick={() => setTagFilter(tag)} className="filter-tag">

@@ -39,6 +39,7 @@ const RestaurantList = ({ restaurants }) => {
             return true;
         });
         setFilteredRestaurants(filteredList);
+        setCurrTagFilters(filters);
     }
 
     const setTimeFilter = (date) => {
@@ -72,12 +73,12 @@ const RestaurantList = ({ restaurants }) => {
                 <FaFilter></FaFilter>
                 <div className="filter-name">Filter</div>
             </Button>
-            <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} />
+            <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} currTagFilters={currTagFilters} />
 
             <div className='tags'>
                 <SizeFilter setOrderSize={setOrderSize} />
                 <TimeFilter setTimeFilter={setTimeFilter} />
-                {tags.map(tag => <FilterItem key={tag} tag={tag} setTagFilter={setTagFilter} />)}
+                {tags.filter(tag => currTagFilters.includes(tag)).map(tag => <FilterItem key={tag} tag={tag} setTagFilter={setTagFilter} />)}
             </div>
 
             <div className='restaurant-list'>
