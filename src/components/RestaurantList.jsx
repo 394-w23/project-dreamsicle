@@ -10,21 +10,35 @@ import { tags } from '../utils/helper';
 import FilterItem from './FilterItem';
 import TimeFilter from './TimeFilter';
 import SizeFilter from './SizeFilter';
+import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
+import { Button } from '@mantine/core';
+import FilterSelector from './FilterSelector';
 
 
 const RestaurantList = ({ restaurants }) => {
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
-    const [currTagFilter, setCurrTagFilter] = useState("")
+    const [currTagFilter, setCurrTagFilter] = useState("");
+    const [currTagFilters, setCurrTagFilters] = useState([]);
+    const [filterOpen, setFilterOpen] = useState(false);
 
-    const setTagFilter = (filter) => {
-        let tempList = restaurants.filter(restaurant => restaurant.profile.tags.includes(filter))
-        if (filter === currTagFilter) {
-            setCurrTagFilter("")
-            setFilteredRestaurants(restaurants)
-        } else {
-            setCurrTagFilter(filter)
-            setFilteredRestaurants(tempList)
-        }
+    const setTagFilter = (filters) => {
+        // let tempList = restaurants.filter(restaurant => restaurant.profile.tags.includes(filter))
+        // if (filter === currTagFilter) {
+        //     setCurrTagFilter("")
+        //     setFilteredRestaurants(restaurants)
+        // } else {
+        //     setCurrTagFilter(filter)
+        //     setFilteredRestaurants(tempList)
+        // }
+        let filteredList = restaurants.filter(restaurant => {
+            for (let filter of filters) {
+                if (!restaurant.profile.tags.includes(filter)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+        setFilteredRestaurants(filteredList);
     }
 
     const setTimeFilter = (date) => {
@@ -46,13 +60,26 @@ const RestaurantList = ({ restaurants }) => {
         setFilteredRestaurants(tempList)
     }
 
+    const openFilterDrawer = () => {
+        setFilterOpen(true);
+    };
+
     return (
         <div>
             <Header />
+
+            <Button className="filter-button" onClick={openFilterDrawer}>
+                <FaFilter></FaFilter>
+                <div className="filter-name">Filter</div>
+            </Button>
+            <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} />
+
             <div className='tags'>
                 <SizeFilter setOrderSize={setOrderSize} />
                 <TimeFilter setTimeFilter={setTimeFilter} />
-                {tags.map(tag => <FilterItem key={tag} tag={tag} setTagFilter={setTagFilter} />)}</div>
+                {tags.map(tag => <FilterItem key={tag} tag={tag} setTagFilter={setTagFilter} />)}
+            </div>
+
             <div className='restaurant-list'>
                 {filteredRestaurants.map(r => <Restaurant key={r.id} restaurant={r} />)}
             </div>
