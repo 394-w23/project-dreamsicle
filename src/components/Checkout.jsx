@@ -5,13 +5,14 @@ import { useForm } from '@mantine/form';
 import { useDbUpdate } from "../utils/firebase";
 import { Link } from "react-router-dom";
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
+import { FaLocationArrow } from "@react-icons/all-files/Fa/FaLocationArrow"
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 import moment from 'moment';
 import OrderTable from './OrderTable';
 
-export default function Checkout({ restaurant, cartData,updateCart, setCartData, setDrawerState }) {
+export default function Checkout({ restaurant, cartData, updateCart, setCartData, setDrawerState }) {
     const [wantReturnableItems, setWantReturnableItems] = useState("No")
     const transactionID = uuid();
     const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
@@ -51,17 +52,17 @@ export default function Checkout({ restaurant, cartData,updateCart, setCartData,
 
         // if there are any orders to submit, we should submit; otherwise do nothing
         if (Object.values(cartData.orders).length > 0) {
-            let formData={...form.values,datetime:moment().format(),id:transactionID,orders:cartData.orders}
+            let formData = { ...form.values, datetime: moment().format(), id: transactionID, orders: cartData.orders }
             updateTransactions(formData)
             const newRestaurantCart = {
                 restaurant: restaurant.id,
                 orders: {}
-              }
-              updateCart(newRestaurantCart)
-              setCartData(newRestaurantCart);
+            }
+            updateCart(newRestaurantCart)
+            setCartData(newRestaurantCart);
         }
         console.log("Checkout cart data length: -------", Object.values(cartData.orders).length > 0)
-       
+
 
     }
     return (
@@ -80,7 +81,9 @@ export default function Checkout({ restaurant, cartData,updateCart, setCartData,
                 <Radio value="Yes" label="Yes" />
                 <Radio value="No" label="No" />
             </Radio.Group>
-
+            <div style={{ textAlign: "center",paddingTop: 20, paddingBottom: 40 }}>
+                        <FaLocationArrow />  Deliver to: 1234 Sheridan Rd, Evanston IL
+            </div>
             <div style={{ textAlign: "center", paddingTop: 20 }}>
                 <Title size="medium">Card on file</Title>
                 <Cards
