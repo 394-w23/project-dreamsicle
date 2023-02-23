@@ -11,7 +11,7 @@ import FilterItem from './FilterItem';
 import TimeFilter from './TimeFilter';
 import SizeFilter from './SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
-import { Button } from '@mantine/core';
+import { Button, Text, Title } from '@mantine/core';
 import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
 import { useFilterStore } from '../store/filterStore';
@@ -125,7 +125,15 @@ const RestaurantList = ({ restaurants }) => {
             </div>
 
             <div className='restaurant-list'>
-                {filteredRestaurants.map(r => <Restaurant key={r.id} restaurant={r} />)}
+                {filteredRestaurants.length > 0? 
+
+                 filteredRestaurants.map(r => <Restaurant key={r.id} restaurant={r} />):
+                 <div style={{marginTop: 100}}>
+                 <Title align='center'>No data</Title>
+                 <Text align='center'>For the chosen filters</Text>
+                 </div>
+                
+                }
             </div>
 
             {/* <Navbar /> */}
