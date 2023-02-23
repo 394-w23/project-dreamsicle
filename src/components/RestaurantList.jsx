@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from "react-router-dom";
 import Restaurant from './Restaurant';
 import logo from '../logo.svg';
@@ -14,6 +14,8 @@ import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
 import { Button } from '@mantine/core';
 import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
+import { useFilterStore } from '../store/filterStore';
+import { typeOfDrawer } from './FilterDrawer';
 
 
 const RestaurantList = ({ restaurants }) => {
@@ -21,12 +23,18 @@ const RestaurantList = ({ restaurants }) => {
     // const [currTagFilter, setCurrTagFilter] = useState("");
     const [currTagFilters, setCurrTagFilters] = useState([]);
     const [tempFilters, setTempFilters] = useState(currTagFilters);
+    let {filters, setFilters} = useFilterStore(); // using zustand store
     const [filterOpen, setFilterOpen] = useState(false);
 
     const [desiredDate, setDesiredDate] = useState("");
     const [desiredTime, setDesiredTime] = useState("");
     const [size, setSize] = useState(0);
     const [address, setAddress] = useState("");
+
+    const [filteredByTime, setFilteredByTime] = useState([]); // restaurants filtered by time
+    const [filteredBySize, setFilteredBySize] = useState([]);
+    // TODO: Filtered by other tags
+
 
     const setTagFilter = (filters) => {
         // let tempList = restaurants.filter(restaurant => restaurant.profile.tags.includes(filter))
@@ -56,28 +64,46 @@ const RestaurantList = ({ restaurants }) => {
     };
 
     const setTimeFilter = (date) => {
-        let desiredDate
 
-        let tempList = restaurants.filter(restaurant => {
+        let restaurantList = filters.includes('size')? filteredBySize: restaurants
+
+        let desiredDate
+        let tempList = restaurantList.filter(restaurant => {
             desiredDate = new Date(date)
             //Remove advance notice time from inputted to see if it is far enough in the future
             desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
             //If the date is still in the future (there is enough time to fulfill order)
             return (desiredDate > new Date())
         })
-
+        setFilteredByTime(tempList);
         setFilteredRestaurants(tempList)
     }
 
     const setOrderSize = (size) => {
-        let tempList = restaurants.filter(restaurant =>
+        let restaurantList = filters.includes('time')? filteredByTime : restaurants
+        if(size){
+        let tempList = restaurantList.filter(restaurant =>
             restaurant.profile.upper_order_bound >= size && size >= restaurant.profile.lower_order_bound)
         setFilteredRestaurants(tempList)
+        setFilteredBySize(tempList);
+        }
     }
 
     const openFilterDrawer = () => {
         setFilterOpen(true);
     };
+
+
+    useEffect(()=> {
+        if(!filters.includes('time') && !filters.includes('size')){
+            setFilteredRestaurants(restaurants); // reset
+        } else if(!filters.includes('time')){
+            setFilteredRestaurants(filteredBySize);
+        } else if(!filters.includes('size')){
+            setFilteredRestaurants(filteredByTime);
+        }
+    }, [filters])
+    
 
     return (
         <div>
@@ -91,7 +117,7 @@ const RestaurantList = ({ restaurants }) => {
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>
-                <SizeFilter setOrderSize={setOrderSize} />
+                <SizeFilter setOrderSize={setOrderSize} numberOfRestaurantsFound={filteredRestaurants.length}/>
 
                 <TimeFilter setTimeFilter={setTimeFilter} numberOfRestaurantsFound={filteredRestaurants.length}/>
 

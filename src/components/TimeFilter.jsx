@@ -25,7 +25,7 @@ const TimeFilter = ({ setTimeFilter, numberOfRestaurantsFound }) => {
     return (
         <>
             <div onClick={() => setOpened(true)} className="filter-tag">
-                <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>TIME FILTER</Badge>
+                <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>TIME FILTER {filterDate && ("("+filterDate+")") }</Badge>
             </div>
             
 <FilterDrawer opened={opened} setOpened={setOpened} filterFunction={setFilterDate} filterVariable={filterDate} typeOfDrawer={typeOfDrawer.TIME} numberOfRestaurantsFound={numberOfRestaurantsFound}/>
