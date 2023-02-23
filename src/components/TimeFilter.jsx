@@ -1,14 +1,15 @@
 import './TimeFilter.css'
 import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"
-import { Badge, Drawer, Input, NumberInput } from '@mantine/core';
+import { Badge, Button, Drawer, Input, NumberInput, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
 
-const TimeFilter = ({ setTimeFilter }) => {
+const TimeFilter = ({ setTimeFilter, numberOfRestaurantsFound }) => {
 
     const [opened, setOpened] = useState(false);
     const [filterDate, setFilterDate] = useState(); // FIXME: Infinity variable doesn't work
     const date = new Date()
     let initialTime = 100000;
+
 
     // Initially, show all restaraunts
     useEffect(() => {
@@ -19,6 +20,11 @@ const TimeFilter = ({ setTimeFilter }) => {
         }
     }, [filterDate])
 
+    useEffect(() => {
+
+        console.log(numberOfRestaurantsFound)
+    }, [numberOfRestaurantsFound])
+
 
     // 
     // date.setHours(date.getHours()+ 25); ///////////////////////////////////////TODO: Hardwired User Inputted date object here
@@ -28,6 +34,7 @@ const TimeFilter = ({ setTimeFilter }) => {
             <div onClick={() => setOpened(true)} className="filter-tag">
                 <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>TIME FILTER</Badge>
             </div>
+
             <Drawer
                 opened={opened}
                 onClose={() => setOpened(false)}
@@ -37,6 +44,10 @@ const TimeFilter = ({ setTimeFilter }) => {
                 position="bottom"
             >
                 <NumberInput min={0} label="Advance Notice" value={filterDate} onChange={(value) => setFilterDate(value)} placeholder="Enter time in hours" />
+                <Text align="center" style={{ marginTop: 50 }}>Found {numberOfRestaurantsFound} restaurants</Text>
+               <div style={{textAlign: "center", marginTop: 20}}>
+               <Button onClick={()=> setOpened(false)}>Done</Button>
+               </div>
             </Drawer>
         </>
 

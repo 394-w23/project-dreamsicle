@@ -59,6 +59,7 @@ const RestaurantList = ({ restaurants }) => {
             //If the date is still in the future (there is enough time to fulfill order)
             return (desiredDate > new Date())
         })
+
         setFilteredRestaurants(tempList)
     }
 
@@ -84,7 +85,9 @@ const RestaurantList = ({ restaurants }) => {
 
             <div className='tags'>
                 <SizeFilter setOrderSize={setOrderSize} />
-                <TimeFilter setTimeFilter={setTimeFilter} />
+
+                <TimeFilter setTimeFilter={setTimeFilter} numberOfRestaurantsFound={filteredRestaurants.length}/>
+
                 {tags.filter(tag => currTagFilters.includes(tag)).map(tag => <FilterItem key={tag} tag={tag} removeFilterTag={removeFilterTag} />)}
             </div>
 
