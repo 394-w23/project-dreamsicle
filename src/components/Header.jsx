@@ -11,7 +11,7 @@ const Header = () => {
 
   return (<div style={{display: "flex"}} className="header-top-row">
     <div className="header-group">
-      <h1 className="app-name">Platter Pal</h1>      
+      <h2 className="app-name">Platter Pal</h2>      
       {/* <div style={{width: "25%",display: "flex", justifyContent: "right"}}>
         <Button onClick={logout} size="xs">Logout</Button>
       </div> */}
