@@ -13,6 +13,7 @@ import SizeFilter from './SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
 import { Button } from '@mantine/core';
 import FilterSelector from './FilterSelector';
+import Onboard from './Onboard';
 
 
 const RestaurantList = ({ restaurants }) => {
@@ -21,6 +22,11 @@ const RestaurantList = ({ restaurants }) => {
     const [currTagFilters, setCurrTagFilters] = useState([]);
     const [tempFilters, setTempFilters] = useState(currTagFilters);
     const [filterOpen, setFilterOpen] = useState(false);
+
+    const [desiredDate, setDesiredDate] = useState("");
+    const [desiredTime, setDesiredTime] = useState("");
+    const [size, setSize] = useState(0);
+    const [address, setAddress] = useState("");
 
     const setTagFilter = (filters) => {
         // let tempList = restaurants.filter(restaurant => restaurant.profile.tags.includes(filter))
@@ -75,6 +81,7 @@ const RestaurantList = ({ restaurants }) => {
     return (
         <div>
             <Header />
+            <Onboard setDesiredDate={setDesiredDate} setSize={setSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime}/>
 
             <Button className="filter-button" onClick={openFilterDrawer}>
                 <FaFilter></FaFilter>

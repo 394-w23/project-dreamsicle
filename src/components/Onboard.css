@@ -1,0 +1,25 @@
+.party-size {
+    margin: auto;
+    margin-bottom: 10vh;
+}
+
+.delivery-address {
+    margin-top: 15vh;
+    margin-bottom: 20vh;
+}
+
+.quantity-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.lets-order {
+    position: absolute;
+    bottom: 6vh;
+    width: 80%;
+    flex-direction: column;
+    
+    display: flex;
+    justify-content: space-around;
+    right: 10%;
+}
