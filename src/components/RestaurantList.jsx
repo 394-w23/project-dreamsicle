@@ -117,7 +117,7 @@ const RestaurantList = ({ restaurants }) => {
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>
-                <SizeFilter setOrderSize={setOrderSize} numberOfRestaurantsFound={filteredRestaurants.length}/>
+                <SizeFilter setOrderSize={setOrderSize} size={size} numberOfRestaurantsFound={filteredRestaurants.length}/>
 
                 <TimeFilter setTimeFilter={setTimeFilter} numberOfRestaurantsFound={filteredRestaurants.length}/>
 

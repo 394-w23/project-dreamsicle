@@ -5,27 +5,26 @@ import { FilterDrawer, typeOfDrawer } from './FilterDrawer';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-const SizeFilter = ({ setOrderSize, numberOfRestaurantsFound }) => {
+const SizeFilter = ({ size,setOrderSize, numberOfRestaurantsFound }) => {
 
-    const [filterSize, setFilterSize] = useState();
-    let initialGroupSize = 1000000 // some big number to list all restaurants at first
+    // const [filterSize, setFilterSize] = useState();
     const [opened, setOpened] = useState();
 
-    useEffect(()=>{
-        if(filterSize){
-            setOrderSize(filterSize);
-        }else{
-            setOrderSize();
-        }
-    },[filterSize])
+    // useEffect(()=>{
+    //     if(filterSize){
+    //         setOrderSize(filterSize);
+    //     }else{
+    //         setOrderSize();
+    //     }
+    // },[filterSize])
 
 
     return (/////////////////////////////////////////////////////////////TODO: HARD CODED ORDER SIZE
     <>
         <div onClick={() => setOpened(true)} className="filter-tag">
-            <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>SIZE FILTER {filterSize && ("("+filterSize+")") }</Badge>
+            <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>SIZE FILTER ({size})</Badge>
         </div>
-        <FilterDrawer opened={opened} setOpened={setOpened} filterVariable={filterSize} filterFunction={setFilterSize} numberOfRestaurantsFound={numberOfRestaurantsFound} typeOfDrawer={typeOfDrawer.SIZE}/>
+        <FilterDrawer opened={opened} setOpened={setOpened} filterVariable={size} filterFunction={setOrderSize} numberOfRestaurantsFound={numberOfRestaurantsFound} typeOfDrawer={typeOfDrawer.SIZE}/>
         </>
     );
 
