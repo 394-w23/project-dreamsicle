@@ -23,8 +23,8 @@ const FilterSelector = ({ setFilterOpen, filterOpen, tags, setTagFilter, tempFil
                 opened={filterOpen}
                 onClose={() => setFilterOpen(false)}
                 title="Filter Restaurants"
-                position="right"
-                size="75%"
+                position="bottom"
+                size="auto"
                 className='filter-drawer'
                 overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
                 overlayOpacity={0.55}
