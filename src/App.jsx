@@ -8,6 +8,7 @@ import './App.css';
 import OrderPage from './components/OrderPage';
 import LoginPage from './components/LoginPage';
 import ReturnPage from './components/ReturnPage';
+import RestaurantItemUpstream from './components/RestaurantItemUpstream';
 
 const App = () => {
   const [data, error] = useDbData("/");
@@ -57,6 +58,11 @@ const App = () => {
             <Route
               path="/returns"
               element={<ReturnPage
+              />}
+            />
+            <Route
+              path="/upstream"
+              element={<RestaurantItemUpstream
               />}
             />
             

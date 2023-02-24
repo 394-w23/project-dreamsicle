@@ -1,25 +1,29 @@
-import './CreateHobby.css'
-import { ActionIcon, Alert, Button, FileInput, MultiSelect, Textarea, TextInput } from '@mantine/core';
+import { Text, Button, NumberInput, TextInput } from '@mantine/core';
 import { useDbData, useDbUpdate, getDbStorage } from '../utils/firebase';
 import uuid from 'react-uuid';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from '@mantine/form';
-import { RiErrorWarningLine } from '@react-icons/all-files/ri/RiErrorWarningLine';
-import { HiOutlineUpload } from '@react-icons/all-files/hi/HiOutlineUpload';
-import { showNotification } from '@mantine/notifications';
-import { getDownloadURL, ref as sRef, uploadBytes } from 'firebase/storage';
 
 export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     const [update, result] = useDbUpdate(`/restaurants/3/menu_sections}`);
     const [menu_sections, error] = useDbData(`/restaurants/3/menu_sections}`);
-
-
-
-
-
-
     const formRef = useRef(null); // to disable form submission on enter
+    // LISTS
+    const [addOns, setAddOns] = useState([])
+    const [customizableCategories, setCustomizableCategories] = useState([])
+    const [items, setItems] = useState([])
+    const [newMenuSections, setNewMenuSections] = useState(menu_sections)
+    // CURRENT TEXT
+    const [currentAddOn, setCurrentAddOn] = useState({name:"",price:0})
+    const [currentCustomizableCategory, setCurrentCustomizableCategory] = useState({name:"",desc:"",required_amount:""})
+    const [currentItem, setCurrentItem] = useState({name:"",price:"",servings:"",tags:"",ingredients:"",photo:""})
+    const [currentNewMenuSections, setCurrentNewMenuSections] = useState({name:""})
 
+    // let new_menu_sections = menu_sections
+    // let add_ons = []
+    // let customizable_categories = []
+    // let items = []
+    console.log(currentAddOn)
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -30,7 +34,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
 
         initialValues: {
             id: uuid(),
-            name: menu_section_name,
+            name: "",
             items: items,
         },
         // proceed
@@ -38,10 +42,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
 
 
 
-    let add_ons = []
-    let customizable_categories = []
-    let required_amount = 0
-    let items = []
+    
 
     const createAddOn = (add_on_name, add_on_price) => {
 
@@ -50,12 +51,13 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
             name: add_on_name,
             price: add_on_price,
         }
+        let newAddOns=addOns
+        newAddOns.push(add_on)
+        setAddOns(newAddOns)
 
-        add_ons.push(add_on)
     }
 
     const createCustomizableCategory = (add_ons, required_amount, name, desc) => {
-
 
         let customizable_category = {
             id: uuid(),
@@ -64,7 +66,9 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
             'required-select-amount': required_amount,
             "customizable-add-ons": add_ons,
         }
-        customizable_categories.push(customizable_category)
+        let newCustomizableCategories=customizableCategories
+        newCustomizableCategories.push(customizable_category)
+        setCustomizableCategories(newCustomizableCategories)
     }
 
     const createItem = (name, price, servings, tags, ingredients, photo) => {
@@ -76,147 +80,88 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
             ingredients: ingredients,
             photo: photo,
         }
-        items.push(item)
-
+        let new_items=items
+        new_items.push(item)
+        setItems(new_items)
     }
 
     const createMenuSection = (name, items) => {
         let menu_section = {
             id: uuid(),
-            name: menu_section_name,
+            name: name,
             items: items,
         }
-        menu_sections.push(menu_section)
+        let new_menu_sections=newMenuSections
+        new_menu_sections.push(menu_section)
+        setNewMenuSections(new_menu_sections)
     }
 
-
-
-
-
-
-    const [raiseAlert, setRaiseAlert] = useState(false) // 
-    const [alertMessage, setAlertMessage] = useState("Please fill in the required fields")
-
     const submitForm = (e) => {
-        form.validate() // mantine 
-
-
-        // form.validateField('name')
-
         e.preventDefault()
 
-        // FIXME: something wrong with the form validation
-        // !form.values.desc && form.setFieldError('desc', "Please enter desc")
-        let formData = { ...form.values, tags: tags, id: hobbyId }
-        // if there issues with the form, show an alert
-        // handle the hobby name
-
-        let hobbyNameExists = currentHobbyNames.includes(form.values.name)
-        if (hobbyNameExists) {
-            setDuplicateHobby(true)
-        } else {
-            setDuplicateHobby(false)
-        }
-
-
-        if (
-            Object.values(form.errors).length > 0 ||
-            !form.values.desc ||
-            !form.values.name ||
-            hobbyNameExists
-        ) {
-            setRaiseAlert(true);
-        } else {
-            setRaiseAlert(false);
-
-            if (image) {
-                // Upload hobby with image
-                const imageName = user.id + "_" + Date.now();
-                const storageRef = sRef(getDbStorage(), `/hobby_images/${imageName}`);
-
-                uploadBytes(storageRef, image).then((snapshot) => {
-                    console.log('Uploaded a hobby image file!');
-                }).then(() => {
-                    getDownloadURL(storageRef).then((url) => {
-                        formData.img = url;
-                    }).then(() => {
-                        update(formData)
-
-                        updateUser({
-                            [hobbyId]: hobbyId,
-                        })
-
-                        updateInitialMessage({
-                            content: "Welcome to \"" + e.target[0].value + "\"!",
-                            date: new Date().toISOString(),
-                            id: messageId,
-                            user: user.id,
-                        });
-                        // setCurrDisplay("hobbies");
-                    });
-                });
-            } else {
-                // Upload hobby without image (default image)
-                update(formData)
-
-                updateUser({
-                    [hobbyId]: hobbyId,
-                })
-
-                updateInitialMessage({
-                    content: "Welcome to \"" + e.target[0].value + "\"!",
-                    date: new Date().toISOString(),
-                    id: messageId,
-                    user: user.id,
-                });
-                setCurrDisplay("hobbies");
-            }
-        }
-        showNotification({
-            title: `You created the ${form.values.name} hobby!`,
-            message: 'Go to "My Hobbies" to see your new hobby!',
-            autoClose: 3000,
-        })
     }
 
     return (
 
         <>
             <form data-cy="create-hobby-form" onSubmit={submitForm} ref={formRef} onKeyDown={handleKeyDown}>
-
-                {raiseAlert && <Alert data-cy="alert" icon={<RiErrorWarningLine />} title="Missing Fields" color="red">
-                    {duplicateHobby ? "Hobby name already exists" : "Please fill in the required fields"}
-                </Alert>
-                }
-
-                <TextInput
-                    data-cy="add-hobby-name"
-                    // required
-                    style={{ marginBottom: 10 }}
-                    {...form.getInputProps('name')}
-                    label="Hobby Name" placeholder="e.g. Ukuleles, Badminton, Competitive Smash" withAsterisk
-                    caption={duplicateHobby ? "Hobby already exists" : ""}
-                    status={duplicateHobby ? "error" : "basic"}
-                />
-
-                <Textarea
-                    // required
-                    style={{ marginBottom: 10 }}
-                    placeholder="Describe your hobby here"
-                    label="Description"
-                    {...form.getInputProps('desc')}
-                    withAsterisk
-                    autosize
-                    minRows={3}
-                    data-cy="add-hobby-desc"
-                />
-
-                <MultiSelect label="Tags" value={tags} searchable onChange={setTags} data={tagsData} clearable />
-
-                <FileInput className="hobby-image-upload" label="Image" placeholder="Upload Hobby Image" icon={<HiOutlineUpload />} accept="image/png,image/jpeg" value={image} onChange={setImage} />
-
-                <div style={{ textAlign: "center" }}>
-                    <Button data-cy="create-hobby-submit-button" style={{ marginTop: 10 }} type="submit">Create Hobby</Button>
+                <div className="add-on">
+                    <Text>ADD ON</Text>
+                    <TextInput
+                        label="Name"
+                        value={currentAddOn.name}
+                        onChange={(event)=>setCurrentAddOn({name:event.currentTarget.value,price:currentAddOn.price})}
+                    />
+                    <NumberInput
+                        label="Price"
+                        value={currentAddOn.price}
+                        onChange={(val)=>setCurrentAddOn({name:currentAddOn.name,price:val})}
+                    />
+                    <Button>Add to add_on list</Button>
+                </div>
+                <div className="customizable-category">
+                    <Text>CUSTOMIZABLE CATEGORY</Text>
+                    <TextInput
+                        label="Name"
+                        value={currentAddOn.name}
+                        onChange={(event)=>setCurrentAddOn({name:event.currentTarget.value,desc:currentAddOn.desc,required_amount:currentAddOn.required_amount})}
+                    />
+                    <TextInput
+                        label="Description"
+                    />
+                    <TextInput
+                        label="Required amount"
+                    />
+                    <Button>Add to customizable category list</Button>
+                </div>
+                <div className="item">
+                    <Text>ITEM</Text>
+                    <TextInput
+                        label="Name"
+                    />
+                    <TextInput
+                        label="Price"
+                    />
+                    <TextInput
+                        label="Servings"
+                    />
+                    <TextInput
+                        label="Tags"
+                    />
+                    <TextInput
+                        label="Ingredients"
+                    />
+                    <TextInput
+                        label="Photo"
+                    />
+                    <Button>Add to item list</Button>
+                </div>
+                <div className="item">
+                    <Text>SECTION</Text>
+                    <TextInput
+                        label="Name"
+                    />
+                    <Button>Add to Section list</Button>
                 </div>
             </form>
         </>
