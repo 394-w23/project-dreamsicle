@@ -1,9 +1,12 @@
-import { Card, Group, Text, Timeline, Title, Checkbox, Button } from '@mantine/core';
+import { Card, Group, Text, Timeline, Title, Checkbox, Button, Input } from '@mantine/core';
+import { DatePicker, TimeInput } from '@mantine/dates';
 import { FaRegSmileBeam } from '@react-icons/all-files/fa/FaRegSmileBeam';
 import { GiCookingPot } from '@react-icons/all-files/gi/GiCookingPot';
 import { RiCheckboxCircleLine } from '@react-icons/all-files/ri/RiCheckboxCircleLine';
 import { RiMailSendLine } from '@react-icons/all-files/ri/RiMailSendLine';
 import { RiTruckLine } from '@react-icons/all-files/ri/RiTruckLine';
+import dayjs from 'dayjs';
+import moment from 'moment';
 import React, { useState } from 'react'
 import Header from './Header'
 import Navbar from './Navbar';
@@ -12,6 +15,11 @@ export default function ReturnPage() {
 
   const [currentState, setCurrentState] = useState(0);
   const [returnItems, setReturnItems] = useState([]);
+  const [returnDate, setReturnDate] = useState();
+  const [returnTime, setReturnTime] = useState();
+
+  // const [returnDateTime, setReturnDateTime] = useState({date: new Date(), time: ""});
+
 
 
   const nextState = () => {
@@ -22,10 +30,16 @@ export default function ReturnPage() {
     }
   }
 
+
+
   return (
     <div style={{ paddingTop: 100, height: "100vh", }}>
-      <Header />
-
+      <Header />      
+      <div style={{ backgroundColor: "#fff", padding: 20, borderRadius: 10, marginBottom: 20 }}>
+        <Title style={{ paddingTop: 10, paddingBottom: 10 }} order={2}>Return Date</Title>
+        <DatePicker label="Pick a date"   minDate={moment(new Date()).toDate()} value={returnDate} onChnage={setReturnDate}/>
+        <TimeInput label="Enter time" format="12" value={returnTime} onChnage={setReturnTime}/>
+      </div>
       <Card radius="md" style={{ marginBottom: 20 }}>
         <Title style={{ paddingTop: 10, paddingBottom: 10 }} order={2}>Return Checklist</Title>
         <Checkbox.Group
