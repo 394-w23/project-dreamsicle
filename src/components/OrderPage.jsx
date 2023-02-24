@@ -12,6 +12,7 @@ import { FaRegSmileBeam } from "@react-icons/all-files/fa/FaRegSmileBeam"
 import { GiCookingPot } from "@react-icons/all-files/gi/GiCookingPot"
 import { menuItemParser } from "../utils/helper";
 import OrderTable from "./OrderTable";
+import { Link } from "react-router-dom";
 
 
 const OrderPage = ({ restaurants }) => {
@@ -53,7 +54,7 @@ const OrderPage = ({ restaurants }) => {
                     </Timeline.Item>
 
                     <Timeline.Item bullet={<RiCheckboxCircleLine size={12} />} title="Accepted">
-                        {currentState >= 1 ? <><Text color="dimmed" size="sm">Your order has been accepted!</Text>
+                        {currentState >= 1 ? <><Text color="dimmed" size="sm">Your order has been accepted! If you would like to schedule a return now, you can do that <Link to={'/returns'}>Here</Link></Text>
                             <Text size="xs" mt={4}>52 minutes ago</Text></> : <></>}
 
                     </Timeline.Item>

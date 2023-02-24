@@ -37,7 +37,7 @@ export default function OrderTable({ restaurant, cartData, deletable,removeOrder
       <thead>
         <tr>
           <th>Item</th>
-          <th>Quanity</th>
+          <th>Mouths to feed</th>
           <th>Price</th>
           {deletable && <th></th>}
         </tr>

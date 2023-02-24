@@ -1,10 +1,7 @@
-import Restaurant from "./Restaurant";
 import { useState } from 'react';
 import { Card, Image, Text, Badge, Alert, Drawer, Group, Button, useMantineTheme } from '@mantine/core';
 import QuantitySelector from "./QuantitySelector";
-import { useDbUpdate } from "../utils/firebase";
 import './MenuItem.css';
-import { useForm } from "@mantine/form";
 import uuid from 'react-uuid';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 
