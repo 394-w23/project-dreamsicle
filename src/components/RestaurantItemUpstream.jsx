@@ -17,21 +17,25 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     const [currentAddOn, setCurrentAddOn] = useState({name:"",price:0})
     const [currentCustomizableCategory, setCurrentCustomizableCategory] = useState({name:"",desc:"",required_amount:""})
     const [currentItem, setCurrentItem] = useState({name:"",price:"",servings:"",tags:"",ingredients:"",photo:""})
-    const [currentNewMenuSections, setCurrentNewMenuSections] = useState({name:""})
+    const [currentNewMenuSections, setCurrentNewMenuSections] = useState("")
 
     // let new_menu_sections = menu_sections
     // let add_ons = []
     // let customizable_categories = []
     // let items = []
-    console.log(currentAddOn)
+    // console.log(currentAddOn)
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
         }
     };
 
-    const form = useForm({
+    console.log("currentAddOn: ", currentAddOn)
+    console.log("currentCustomizableCategory: ", currentCustomizableCategory)
+    console.log("currentItem: ", currentItem)
+    console.log("currentNewMenuSections: ", currentNewMenuSections)
 
+    const form = useForm({
         initialValues: {
             id: uuid(),
             name: "",
@@ -123,14 +127,18 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     <Text>CUSTOMIZABLE CATEGORY</Text>
                     <TextInput
                         label="Name"
-                        value={currentAddOn.name}
-                        onChange={(event)=>setCurrentAddOn({name:event.currentTarget.value,desc:currentAddOn.desc,required_amount:currentAddOn.required_amount})}
+                        value={currentCustomizableCategory.name}
+                        onChange={(event)=>setCurrentCustomizableCategory({...currentCustomizableCategory, name:event.currentTarget.value})}
                     />
                     <TextInput
                         label="Description"
+                        value={currentCustomizableCategory.desc}
+                        onChange={(event)=>setCurrentCustomizableCategory({...currentCustomizableCategory, desc:event.currentTarget.value})}
                     />
-                    <TextInput
+                    <NumberInput
                         label="Required amount"
+                        value={currentCustomizableCategory.required_amount}
+                        onChange={(val)=>setCurrentCustomizableCategory({...currentCustomizableCategory,required_amount:val})}
                     />
                     <Button>Add to customizable category list</Button>
                 </div>
@@ -138,21 +146,33 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     <Text>ITEM</Text>
                     <TextInput
                         label="Name"
+                        value={currentItem.name}
+                        onChange={(event)=>setCurrentItem({...currentItem, name:event.currentTarget.value})}
                     />
-                    <TextInput
+                    <NumberInput
                         label="Price"
+                        value={currentItem.name}
+                        onChange={(val)=>setCurrentItem({...currentItem,price:val})}
                     />
-                    <TextInput
+                    <NumberInput
                         label="Servings"
+                        value={currentItem.servings}
+                        onChange={(val)=>setCurrentItem({...currentItem, servings:val})}
                     />
                     <TextInput
                         label="Tags"
+                        value={currentItem.tags}
+                        onChange={(event)=>setCurrentItem({...currentItem, tags:event.currentTarget.value})}
                     />
                     <TextInput
                         label="Ingredients"
+                        value={currentItem.ingredients}
+                        onChange={(event)=>setCurrentItem({...currentItem, ingredients:event.currentTarget.value})}
                     />
                     <TextInput
                         label="Photo"
+                        value={currentItem.photo}
+                        onChange={(event)=>setCurrentItem({...currentItem, photo:event.currentTarget.value})}
                     />
                     <Button>Add to item list</Button>
                 </div>
@@ -160,6 +180,8 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     <Text>SECTION</Text>
                     <TextInput
                         label="Name"
+                        value={currentNewMenuSections}
+                        onChange={(event)=>setCurrentNewMenuSections(event.currentTarget.value)}
                     />
                     <Button>Add to Section list</Button>
                 </div>
