@@ -79,11 +79,12 @@ const RestaurantList = ({ restaurants }) => {
         setFilteredRestaurants(tempList)
     }
 
-    const setOrderSize = (size) => {
+    const setOrderSize = (inputSize) => {
         let restaurantList = filters.includes('time')? filteredByTime : restaurants
-        if(size){
+        setSize(inputSize)
+        if(inputSize){
         let tempList = restaurantList.filter(restaurant =>
-            restaurant.profile.upper_order_bound >= size && size >= restaurant.profile.lower_order_bound)
+            restaurant.profile.upper_order_bound >= inputSize && inputSize >= restaurant.profile.lower_order_bound)
         setFilteredRestaurants(tempList)
         setFilteredBySize(tempList);
         }
@@ -136,7 +137,7 @@ const RestaurantList = ({ restaurants }) => {
                 }
             </div>
 
-            {/* <Navbar /> */}
+            <Navbar />
         </div>
     );
 
