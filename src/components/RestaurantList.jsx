@@ -109,7 +109,7 @@ const RestaurantList = ({ restaurants }) => {
     return (
         <div>
             <Header />
-            <Onboard setDesiredDate={setDesiredDate} setSize={setSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime}/>
+            <Onboard setDesiredDate={setDesiredDate} setOrderSize={setOrderSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime}/>
 
             <Button className="filter-button" onClick={openFilterDrawer}>
                 <FaFilter></FaFilter>
