@@ -11,11 +11,13 @@ import FilterItem from './FilterItem';
 import TimeFilter from './TimeFilter';
 import SizeFilter from './SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
-import { Button, Text, Title } from '@mantine/core';
+import { Button, NumberInput, Text, Title } from '@mantine/core';
 import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
 import { useFilterStore } from '../store/filterStore';
 import { typeOfDrawer } from './FilterDrawer';
+import DateTimePicker from 'react-datetime-picker';
+import { DatePicker, TimeInput } from '@mantine/dates';
 
 
 const RestaurantList = ({ restaurants }) => {
@@ -89,6 +91,32 @@ const RestaurantList = ({ restaurants }) => {
             <Header />
 
             <Onboard setDesiredDate={setDesiredDate} setSize={setSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime} />
+
+            <div className="main-filters">
+                <NumberInput
+                    className="size-input"
+                    defaultValue={null}////////////////////////// Change to size or empty
+                    placeholder="Size"
+                    label="Party Size"
+                    styles={{ input: { textAlign: 'center' } }}
+                    hideControls
+                />
+                <DatePicker
+                    className="date-input"
+                    label="Delivery Date"
+                    placeholder="Select Delivery Date"
+                    firstDayOfWeek="sunday"
+                />
+                <TimeInput
+                    className="time-input"
+                    label="Delivery Time"
+                    format="12"
+                />
+                {/* <DateTimePicker 
+                    className="datetime-input"
+                    name="Delivery Time"
+                /> */}
+            </div>
 
             <Button className="filter-button" onClick={openFilterDrawer}>
                 <FaFilter></FaFilter>
