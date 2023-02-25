@@ -10,16 +10,8 @@ const SizeFilter = ({ size, setSize, numberOfRestaurantsFound }) => {
     // const [filterSize, setFilterSize] = useState();
     const [opened, setOpened] = useState();
 
-    // useEffect(() => {
-    //     if (size) {
-    //         setOrderSize(size);
-    //     } else {
-    //         setOrderSize();
-    //     }
-    // }, [size])
 
-
-    return (/////////////////////////////////////////////////////////////TODO: HARD CODED ORDER SIZE
+    return (
         <>
             <div onClick={() => setOpened(true)} className="filter-tag">
                 <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>SIZE FILTER ({size})</Badge>

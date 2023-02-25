@@ -37,33 +37,10 @@ const RestaurantList = ({ restaurants }) => {
     // TODO: Filtered by other tags
 
 
-    const setTagFilter = (filters) => {
-        // let tempList = restaurants.filter(restaurant => restaurant.profile.tags.includes(filter))
-        // if (filter === currTagFilter) {
-        //     setCurrTagFilter("")
-        //     setFilteredRestaurants(restaurants)
-        // } else {
-        //     setCurrTagFilter(filter)
-        //     setFilteredRestaurants(tempList)
-        // }
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        // let filteredList = restaurants.filter(restaurant => {
-        //     for (let filter of filters) {
-        //         console.log(restaurant)
-        //         if (!restaurant.profile.tags || !restaurant.profile.tags.includes(filter)) {
-        //             return false;
-        //         }
-        //     }
-        //     return true;
-        // });
-        // setFilteredRestaurants(filteredList);
-        setCurrTagFilters(filters);
-    }
-
     const removeFilterTag = (tag) => {
         let tagFilters = currTagFilters.filter(f => f !== tag);
         setTempFilters(tagFilters);
-        setTagFilter(tagFilters);
+        setCurrTagFilters(tagFilters);
     };
 
     const openFilterDrawer = () => {
@@ -117,7 +94,7 @@ const RestaurantList = ({ restaurants }) => {
                 <FaFilter></FaFilter>
                 <div className="filter-name">Filter</div>
             </Button>
-            <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} tempFilters={tempFilters} setTempFilters={setTempFilters} />
+            <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>
                 <SizeFilter setSize={setSize} size={size} numberOfRestaurantsFound={filteredRestaurants.length} />

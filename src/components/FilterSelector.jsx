@@ -2,7 +2,7 @@ import './FilterSelector.css'
 import { Button, Checkbox, Drawer, useMantineTheme } from '@mantine/core';
 import { useState } from 'react';
 
-const FilterSelector = ({ setFilterOpen, filterOpen, tags, setTagFilter, tempFilters, setTempFilters }) => {
+const FilterSelector = ({ setFilterOpen, filterOpen, tags, setCurrTagFilters, tempFilters, setTempFilters }) => {
     // const [filters, setFilters] = useState(currTagFilters);
 
     const theme = useMantineTheme();
@@ -35,7 +35,7 @@ const FilterSelector = ({ setFilterOpen, filterOpen, tags, setTagFilter, tempFil
                 
                 { tags.map(tag => <Checkbox className="checkbox" checked={tempFilters.includes(tag)} onChange={(event) => event.currentTarget.checked} label={tag} key={tag} tag={tag} onClick={() => updateFilters(tag)} />) }
 
-                <Button className="apply-button" onClick={() => setTagFilter(tempFilters)}>Apply Filters</Button>
+                <Button className="apply-button" onClick={() => setCurrTagFilters(tempFilters)}>Apply Filters</Button>
 
             </Drawer>
 

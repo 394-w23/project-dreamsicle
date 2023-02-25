@@ -7,22 +7,6 @@ import { FilterDrawer, typeOfDrawer } from './FilterDrawer';
 const TimeFilter = ({ numberOfRestaurantsFound, filterDate, setFilterDate }) => {
 
     const [opened, setOpened] = useState(false);
-    // const [filterDate, setFilterDate] = useState(); 
-    const date = new Date()
-    let initialTime = 100000;    // FIXME: Infinity variable doesn't work
-
-
-
-    // Initially, show all restaraunts
-    // useEffect(() => {
-    //     if (!filterDate) {
-    //         setTimeFilter(date.setHours(date.getHours() + initialTime));
-    //         // setFilterDate(date.setHours(date.getHours() + initialTime));
-    //     } else {
-    //         setTimeFilter(date.setHours(date.getHours() + filterDate));
-    //         // setFilterDate(date.setHours(date.getHours() + filterDate));
-    //     }
-    // }, [filterDate])
 
     return (
         <>
@@ -35,8 +19,6 @@ const TimeFilter = ({ numberOfRestaurantsFound, filterDate, setFilterDate }) => 
         </>
 
     );
-
-
 
     // return (
     //      <div onClick={() => setTimeFilter(date)} className="filter-item"><RiTruckLine size={12} />
