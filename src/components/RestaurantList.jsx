@@ -66,33 +66,6 @@ const RestaurantList = ({ restaurants }) => {
         setTagFilter(tagFilters);
     };
 
-    // const setTimeFilter = (date) => {
-
-    //     // let restaurantList = filters.includes('size') ? filteredBySize : restaurants
-
-    //     let desiredDate
-    //     let tempList = filteredRestaurants.filter(restaurant => {
-    //         desiredDate = new Date(date)
-    //         //Remove advance notice time from inputted to see if it is far enough in the future
-    //         desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
-    //         //If the date is still in the future (there is enough time to fulfill order)
-    //         return (desiredDate > new Date())
-    //     })
-    //     setFilteredByTime(tempList);
-    //     setFilteredRestaurants(tempList);
-    // }
-
-    // const setOrderSize = (inputSize) => {
-    //     // let restaurantList = filters.includes('time') ? filteredByTime : restaurants
-    //     setSize(inputSize)
-    //     if (inputSize) {
-    //         let tempList = filteredRestaurants.filter(restaurant =>
-    //             restaurant.profile.upper_order_bound >= inputSize && inputSize >= restaurant.profile.lower_order_bound)
-    //         setFilteredRestaurants(tempList)
-    //         setFilteredBySize(tempList);
-    //     }
-    // }
-
     const openFilterDrawer = () => {
         setFilterOpen(true);
     };
@@ -130,13 +103,6 @@ const RestaurantList = ({ restaurants }) => {
     };
 
     useEffect(() => {
-        // if (!filters.includes('time') && !filters.includes('size')) {
-        //     setFilteredRestaurants(restaurants); // reset
-        // } else if (!filters.includes('time')) {
-        //     setFilteredRestaurants(filteredBySize);
-        // } else if (!filters.includes('size')) {
-        //     setFilteredRestaurants(filteredByTime);
-        // }
         applyFilters();
     }, [filters, size, filterDate, currTagFilters])
 
@@ -144,7 +110,7 @@ const RestaurantList = ({ restaurants }) => {
     return (
         <div>
             <Header />
-            {/* <Onboard setDesiredDate={setDesiredDate} setOrderSize={setOrderSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime} /> */}
+
             <Onboard setDesiredDate={setDesiredDate} setSize={setSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime} />
 
             <Button className="filter-button" onClick={openFilterDrawer}>
@@ -154,10 +120,9 @@ const RestaurantList = ({ restaurants }) => {
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setTagFilter={setTagFilter} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>
-                {/* <SizeFilter setOrderSize={setOrderSize} size={size} numberOfRestaurantsFound={filteredRestaurants.length} /> */}
                 <SizeFilter setSize={setSize} size={size} numberOfRestaurantsFound={filteredRestaurants.length} />
 
-                <TimeFilter setTimeFilter={setTimeFilter} numberOfRestaurantsFound={filteredRestaurants.length} filterDate={filterDate} setFilterDate={setFilterDate} />
+                <TimeFilter numberOfRestaurantsFound={filteredRestaurants.length} filterDate={filterDate} setFilterDate={setFilterDate} />
 
                 {tags.filter(tag => currTagFilters.includes(tag)).map(tag => <FilterItem key={tag} tag={tag} removeFilterTag={removeFilterTag} />)}
             </div>

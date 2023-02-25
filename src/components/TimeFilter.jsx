@@ -4,7 +4,7 @@ import { Badge, Button, Drawer, Input, NumberInput, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { FilterDrawer, typeOfDrawer } from './FilterDrawer';
 
-const TimeFilter = ({ setTimeFilter, numberOfRestaurantsFound, filterDate, setFilterDate }) => {
+const TimeFilter = ({ numberOfRestaurantsFound, filterDate, setFilterDate }) => {
 
     const [opened, setOpened] = useState(false);
     // const [filterDate, setFilterDate] = useState(); 
