@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 import "./Onboard.css";
 
-const Onboard = ({ setDesiredDate, setOrderSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
+const Onboard = ({ setDesiredDate, setSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
     const [raiseAlert, setRaiseAlert] = useState(false);
     const [open, setOpen] = useState(true);
 
@@ -49,7 +49,7 @@ const Onboard = ({ setDesiredDate, setOrderSize, size, setAddress, address, setD
                 </Input.Wrapper>
                 <Input.Wrapper className="party-size" label="How many people are you expecting?" size="3.5vh">
                     <div className="quantity-buttons">
-                        <QuantitySelector quantity={size} setQuantity={setOrderSize} />
+                        <QuantitySelector quantity={size} setQuantity={setSize} />
                     </div>
 
                 </Input.Wrapper>
