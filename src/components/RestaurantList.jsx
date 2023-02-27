@@ -11,7 +11,7 @@ import FilterItem from './FilterItem';
 import TimeFilter from './TimeFilter';
 import SizeFilter from './SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
-import { Button, NumberInput, Text, Title } from '@mantine/core';
+import { Button, NumberInput, Text, Title,TextInput } from '@mantine/core';
 import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
 import { useFilterStore } from '../store/filterStore';
@@ -96,7 +96,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             <div className="main-filters">
                 <NumberInput
                     className="size-input"
-                    defaultValue={null}////////////////////////// Change to size or empty
+                    value={size}////////////////////////// Change to size or empty
                     placeholder="Size"
                     label="Party Size"
                     styles={{ input: { textAlign: 'center' } }}
@@ -119,10 +119,20 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 /> */}
             </div>
 
-            <Button className="filter-button" onClick={openFilterDrawer}>
+            <div>
+            <TextInput
+                    className="address-input"
+                    value={address}////////////////////////// Change to size or empty
+                    placeholder="Address"
+                    label="Address"
+                    styles={{ input: { textAlign: 'center' } }}
+                    hideControls
+                />
+                <Button className="filter-button" onClick={openFilterDrawer}>
                 <FaFilter></FaFilter>
                 <div className="filter-name">Filter</div>
             </Button>
+            </div>
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>

@@ -14,7 +14,7 @@ const SizeFilter = ({ size, setSize, numberOfRestaurantsFound }) => {
     return (
         <>
             <div onClick={() => setOpened(true)} className="filter-tag">
-                <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>SIZE FILTER ({size})</Badge>
+                <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>SIZE FILTER {!size? '':`(${size})`}</Badge>
             </div>
             <FilterDrawer opened={opened} setOpened={setOpened} filterVariable={size} filterFunction={setSize} numberOfRestaurantsFound={numberOfRestaurantsFound} typeOfDrawer={typeOfDrawer.SIZE} />
         </>
