@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Badge, Button, Drawer, Input, NumberInput, Text } from '@mantine/core';
+import { Badge, Button, Drawer, Input, useMantineTheme,NumberInput, Text } from '@mantine/core';
 import { useFilterStore } from '../store/filterStore';
 
 
@@ -11,7 +11,7 @@ export const typeOfDrawer = {
 export const FilterDrawer = ({ opened, setOpened, numberOfRestaurantsFound, typeOfDrawer, filterVariable, filterFunction }) => {
 
     let { filters, setFilters } = useFilterStore();
-
+    const theme = useMantineTheme();
     let label = "";
     let inputPlaceholder = ""
     if (typeOfDrawer == typeOfDrawer.TIME) {
@@ -29,7 +29,7 @@ export const FilterDrawer = ({ opened, setOpened, numberOfRestaurantsFound, type
      */
 
     useEffect(() => {
-        console.log(filterVariable)
+        // console.log(filterVariable)
         if (filterVariable !== undefined) {
             if (!filters.includes(typeOfDrawer)) {
                 setFilters([...filters, typeOfDrawer])
@@ -52,6 +52,9 @@ export const FilterDrawer = ({ opened, setOpened, numberOfRestaurantsFound, type
             title={`Filter by ${typeOfDrawer}`}
             padding="xl"
             position="bottom"
+            overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
+                overlayOpacity={0.55}
+                overlayBlur={3}
         >
             <NumberInput min={0} label={label} value={filterVariable} onChange={(value) => filterFunction(value)} placeholder={inputPlaceholder} />
             <Text align="center" style={{ marginTop: 50 }}>Found {numberOfRestaurantsFound} restaurants</Text>

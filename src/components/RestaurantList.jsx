@@ -20,13 +20,14 @@ import DateTimePicker from 'react-datetime-picker';
 import { DatePicker, TimeInput } from '@mantine/dates';
 
 
-const RestaurantList = ({ restaurants }) => {
+const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
     // const [currTagFilter, setCurrTagFilter] = useState("");
     const [currTagFilters, setCurrTagFilters] = useState([]);
     const [tempFilters, setTempFilters] = useState(currTagFilters);
     let { filters, setFilters } = useFilterStore(); /////////////////// using zustand store
     const [filterOpen, setFilterOpen] = useState(false);
+    
 
     const [desiredDate, setDesiredDate] = useState("");
     const [desiredTime, setDesiredTime] = useState("");
@@ -90,7 +91,7 @@ const RestaurantList = ({ restaurants }) => {
         <div>
             <Header />
 
-            <Onboard setDesiredDate={setDesiredDate} setSize={setSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime} />
+            <Onboard setOnboardOpen={setOnboardOpen} onboardOpen={onboardOpen} setDesiredDate={setDesiredDate} setSize={setSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime} />
 
             <div className="main-filters">
                 <NumberInput
@@ -143,7 +144,6 @@ const RestaurantList = ({ restaurants }) => {
 
                 }
             </div>
-
             <Navbar />
         </div>
     );
