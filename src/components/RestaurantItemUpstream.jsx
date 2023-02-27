@@ -1,4 +1,4 @@
-import { Text, Button, NumberInput, TextInput } from '@mantine/core';
+import { Textarea, Text, Button, NumberInput, TextInput } from '@mantine/core';
 import { useDbData, useDbUpdate, getDbStorage } from '../utils/firebase';
 import uuid from 'react-uuid';
 import { useEffect, useRef, useState } from 'react';
@@ -17,9 +17,10 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     const [newMenuSections, setNewMenuSections] = useState(menu_sections === undefined || menu_sections === null ? [] : menu_sections)
     // CURRENT TEXT
     const [currentAddOn, setCurrentAddOn] = useState({ name: "", price: 0 })
-    const [currentCustomizableCategory, setCurrentCustomizableCategory] = useState({ name: "", desc: "", required_amount: 0 })
+    const [currentCustomizableCategory, setCurrentCustomizableCategory] = useState({ name: "", required_amount: 0 })
     const [currentItem, setCurrentItem] = useState({ name: "", price: 0, servings: 0, tags: "", ingredients: "", photo: "" })
     const [currentNewMenuSections, setCurrentNewMenuSections] = useState("")
+    const [editableMenuSection, setEditableMenuSection] = useState("")
 
     // console.log(newMenuSections)
 
@@ -29,22 +30,6 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
         }
     };
 
-    // console.log("currentAddOn: ", currentAddOn)
-    // console.log("currentCustomizableCategory: ", currentCustomizableCategory)
-    // console.log("currentItem: ", currentItem)
-    // console.log("currentNewMenuSections: ", currentNewMenuSections)
-
-    const form = useForm({
-        initialValues: {
-            id: uuid(),
-            name: "",
-            items: items,
-        },
-        // proceed
-    });
-
-
-
     const displayInfo = () => {
         console.log("addOns", addOns)
         console.log("customizableCategories", customizableCategories)
@@ -53,7 +38,14 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     }
 
     const createAddOn = () => {
-
+        if (currentAddOn.name === "" || !(currentAddOn.price > -1)) {
+            showNotification({
+                message: 'Fill in required fields',
+                autoClose: 3000,
+                color: 'red'
+            });
+            return;
+        }
         let add_on = {
             id: uuid(),
             name: currentAddOn.name,
@@ -72,11 +64,26 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     }
 
     const createCustomizableCategory = () => {
+        if (addOns.length === 0) {
+            showNotification({
+                message: 'Must create at least one add-on to create a customizable category',
+                autoClose: 3000,
+                color: 'red'
+            });
+            return;
+        }
+        if (currentCustomizableCategory.name === "" || !(currentCustomizableCategory.required_amount > -1)) {
+            showNotification({
+                message: 'Fill in required fields',
+                autoClose: 3000,
+                color: 'red'
+            });
+            return;
+        }
 
         let customizable_category = {
             id: uuid(),
             name: currentCustomizableCategory.name,
-            desc: currentCustomizableCategory.desc,
             'required-select-amount': currentCustomizableCategory.required_amount,
             "customizable-add-ons": addOns,
         }
@@ -87,11 +94,27 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
             message: `Created ${customizable_category.name} customizableCategory`,
             autoClose: 1500,
         });
-        setCurrentCustomizableCategory({ name: "", desc: "", required_amount: 0 })
+        setCurrentCustomizableCategory({ name: "", required_amount: 0 })
         setAddOns([])
     }
 
     const createItem = () => {
+        if (customizableCategories.length === 0) {
+            showNotification({
+                message: 'Must create at least one customizable category to create an item',
+                autoClose: 3000,
+                color: 'red'
+            });
+            return;
+        }
+        if (currentItem.name === "" || currentItem.tags === "" || currentItem.photo === "" || currentItem.ingredients === "" || !(currentItem.price > -1) || !(currentItem.servings > -1)) {
+            showNotification({
+                message: 'Fill in required fields',
+                autoClose: 3000,
+                color: 'red'
+            });
+            return;
+        }
         let item = {
             name: currentItem.name,
             price: currentItem.price,
@@ -113,29 +136,56 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     }
 
     const createMenuSection = () => {
+        if (items.length === 0) {
+            showNotification({
+                message: 'Must create at least one item to create a section',
+                autoClose: 3000,
+                color: 'red'
+            });
+            return;
+        }
+        if (currentNewMenuSections === "") {
+            showNotification({
+                message: 'Fill in required fields',
+                autoClose: 3000,
+                color: 'red'
+            });
+            return;
+        }
         let menu_section = {
             id: uuid(),
             name: currentNewMenuSections,
             items: items
         }
-        let new_menu_sections = newMenuSections
-        new_menu_sections.push(menu_section)
-        setNewMenuSections(new_menu_sections)
-
-        
-
+        setEditableMenuSection(JSON.stringify(menu_section));
         setCurrentNewMenuSections("")
-        showNotification({
-            message: `Created ${menu_section.name} section`,
-            autoClose: 1500,
-        });
         setItems([])
-        updateMenuSections({menu_sections:new_menu_sections})
     }
 
-    const submitForm = (e) => {
-        e.preventDefault()
+    const submitForm = () => {
+        if (editableMenuSection === "") {
 
+            showNotification({
+                message: 'Must have something in the textbox to submit',
+                autoClose: 3000,
+                color: 'red'
+            });
+            return;
+
+        }
+        let objectSection = JSON.parse(editableMenuSection,didntSubmit);
+        
+        let new_menu_sections = newMenuSections
+        new_menu_sections.push(objectSection)
+        setNewMenuSections(new_menu_sections)
+        setEditableMenuSection("")
+
+        showNotification({
+            message: `Created ${editableMenuSection.name} section`,
+            autoClose: 1500,
+        });
+
+        updateMenuSections({ menu_sections: new_menu_sections })
     }
 
     return (
@@ -164,11 +214,11 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                         value={currentCustomizableCategory.name}
                         onChange={(event) => setCurrentCustomizableCategory({ ...currentCustomizableCategory, name: event.currentTarget.value })}
                     />
-                    <TextInput
+                    {/* <TextInput
                         label="Description"
                         value={currentCustomizableCategory.desc}
                         onChange={(event) => setCurrentCustomizableCategory({ ...currentCustomizableCategory, desc: event.currentTarget.value })}
-                    />
+                    /> */}
                     <NumberInput
                         label="Required amount"
                         value={currentCustomizableCategory.required_amount}
@@ -185,7 +235,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     />
                     <NumberInput
                         label="Price"
-                        value={currentItem.name}
+                        value={currentItem.price}
                         onChange={(val) => setCurrentItem({ ...currentItem, price: val })}
                     />
                     <NumberInput
@@ -217,7 +267,16 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                         value={currentNewMenuSections}
                         onChange={(event) => setCurrentNewMenuSections(event.currentTarget.value)}
                     />
-                    <Button onClick={createMenuSection}>Add to Section list</Button>
+                    <Button onClick={createMenuSection}>View constructed Section list below</Button>
+                    <Textarea
+                        placeholder="Complete above sections to view here"
+                        label="Completed Section (edit if you want)"
+                        value={editableMenuSection}
+                        autosize
+                        
+                        onChange={(event) => setEditableMenuSection(event.currentTarget.value)}
+                    />
+                    <Button color="orange" onClick={submitForm}>Submit to Firebase</Button>
                 </div>
             </form>
         </>
