@@ -5,6 +5,8 @@
   height: 100%;
   padding: 5%;
   padding-top: 8vh;
+  padding-bottom: 8vh;
+  /* TEMPORARY SOLUTION TO PADDING PROBLEM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 }
 
 .App-logo {
