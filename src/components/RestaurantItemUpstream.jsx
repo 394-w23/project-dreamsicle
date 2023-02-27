@@ -197,11 +197,13 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     <Text>ADD ON</Text>
                     <TextInput
                         label="Name"
+                        required
                         value={currentAddOn.name}
                         onChange={(event) => setCurrentAddOn({ ...currentAddOn, name: event.currentTarget.value })}
                     />
                     <NumberInput
                         label="Price"
+                        required
                         value={currentAddOn.price}
                         onChange={(val) => setCurrentAddOn({ ...currentAddOn, price: val })}
                     />
@@ -211,6 +213,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     <Text>CUSTOMIZABLE CATEGORY</Text>
                     <TextInput
                         label="Name"
+                        required
                         value={currentCustomizableCategory.name}
                         onChange={(event) => setCurrentCustomizableCategory({ ...currentCustomizableCategory, name: event.currentTarget.value })}
                     />
@@ -221,6 +224,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     /> */}
                     <NumberInput
                         label="Required amount"
+                        required
                         value={currentCustomizableCategory.required_amount}
                         onChange={(val) => setCurrentCustomizableCategory({ ...currentCustomizableCategory, required_amount: val })}
                     />
@@ -230,31 +234,37 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     <Text>ITEM</Text>
                     <TextInput
                         label="Name"
+                        required
                         value={currentItem.name}
                         onChange={(event) => setCurrentItem({ ...currentItem, name: event.currentTarget.value })}
                     />
                     <NumberInput
                         label="Price"
+                        required
                         value={currentItem.price}
                         onChange={(val) => setCurrentItem({ ...currentItem, price: val })}
                     />
                     <NumberInput
                         label="Servings"
+                        required
                         value={currentItem.servings}
                         onChange={(val) => setCurrentItem({ ...currentItem, servings: val })}
                     />
                     <TextInput
                         label="Tags"
+                        required
                         value={currentItem.tags}
                         onChange={(event) => setCurrentItem({ ...currentItem, tags: event.currentTarget.value })}
                     />
                     <TextInput
                         label="Ingredients"
+                        required
                         value={currentItem.ingredients}
                         onChange={(event) => setCurrentItem({ ...currentItem, ingredients: event.currentTarget.value })}
                     />
                     <TextInput
                         label="Photo"
+                        required
                         value={currentItem.photo}
                         onChange={(event) => setCurrentItem({ ...currentItem, photo: event.currentTarget.value })}
                     />
@@ -264,6 +274,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     <Text>SECTION</Text>
                     <TextInput
                         label="Name"
+                        required
                         value={currentNewMenuSections}
                         onChange={(event) => setCurrentNewMenuSections(event.currentTarget.value)}
                     />
@@ -273,6 +284,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                         label="Completed Section (edit if you want)"
                         value={editableMenuSection}
                         autosize
+                        required
                         
                         onChange={(event) => setEditableMenuSection(event.currentTarget.value)}
                     />
