@@ -25,7 +25,7 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
                 // append to existing orders
                 const new_data = { ...cartData, orders: { ...cartData.orders, [new_uuid]: new_order } };
                 // console.log("new_data to existing orders",new_data)
-                console.log("C")
+                setCartData(new_data)
                 updateOrders({ ...cartData.orders, [new_uuid]: new_order })
             } else {
                 console.log("B")
