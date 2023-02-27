@@ -116,6 +116,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
             return;
         }
         let item = {
+            id: uuid(),
             name: currentItem.name,
             price: currentItem.price,
             servings: currentItem.servings,
@@ -173,7 +174,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
             return;
 
         }
-        let objectSection = JSON.parse(editableMenuSection,didntSubmit);
+        let objectSection = JSON.parse(editableMenuSection);
         
         let new_menu_sections = newMenuSections
         new_menu_sections.push(objectSection)
@@ -204,6 +205,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                     <NumberInput
                         label="Price"
                         required
+                        precision={2}
                         value={currentAddOn.price}
                         onChange={(val) => setCurrentAddOn({ ...currentAddOn, price: val })}
                     />
@@ -239,6 +241,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                         onChange={(event) => setCurrentItem({ ...currentItem, name: event.currentTarget.value })}
                     />
                     <NumberInput
+                        precision={2}
                         label="Price"
                         required
                         value={currentItem.price}

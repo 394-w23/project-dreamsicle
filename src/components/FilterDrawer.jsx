@@ -29,7 +29,7 @@ export const FilterDrawer = ({ opened, setOpened, numberOfRestaurantsFound, type
      */
 
     useEffect(() => {
-        console.log(filterVariable)
+        // console.log(filterVariable)
         if (filterVariable !== undefined) {
             if (!filters.includes(typeOfDrawer)) {
                 setFilters([...filters, typeOfDrawer])
