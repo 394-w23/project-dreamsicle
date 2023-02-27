@@ -12,6 +12,7 @@ import RestaurantItemUpstream from './components/RestaurantItemUpstream';
 
 const App = () => {
   const [data, error] = useDbData("/");
+  const [onboardOpen, setOnboardOpen] = useState(false);
   // const [cart,setCart] = useState({})
 
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
@@ -31,12 +32,12 @@ const App = () => {
           <Routes>
           <Route
               path="/"
-              element={<LoginPage
+              element={<LoginPage setOnboardOpen={setOnboardOpen}
               />}
             />
             <Route
               path="/browse"
-              element={<RestaurantList
+              element={<RestaurantList setOnboardOpen={setOnboardOpen} onboardOpen={onboardOpen}
               restaurants={restaurants}
               />}
             />

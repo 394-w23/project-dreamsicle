@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 import "./Onboard.css";
 
-const Onboard = ({ setDesiredDate, setOrderSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
+const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setOrderSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
     const [raiseAlert, setRaiseAlert] = useState(false);
-    const [open, setOpen] = useState(true);
+    
 
     const theme = useMantineTheme();
     
@@ -19,12 +19,12 @@ const Onboard = ({ setDesiredDate, setOrderSize, size, setAddress, address, setD
         setRaiseAlert(alarm)
 
         if (!alarm) {
-            setOpen(false)
+            setOnboardOpen(false)
         }
     }
     return (
         <Drawer
-            opened={open}
+            opened={onboardOpen}
             onClose={validateInput}
             position="bottom"
             size="100%"

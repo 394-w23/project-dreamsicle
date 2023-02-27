@@ -18,13 +18,14 @@ import { useFilterStore } from '../store/filterStore';
 import { typeOfDrawer } from './FilterDrawer';
 
 
-const RestaurantList = ({ restaurants }) => {
+const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
     // const [currTagFilter, setCurrTagFilter] = useState("");
     const [currTagFilters, setCurrTagFilters] = useState([]);
     const [tempFilters, setTempFilters] = useState(currTagFilters);
     let {filters, setFilters} = useFilterStore(); // using zustand store
     const [filterOpen, setFilterOpen] = useState(false);
+    
 
     const [desiredDate, setDesiredDate] = useState("");
     const [desiredTime, setDesiredTime] = useState("");
@@ -109,7 +110,7 @@ const RestaurantList = ({ restaurants }) => {
     return (
         <div>
             <Header />
-            <Onboard setDesiredDate={setDesiredDate} setOrderSize={setOrderSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime}/>
+            <Onboard setOnboardOpen={setOnboardOpen} onboardOpen={onboardOpen} setDesiredDate={setDesiredDate} setOrderSize={setOrderSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime}/>
 
             <Button className="filter-button" onClick={openFilterDrawer}>
                 <FaFilter></FaFilter>
@@ -126,17 +127,14 @@ const RestaurantList = ({ restaurants }) => {
             </div>
 
             <div className='restaurant-list'>
-                {filteredRestaurants.length > 0? 
-
+                {filteredRestaurants.length > 0?
                  filteredRestaurants.map(r => <Restaurant key={r.id} restaurant={r} />):
                  <div style={{marginTop: 100}}>
                  <Title align='center'>No data</Title>
                  <Text align='center'>For the chosen filters</Text>
                  </div>
-                
                 }
             </div>
-
             <Navbar />
         </div>
     );
