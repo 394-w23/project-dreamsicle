@@ -55,7 +55,7 @@ const RestaurantList = ({ restaurants }) => {
         filteredList = restaurants.filter(restaurant => {
             for (let filter of currTagFilters) {
                 console.log(restaurant)
-                if (!restaurant.profile.tags || !restaurant.profile.tags.includes(filter)) {
+                if (restaurant.profile.tags && !restaurant.profile.tags || !restaurant.profile.tags.includes(filter)) {
                     return false;
                 }
             }
