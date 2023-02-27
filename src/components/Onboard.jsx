@@ -22,10 +22,15 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
             setOnboardOpen(false)
         }
     }
+    const initializeDefaultValues= () => {
+        setSize(0)
+        setAddress("")
+        setOnboardOpen(false)
+    }
     return (
         <Drawer
             opened={onboardOpen}
-            onClose={validateInput}
+            onClose={initializeDefaultValues}
             position="bottom"
             size="100%"
             className='filter-drawer'
