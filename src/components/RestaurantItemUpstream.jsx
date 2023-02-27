@@ -8,7 +8,7 @@ import { showNotification } from '@mantine/notifications';
 
 export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     const [updateMenuSections, result] = useDbUpdate(`/restaurants/3`);
-    const [menu_sections, error] = useDbData(`/restaurants/3`);
+    const [menu_sections, error] = useDbData(`/restaurants/3/menu_sections`);
     const formRef = useRef(null); // to disable form submission on enter
     // LISTS
     const [addOns, setAddOns] = useState([])
@@ -22,8 +22,10 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     const [currentNewMenuSections, setCurrentNewMenuSections] = useState("")
     const [editableMenuSection, setEditableMenuSection] = useState("")
 
+    useEffect(() => {
+        setNewMenuSections(menu_sections)
+    },[menu_sections])
     // console.log(newMenuSections)
-
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -186,7 +188,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
             autoClose: 1500,
         });
 
-        updateMenuSections({ menu_sections: new_menu_sections })
+        updateMenuSections({ menu_sections: new_menu_sections})
     }
 
     return (
