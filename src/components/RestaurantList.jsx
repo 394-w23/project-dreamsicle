@@ -96,6 +96,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             <div className="main-filters">
                 <NumberInput
                     className="size-input"
+                    onChange={(val)=>setSize(val)}
                     value={size}////////////////////////// Change to size or empty
                     placeholder="Size"
                     label="Party Size"
@@ -122,10 +123,10 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             <div>
             <TextInput
                     className="address-input"
+                    onChange={(event)=>setAddress(event.target.value)}
                     value={address}////////////////////////// Change to size or empty
                     placeholder="Address"
                     label="Address"
-                    styles={{ input: { textAlign: 'center' } }}
                     hideControls
                 />
                 <Button className="filter-button" onClick={openFilterDrawer}>

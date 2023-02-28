@@ -1,4 +1,4 @@
-import { Card, Group, Text, Timeline, Title, Checkbox, Button, Input } from '@mantine/core';
+import { Card, NumberInput, TextInput, Select, Group, Text, Timeline, Title, Checkbox, Button, Input } from '@mantine/core';
 import { DatePicker, TimeInput } from '@mantine/dates';
 import { FaRegSmileBeam } from '@react-icons/all-files/fa/FaRegSmileBeam';
 import { GiCookingPot } from '@react-icons/all-files/gi/GiCookingPot';
@@ -10,6 +10,7 @@ import moment from 'moment';
 import React, { useState } from 'react'
 import Header from './Header'
 import Navbar from './Navbar';
+import "./ReturnPage.css";
 
 export default function ReturnPage() {
 
@@ -20,8 +21,6 @@ export default function ReturnPage() {
 
   // const [returnDateTime, setReturnDateTime] = useState({date: new Date(), time: ""});
 
-
-
   const nextState = () => {
     if (currentState < 4) {
       setCurrentState(currentState + 1)
@@ -30,36 +29,75 @@ export default function ReturnPage() {
     }
   }
 
-
-
   return (
-    <div style={{ paddingTop: 100, height: "100vh", }}>
-      <Header />      
-      <div style={{ backgroundColor: "#fff", padding: 20, borderRadius: 10, marginBottom: 20 }}>
-        <Title style={{ paddingTop: 10, paddingBottom: 10 }} order={2}>Return Date</Title>
-        <DatePicker label="Pick a date"   minDate={moment(new Date()).toDate()} value={returnDate} onChnage={setReturnDate}/>
-        <TimeInput label="Enter time" format="12" value={returnTime} onChnage={setReturnTime}/>
+    <div className="return-page">
+      <Header />
+      <div>
+        <Title style={{ color: "black", marginBottom: "2vh" }} order={2}>Schedule Return</Title>
+        <div className="inputs">
+          <div className="phone-name">
+            <TextInput
+              placeholder="Insert Name Here"
+              label="Name"
+              className="name"
+            />
+            <NumberInput
+              placeholder="Write Phone Number Here"
+              label="Phone Number"
+              hideControls
+            />
+          </div>
+          <TextInput
+            placeholder="Address"
+            label="Address"
+          />
+          <div className="date-time">
+            <DatePicker className="date" label="Pick a date" minDate={moment(new Date()).toDate()} value={returnDate} onChnage={setReturnDate} />
+            <Select
+              label="Pickup time range"
+              placeholder="Pick a time range"
+              data={[
+                { value: 8, label: '8:00am-9:00am' },
+                { value: 9, label: '9:00am-10:00am' },
+                { value: 10, label: '10:00am-11:00am' },
+                { value: 11, label: '11:00am-12:00pm' },
+                { value: 12, label: '12:00pm-1:00pm' },
+                { value: 13, label: '1:00pm-2:00pm' },
+                { value: 14, label: '2:00pm-3:00pm' },
+                { value: 15, label: '3:00pm-4:00pm' },
+                { value: 16, label: '4:00pm-5:00pm' },
+                { value: 17, label: '5:00pm-6:00pm' },
+                { value: 18, label: '6:00pm-7:00pm' },
+                { value: 19, label: '7:00pm-8:00pm' },
+              ]}
+            />
+          </div>
+        </div>
+
+
+
+
       </div>
       <Card radius="md" style={{ marginBottom: 20 }}>
-        <Title style={{ paddingTop: 10, paddingBottom: 10 }} order={2}>Return Checklist</Title>
+        {/* <Title style={{ paddingTop: 10, paddingBottom: 10 }} order={2}>Return Checklist</Title> */}
         <Checkbox.Group
           defaultValue={[]}
-          label="Here is a checklist to help you add all the items to your return"
+          // label="Here is a checklist to help you add all the items to your return"
           orientation='vertical'
           value={returnItems}
           onChange={setReturnItems}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((x, key) =>
-            <Checkbox key={key} value={`item${x}`} label={`Return Item ${x}`} />
+          {["food containers", "utensils", "plates"].map((x, key) =>
+            <Checkbox key={key} value={`item${x}`} label={x} />
           )
           }
         </Checkbox.Group>
       </Card>
 
-      <div style={{ textAlign: "center", paddingBottom: 20 }}>
+      <div style={{ textAlign: "center" }}>
         <Button >Start Return</Button>
       </div>
-      <div className="timeline" onClick={nextState}>
+      {/* <div className="timeline" onClick={nextState}>
         <Timeline active={currentState} bulletSize={24} lineWidth={2}>
           <Timeline.Item bullet={<RiMailSendLine size={12} />} title="Submitted">
             {currentState >= 0 ? <><Text color="dimmed" size="sm">Your order has been submitted to!</Text>
@@ -86,7 +124,7 @@ export default function ReturnPage() {
               <Text size="xs" mt={4}>12 minutes ago</Text></> : <></>}
           </Timeline.Item>
         </Timeline>
-      </div>
+      </div> */}
 
       <Navbar />
     </div>

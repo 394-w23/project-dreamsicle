@@ -1,0 +1,12 @@
+.phone-name,.date-time {
+    display: flex;
+    flex-direction: row;
+}
+
+.name,.date {
+    margin-right: 2vh;
+}
+
+.inputs > * {
+    margin-bottom: 1vh;
+}
