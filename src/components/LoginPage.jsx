@@ -5,7 +5,8 @@ import React, { useEffect } from 'react'
 import { RiGoogleFill } from "@react-icons/all-files/ri/RiGoogleFill"
 // import { FirebaseSignIn, useAuth, useDbData, useDbUpdate } from '../utils/firebase';
 
-export default function LoginPage({setCurrDisplay}) {
+export default function LoginPage({setOnboardOpen}) {
+    setOnboardOpen(true);
     // Sign in the user if they are not signed in already
     // const user = useAuth();
     // const [data, error] = useDbData("/");

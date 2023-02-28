@@ -20,12 +20,15 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
         } else {
             const new_order = { id: new_uuid, item: itemDetails.id, quantity: quantity }
             if (cartData.orders) {
+                console.log("A")
+                console.log(new_order)
                 // append to existing orders
                 const new_data = { ...cartData, orders: { ...cartData.orders, [new_uuid]: new_order } };
                 // console.log("new_data to existing orders",new_data)
                 setCartData(new_data)
                 updateOrders({ ...cartData.orders, [new_uuid]: new_order })
             } else {
+                console.log("B")
                 // create new orders attribute thingy
                 const new_data = { ...cartData, orders: { [new_uuid]: new_order } }
                 // console.log("new_data to nonexisting orders",new_data)

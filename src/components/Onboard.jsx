@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 import "./Onboard.css";
 
-const Onboard = ({ setDesiredDate, setOrderSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
+const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
     const [raiseAlert, setRaiseAlert] = useState(false);
-    const [open, setOpen] = useState(true);
+    
 
     const theme = useMantineTheme();
     
@@ -19,13 +19,18 @@ const Onboard = ({ setDesiredDate, setOrderSize, size, setAddress, address, setD
         setRaiseAlert(alarm)
 
         if (!alarm) {
-            setOpen(false)
+            setOnboardOpen(false)
         }
+    }
+    const initializeDefaultValues= () => {
+        setSize(0)
+        setAddress("")
+        setOnboardOpen(false)
     }
     return (
         <Drawer
-            opened={open}
-            onClose={validateInput}
+            opened={onboardOpen}
+            onClose={initializeDefaultValues}
             position="bottom"
             size="100%"
             className='filter-drawer'
@@ -49,7 +54,7 @@ const Onboard = ({ setDesiredDate, setOrderSize, size, setAddress, address, setD
                 </Input.Wrapper>
                 <Input.Wrapper className="party-size" label="How many people are you expecting?" size="3.5vh">
                     <div className="quantity-buttons">
-                        <QuantitySelector quantity={size} setQuantity={setOrderSize} />
+                        <QuantitySelector quantity={size} setQuantity={setSize} />
                     </div>
 
                 </Input.Wrapper>

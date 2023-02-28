@@ -55,6 +55,8 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
 
   let openCart = () => {
+    console.log("cartData.orders",cartData.orders)
+    // console.log("Object.values(cartData.orders)",Object.values(cartData.orders))
     if(cartData.orders && Object.values(cartData.orders).length>0) {
       setRaiseAlert(false)
       setDrawerState("cart");
