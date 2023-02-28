@@ -109,7 +109,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
         //     });
         //     return;
         // }
-        if (currentItem.name === "" || currentItem.ingredients === "" || !(currentItem.price > -1) || !(currentItem.servings > -1)) {
+        if (currentItem.name === "" || !(currentItem.price > -1) || !(currentItem.servings > -1)) {
             showNotification({
                 message: 'Fill in required fields',
                 autoClose: 3000,
