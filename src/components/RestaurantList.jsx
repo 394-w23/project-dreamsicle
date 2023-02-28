@@ -11,7 +11,7 @@ import FilterItem from './FilterItem';
 import TimeFilter from './TimeFilter';
 import SizeFilter from './SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
-import { Button, NumberInput, Text, Title,TextInput } from '@mantine/core';
+import { Button, NumberInput, Text, Title, TextInput } from '@mantine/core';
 import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
 import { useFilterStore } from '../store/filterStore';
@@ -27,7 +27,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     const [tempFilters, setTempFilters] = useState(currTagFilters);
     let { filters, setFilters } = useFilterStore(); /////////////////// using zustand store
     const [filterOpen, setFilterOpen] = useState(false);
-    
+
 
     const [desiredDate, setDesiredDate] = useState("");
     const [desiredTime, setDesiredTime] = useState("");
@@ -96,7 +96,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             <div className="main-filters">
                 <NumberInput
                     className="size-input"
-                    onChange={(val)=>setSize(val)}
+                    onChange={(val) => setSize(val)}
                     value={size}////////////////////////// Change to size or empty
                     placeholder="Size"
                     label="Party Size"
@@ -120,19 +120,23 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 /> */}
             </div>
 
-            <div>
-            <TextInput
+            <div className="address-and-filter">
+                <TextInput
                     className="address-input"
-                    onChange={(event)=>setAddress(event.target.value)}
+                    onChange={(event) => setAddress(event.target.value)}
                     value={address}////////////////////////// Change to size or empty
                     placeholder="Address"
                     label="Address"
                     hideControls
                 />
+                <div className="filter-div">
                 <Button className="filter-button" onClick={openFilterDrawer}>
-                <FaFilter></FaFilter>
-                <div className="filter-name">Filter</div>
-            </Button>
+                    <FaFilter></FaFilter>
+                    <div className="filter-name">Filter</div>
+                </Button>
+                </div>
+                
+
             </div>
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
