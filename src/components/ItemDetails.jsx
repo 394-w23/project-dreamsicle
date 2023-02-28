@@ -41,11 +41,15 @@ const ItemDetails = ({ updateOrders, itemDetails, itemDetailsOpened, setItemDeta
             setRaiseAlert(false)
         }
     }
+    const closeDrawer=()=> {
+        setQuantity(0)
+        setItemDetailsOpened(false)
+    }
 
     return (
         <Drawer
             opened={itemDetailsOpened}
-            onClose={() => setItemDetailsOpened(false)}
+            onClose={() => closeDrawer()}
             title="Item Details"
             position="bottom"
             size="93%"
