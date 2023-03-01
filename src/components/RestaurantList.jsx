@@ -32,7 +32,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     const [desiredDate, setDesiredDate] = useState("");
     const [desiredTime, setDesiredTime] = useState("");
     const [filterDate, setFilterDate] = useState(null);
-    const [size, setSize] = useState(0);
+    const [size, setSize] = useState(10);
     const [address, setAddress] = useState("");
 
     // const [filteredByTime, setFilteredByTime] = useState([]); // restaurants filtered by time

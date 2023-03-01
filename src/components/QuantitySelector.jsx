@@ -11,7 +11,7 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
     setQuantity(isNaN(quantity) ? 1 : quantity + 1)
   };
   const subtract = () => {
-    setQuantity(quantity > 0 ? quantity - 1 : 0)
+    setQuantity(quantity > 10 ? quantity - 1 : 10)
   };
 
   return (

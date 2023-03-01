@@ -14,7 +14,7 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
     const validateInput = () => {
         console.log("size",size)
         console.log("address",address)
-        let alarm = size === null || size <= 0 || address === "" 
+        let alarm = size === null || size <= 10 || address === "" 
         // || desiredDate === "" || desiredTime === ""
         setRaiseAlert(alarm)
 
@@ -23,7 +23,7 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
         }
     }
     const initializeDefaultValues= () => {
-        setSize(0)
+        setSize(10)
         setAddress("")
         setOnboardOpen(false)
     }
@@ -52,7 +52,7 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
                 <Input.Wrapper className="delivery-address" label="Where should we deliver to?" size="3.5vh">
                     <TextInput value={address} onChange={(event) => setAddress(event.currentTarget.value)}/>
                 </Input.Wrapper>
-                <Input.Wrapper className="party-size" label="How many people are you expecting?" size="3.5vh">
+                <Input.Wrapper className="party-size" label="How many people are you expecting? (10 person minimum)" size="3.5vh">
                     <div className="quantity-buttons">
                         <QuantitySelector quantity={size} setQuantity={setSize} />
                     </div>
