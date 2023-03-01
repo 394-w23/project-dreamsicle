@@ -18,6 +18,7 @@ export default function ReturnPage() {
   const [returnItems, setReturnItems] = useState([]);
   const [returnDate, setReturnDate] = useState();
   const [returnTime, setReturnTime] = useState();
+  const [validateReturn, setValidateReturn] = useState(false);
 
   // const [returnDateTime, setReturnDateTime] = useState({date: new Date(), time: ""});
 
@@ -52,7 +53,7 @@ export default function ReturnPage() {
             label="Address"
           />
           <div className="date-time">
-            <DatePicker className="date" label="Pick a date" minDate={moment(new Date()).toDate()} value={returnDate} onChnage={setReturnDate} />
+            <DatePicker className="date" label="Pick a date" minDate={moment(new Date()).toDate()} value={returnDate} onChange={setReturnDate} />
             <Select
               label="Pickup time range"
               placeholder="Pick a time range"
@@ -82,7 +83,7 @@ export default function ReturnPage() {
         {/* <Title style={{ paddingTop: 10, paddingBottom: 10 }} order={2}>Return Checklist</Title> */}
         <Checkbox.Group
           defaultValue={[]}
-          // label="Here is a checklist to help you add all the items to your return"
+          label="Please return the following items: "
           orientation='vertical'
           value={returnItems}
           onChange={setReturnItems}
@@ -95,7 +96,14 @@ export default function ReturnPage() {
       </Card>
 
       <div style={{ textAlign: "center" }}>
-        <Button >Start Return</Button>
+        <Checkbox label="I acknowledge that failure to return any item will result in an additional fee" onChange={() => setValidateReturn(validateReturn => !validateReturn)}>
+        </Checkbox>
+        <div>{
+          validateReturn
+          ?<Button>Start Return</Button>
+          :<Button disabled>Start Return</Button>
+          }
+        </div>
       </div>
       {/* <div className="timeline" onClick={nextState}>
         <Timeline active={currentState} bulletSize={24} lineWidth={2}>
