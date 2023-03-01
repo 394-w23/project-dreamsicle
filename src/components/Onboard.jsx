@@ -14,7 +14,7 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
     const validateInput = () => {
         console.log("size",size)
         console.log("address",address)
-        let alarm = size === null || size <= 10 || address === "" 
+        let alarm = size === null || size < 10 || address === "" 
         // || desiredDate === "" || desiredTime === ""
         setRaiseAlert(alarm)
 
