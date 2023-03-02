@@ -79,12 +79,18 @@ const ItemDetails = ({
   const handleAddOns = (selected, b) => {
     console.log(selected, b)
   }
+  const [limitedAddOns, setLimitedAddOns] = useState({});
 
-  const [limitedAddOns, setLimitedAddOns] = useState([]);
-
-  const handleAddOnsWithLimits = (selected, limit) => {
-    setLimitedAddOns(selected.splice(selected.length - limit, selected.length))
-    // TODO: handle pricing
+  const handleAddOnsWithLimits = (selected, limit, category) => {
+    let addOns = limitedAddOns[category] || [];
+    if(limit == 0){
+      addOns = selected;
+    }else{
+    addOns = selected.splice(selected.length - limit, selected.length)
+    }
+    let rawLimitedAddOns = { ...limitedAddOns };
+    rawLimitedAddOns[category] = addOns;
+    setLimitedAddOns(rawLimitedAddOns);
   }
 
 
@@ -121,25 +127,23 @@ const ItemDetails = ({
             <Group position="apart" mt="md" mb="xs">
               <Title size="h3" >Customization Options</Title>
               {itemDetails["customizable-categories"].map((category) => {
-
-
                 return (
                   <Group style={{ flexDirection: "column", alignItems: "flex-start" }} position="apart" mt="md" mb="xs">
                     <Title size="h4">{category.name}</Title>
 
                     {/* Radio group or checkbox group */}
-                    {category["required-select-amount"] == 0 ?
+                    {/* {category["required-select-amount"] == 0 ?
 
                       <Checkbox.Group style={{ flexDirection: "column", alignItems: "flex-start" }} onChange={(e) => { handleAddOns(e, category["customizable-add-ons"]) }}>
                         {category["customizable-add-ons"].map((addOn, index) =>
                           <Checkbox key={index} value={addOn.name} label={addOn.name} style={{ width: "100%" }} />)}
                       </Checkbox.Group>
-                      :
-                      <Checkbox.Group style={{ flexDirection: "column", alignItems: "flex-start" }} value={limitedAddOns} onChange={(e) => { handleAddOnsWithLimits(e, category["required-select-amount"]) }}>
+                      : */}
+                      <Checkbox.Group style={{ flexDirection: "column", alignItems: "flex-start" }} value={limitedAddOns[category.name]} onChange={(e) => { handleAddOnsWithLimits(e, category["required-select-amount"], category.name)}}>
                         {category["customizable-add-ons"].map((addOn, index) =>
                           <Checkbox key={index} value={addOn.name} label={addOn.name} style={{ width: "100%" }} />)}
                       </Checkbox.Group>
-                    }
+                    
                   </Group>
                 );
               })}
