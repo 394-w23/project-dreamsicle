@@ -5,13 +5,13 @@ import './Restaurant.css';
 import { Button, NumberInput, Group, ActionIcon } from '@mantine/core';
 
 
-const QuantitySelector = ({ quantity, setQuantity }) => {
+const QuantitySelector = ({ quantity, setQuantity, minAllowedAmount }) => {
   const { number } = useParams();
   const add = () => {
     setQuantity(isNaN(quantity) ? 1 : quantity + 1)
   };
   const subtract = () => {
-    setQuantity(quantity > 10 ? quantity - 1 : 10)
+    setQuantity(quantity > minAllowedAmount ? quantity - 1 : minAllowedAmount)
   };
 
   return (
@@ -26,7 +26,7 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
           value={quantity}
           onChange={(quantity) => setQuantity(quantity)}
           // handlersRef={handlers}
-          min={0}
+          min={minAllowedAmount}
           styles={{ input: { width: '54px', textAlign: 'center' } }}
         />
         <ActionIcon size={36} variant="default" onClick={() => add()}>

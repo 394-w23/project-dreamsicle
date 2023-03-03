@@ -54,7 +54,7 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
                 </Input.Wrapper>
                 <Input.Wrapper className="party-size" label="How many people are you expecting? (10 person minimum)" size="3.5vh">
                     <div className="quantity-buttons">
-                        <QuantitySelector quantity={size} setQuantity={setSize} />
+                        <QuantitySelector quantity={size} setQuantity={setSize} minAllowedAmount={10}/>
                     </div>
 
                 </Input.Wrapper>

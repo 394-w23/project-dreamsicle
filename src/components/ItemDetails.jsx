@@ -174,10 +174,10 @@ const ItemDetails = ({
 
           <Group position="apart" mt="md" mb="xs">
             <Text>{itemDetails.servings} servings</Text>
-            <QuantitySelector setQuantity={setQuantity} quantity={quantity} />
+            <QuantitySelector setQuantity={setQuantity} quantity={quantity} minAllowedAmount={0}/>
           </Group>
           <Text position="right">
-            Subtotal: ${((quantity * itemDetails.price) + (quantity * addOnTotalPrice)).toFixed(2) } 
+            Subtotal: ${(isNaN(quantity)?  "0.00": ((quantity * itemDetails.price) + (quantity * addOnTotalPrice)).toFixed(2))} 
           </Text>
         </Card>
         <div style={{ textAlign: "center", marginTop: 20, marginBottom: 100 }}>
