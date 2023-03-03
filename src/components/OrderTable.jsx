@@ -11,8 +11,10 @@ export default function OrderTable({ restaurant, cartData, deletable,removeOrder
 
   let total_price = 0
   Object.values(cartData.orders).forEach(i => {
-    total_price += i.quantity * (menuItemParser(i, restaurant).price)
+    total_price += (i.quantity * (menuItemParser(i, restaurant).price))
   })
+
+  
 
 
   rows = Object.values(cartData.orders).map((order) => {
@@ -21,7 +23,7 @@ export default function OrderTable({ restaurant, cartData, deletable,removeOrder
       <tr key={order.id}>
         <td>{item.name}</td>
         <td>{order.quantity}</td>
-        <td>${item.price * order.quantity}</td>
+        <td>${(item.price * order.quantity).toFixed(2)}</td>
         {deletable && <td><Button compact variant="subtle" onClick={() => removeOrder(order)}><FaTrash /></Button></td>}
       </tr>
     )
@@ -29,7 +31,7 @@ export default function OrderTable({ restaurant, cartData, deletable,removeOrder
   rows.push(<tr key={0}>
     <td><span style={{ fontWeight: 'bold' }}>Total</span></td>
     <td></td>
-    <td><span style={{ fontWeight: 'bold' }}>${total_price}</span></td>
+    <td><span style={{ fontWeight: 'bold' }}>${total_price.toFixed(2)}</span></td>
     {deletable && <td></td>}
   </tr>)
   return (
