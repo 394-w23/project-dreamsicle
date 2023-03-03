@@ -11,13 +11,14 @@ import FilterItem from './FilterItem';
 import TimeFilter from './TimeFilter';
 import SizeFilter from './SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
-import { Button, NumberInput, Text, Title,TextInput } from '@mantine/core';
+import { Button, NumberInput, Text, Title, TextInput } from '@mantine/core';
 import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
 import { useFilterStore } from '../store/filterStore';
 import { typeOfDrawer } from './FilterDrawer';
 import DateTimePicker from 'react-datetime-picker';
 import { DatePicker, TimeInput } from '@mantine/dates';
+import moment from 'moment';
 
 
 const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
@@ -27,10 +28,11 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     const [tempFilters, setTempFilters] = useState(currTagFilters);
     let { filters, setFilters } = useFilterStore(); /////////////////// using zustand store
     const [filterOpen, setFilterOpen] = useState(false);
-    
+
 
     const [desiredDate, setDesiredDate] = useState("");
     const [desiredTime, setDesiredTime] = useState("");
+    const [formattedDesiredDateTime, setFormattedDesiredDateTime] = useState("");
     const [filterDate, setFilterDate] = useState(null);
     const [size, setSize] = useState(0);
     const [address, setAddress] = useState("");
@@ -39,6 +41,31 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     // const [filteredBySize, setFilteredBySize] = useState([]);
     // TODO: Filtered by other tags
 
+    // handle the event date and time
+    useEffect(() => {
+        if (desiredTime && desiredDate) {
+            let date = moment(desiredDate, "MM/DD/YYYY");
+            let time = moment(desiredTime, "hh:mm a");
+            let dateTime = date.add(time.hours(), 'hours').add(time.minutes(), 'minutes');
+            if (dateTime.unix()) {
+                setFormattedDesiredDateTime(dateTime.unix() * 1000);
+            }
+            if (!filters.includes(typeOfDrawer.TIME)) {
+                setFilters([...filters, typeOfDrawer.TIME])
+            }
+        } else if (desiredDate) {
+            let date = moment(desiredDate, "MM/DD/YYYY");
+            if (date.unix()) {
+                setFormattedDesiredDateTime(date.unix() * 1000);
+            }
+            if (!filters.includes(typeOfDrawer.TIME)) {
+                setFilters([...filters, typeOfDrawer.TIME])
+            }
+        } else {
+            let newFilters = filters.filter(x => x != typeOfDrawer.TIME)
+            setFilters(newFilters);
+        }
+    }, [desiredTime, desiredDate]);
 
     const removeFilterTag = (tag) => {
         let tagFilters = currTagFilters.filter(f => f !== tag);
@@ -63,18 +90,50 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             return true;
         });
 
-        if (filters.includes('time') && filterDate) {
-            filteredList = filteredList.filter(restaurant => {
-                let desiredDate = new Date();
-                desiredDate.setHours(desiredDate.getHours() + filterDate)
-                //Remove advance notice time from inputted to see if it is far enough in the future
-                desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
-                //If the date is still in the future (there is enough time to fulfill order)
-                return (desiredDate >= new Date())
-            });
+        // if (filters.includes('time') && filterDate) {
+        //     filteredList = filteredList.filter(restaurant => {
+        //         let desiredDate = new Date();
+        //         desiredDate.setHours(desiredDate.getHours() + filterDate)
+        //         //Remove advance notice time from inputted to see if it is far enough in the future
+        //         desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
+        //         //If the date is still in the future (there is enough time to fulfill order)
+        //         return (desiredDate >= new Date())
+        //     });
+        // }
+
+        if (filters.includes('time') && formattedDesiredDateTime) {
+            console.log('hi')
+            console.log(new Date(formattedDesiredDateTime).toISOString())
+            console.log(new Date(formattedDesiredDateTime).getHours())
+            console.log(new Date(formattedDesiredDateTime).getMinutes())
+            console.log(new Date(formattedDesiredDateTime).getDate())
+            if (desiredTime) {
+                filteredList = filteredList.filter(restaurant => {
+                    if (new Date(restaurant.profile.open_time).getHours() <= new Date(formattedDesiredDateTime).getHours()
+                        && new Date(restaurant.profile.close_time).getHours() >= new Date(formattedDesiredDateTime).getHours()) {
+                        //Remove advance notice time from inputted to see if it is far enough in the future
+                        let desiredDate = new Date(formattedDesiredDateTime);
+                        desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
+                        //If the date is still in the future (there is enough time to fulfill order)
+                        return (desiredDate >= new Date());
+                    }
+                    return false;
+                });
+            } else {
+                filteredList = filteredList.filter(restaurant => {
+                    //Remove advance notice time from inputted to see if it is far enough in the future
+                    let desiredDate = new Date(formattedDesiredDateTime);
+                    console.log(desiredDate.toISOString())
+                    desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
+                    //If the date is still in the future (there is enough time to fulfill order)
+                    console.log(desiredDate.toISOString())
+                    return (desiredDate >= new Date());
+                });
+            }
+            
         }
 
-        if (filters.includes('time') && size) {
+        if (filters.includes('size') && size) {
             filteredList = filteredList.filter(restaurant =>
                 (restaurant.profile.upper_order_bound >= size) && (size >= restaurant.profile.lower_order_bound));
         }
@@ -97,7 +156,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 <NumberInput
                     className="size-input"
                     value={size}////////////////////////// Change to size or empty
-                    onChange={(val)=>setSize(val)}
+                    onChange={(val) => setSize(val)}
                     placeholder="Size"
                     label="Party Size"
                     styles={{ input: { textAlign: 'center' } }}
@@ -108,11 +167,16 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                     label="Delivery Date"
                     placeholder="Select Delivery Date"
                     firstDayOfWeek="sunday"
+                    onChange={(value) => setDesiredDate(value)}
+                    value={desiredDate}
+                    minDate={new Date()}
                 />
                 <TimeInput
                     className="time-input"
                     label="Delivery Time"
                     format="12"
+                    onChange={(value) => setDesiredTime(value)}
+                    value={desiredTime}
                 />
                 {/* <DateTimePicker 
                     className="datetime-input"
@@ -121,18 +185,18 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             </div>
 
             <div>
-            <TextInput
+                <TextInput
                     className="address-input"
                     value={address}////////////////////////// Change to size or empty
                     placeholder="Address"
                     label="Address"
-                    onChange={(event)=>setAddress(event.target.value)}
+                    onChange={(event) => setAddress(event.target.value)}
                     styles={{ input: { textAlign: 'center' } }}
                 />
                 <Button className="filter-button" onClick={openFilterDrawer}>
-                <FaFilter></FaFilter>
-                <div className="filter-name">Filter</div>
-            </Button>
+                    <FaFilter></FaFilter>
+                    <div className="filter-name">Filter</div>
+                </Button>
             </div>
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
