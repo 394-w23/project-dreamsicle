@@ -185,7 +185,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
 
                 <Button className="filter-button" onClick={openFilterDrawer}>
                     <FaFilter></FaFilter>
-                    <div className="filter-name">Filter</div>
+                    <div className="filter-name">Filters</div>
                 </Button>
             </div>
 
