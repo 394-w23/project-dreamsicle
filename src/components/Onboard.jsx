@@ -1,20 +1,20 @@
 import QuantitySelector from './QuantitySelector';
 import { DatePicker, TimeInput } from '@mantine/dates'
-import { Button, Drawer, useMantineTheme, TextInput, Alert, Input } from '@mantine/core';
+import { Button, Drawer, useMantineTheme, TextInput, Alert, Input, NumberInput } from '@mantine/core';
 import { useState } from 'react';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 import "./Onboard.css";
 
 const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
     const [raiseAlert, setRaiseAlert] = useState(false);
-    
+
 
     const theme = useMantineTheme();
-    
+
     const validateInput = () => {
-        console.log("size",size)
-        console.log("address",address)
-        let alarm = size === null || size <= 0 || address === "" 
+        console.log("size", size)
+        console.log("address", address)
+        let alarm = size === null || size <= 0 || address === ""
         // || desiredDate === "" || desiredTime === ""
         setRaiseAlert(alarm)
 
@@ -22,7 +22,7 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
             setOnboardOpen(false)
         }
     }
-    const initializeDefaultValues= () => {
+    const initializeDefaultValues = () => {
         setSize(0)
         setAddress("")
         setOnboardOpen(false)
@@ -49,24 +49,24 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
                 </div>
             </Input.Wrapper> */}
 
-                <Input.Wrapper className="delivery-address" label="Where should we deliver to?" size="3.5vh">
-                    <TextInput value={address} onChange={(event) => setAddress(event.currentTarget.value)}/>
+                <Input.Wrapper className="delivery-address" label="Delivery Zip Code" size="3.5vh">
+                    <NumberInput value={address} onChange={(value) => setAddress(value)} maxLength={5} hideControls />
                 </Input.Wrapper>
-                <Input.Wrapper className="party-size" label="How many people are you expecting?" size="3.5vh">
+                <Input.Wrapper className="party-size" label="Party Size" size="3.5vh">
                     <div className="quantity-buttons">
                         <QuantitySelector quantity={size} setQuantity={setSize} />
                     </div>
 
                 </Input.Wrapper>
-                
+
                 <div className="lets-order">
-                {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Missing Fields" color="red">
-                    Complete the required fields
-                </Alert>}
+                    {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Missing Fields" color="red">
+                        Complete the required fields
+                    </Alert>}
                     <Button onClick={validateInput}>Let's Order!</Button>
                 </div>
-                
-                
+
+
             </div>
         </Drawer>
     );

@@ -168,6 +168,25 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                     styles={{ input: { textAlign: 'center' } }}
                     hideControls
                 />
+
+                <NumberInput
+                    className="restaurant-list-zip-code"
+                    value={address}
+                    onChange={(value) => setAddress(value)}
+                    placeholder="Zip Code"
+                    label="Zip Code"
+                    maxLength={5}
+                    styles={{ input: { textAlign: 'center' } }}
+                    hideControls
+                />
+
+                <Button className="filter-button" onClick={openFilterDrawer}>
+                    <FaFilter></FaFilter>
+                    <div className="filter-name">Filter</div>
+                </Button>
+            </div>
+
+            <div className="restaurant-list-date-time">
                 <DatePicker
                     className="date-input"
                     label="Delivery Date"
@@ -197,20 +216,6 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 /> */}
             </div>
 
-            <div>
-                <TextInput
-                    className="address-input"
-                    value={address}////////////////////////// Change to size or empty
-                    placeholder="Address"
-                    label="Address"
-                    onChange={(event) => setAddress(event.target.value)}
-                    styles={{ input: { textAlign: 'center' } }}
-                />
-                <Button className="filter-button" onClick={openFilterDrawer}>
-                    <FaFilter></FaFilter>
-                    <div className="filter-name">Filter</div>
-                </Button>
-            </div>
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>
