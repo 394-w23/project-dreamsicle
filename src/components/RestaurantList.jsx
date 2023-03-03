@@ -22,7 +22,7 @@ import moment from 'moment';
 
 
 const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
-    
+
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
     // const [currTagFilter, setCurrTagFilter] = useState("");
     const [currTagFilters, setCurrTagFilters] = useState([]);
@@ -116,12 +116,12 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             console.log(new Date(formattedDesiredDateTime).getDate())
             if (desiredTime) {
                 filteredList = filteredList.filter(restaurant => {
-                    console.log('Poen',new Date(restaurant.profile.open_time).toLocaleString())
-                    console.log('Me',new Date(formattedDesiredDateTime).toLocaleString())
-                    console.log('Closed',new Date(restaurant.profile.close_time).toLocaleString())
+                    console.log('Poen', new Date(restaurant.profile.open_time).toLocaleString())
+                    console.log('Me', new Date(formattedDesiredDateTime).toLocaleString())
+                    console.log('Closed', new Date(restaurant.profile.close_time).toLocaleString())
                     //Added +6 to evaluation because of time zone issues when creating restauratn data
-                    if (new Date(restaurant.profile.open_time).getHours()+6 <= new Date(formattedDesiredDateTime).getHours()
-                        && new Date(restaurant.profile.close_time).getHours()+6 >= new Date(formattedDesiredDateTime).getHours()) {
+                    if (100 * (new Date(restaurant.profile.open_time).getHours() + 6) + new Date(restaurant.profile.open_time).getMinutes() <= 100 * (new Date(formattedDesiredDateTime).getHours()) + new Date(formattedDesiredDateTime).getMinutes()
+                        && 100 * (new Date(restaurant.profile.close_time).getHours() + 6) + new Date(restaurant.profile.close_time).getMinutes() >= 100 * (new Date(formattedDesiredDateTime).getHours()) + new Date(formattedDesiredDateTime).getMinutes()) {
                         //Remove advance notice time from inputted to see if it is far enough in the future
                         let desiredDate = new Date(formattedDesiredDateTime);
                         desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
@@ -214,7 +214,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                     className="time-input"
                     label="Delivery Time"
                     format="12"
-                    
+
                     onChange={(value) => {
 
                         setDesiredTime(value)
