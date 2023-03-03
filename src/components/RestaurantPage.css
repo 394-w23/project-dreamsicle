@@ -11,14 +11,17 @@
 }
 
 .open-cart {
-    position: fixed;
-    bottom: 10%;
-    width: 100%;
-    padding: auto;
+    /* position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-100%); */
 }
 
 .submit-button{
-    /* margin: auto; */
+    position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
 
 }
 
