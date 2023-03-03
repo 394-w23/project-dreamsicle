@@ -1,13 +1,8 @@
-.restaurant-list {
-    /* background-color: gray;
-    color: gray; */
-}
-
 .main-filters {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 95%;
+    width: 100%;
     margin: auto;
     margin-bottom: 10px;
 }
@@ -24,7 +19,8 @@
     display: flex;
     flex-direction: row;
     margin: auto;
-    width: 95%;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .date-input {
