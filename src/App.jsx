@@ -9,6 +9,7 @@ import OrderPage from './components/OrderPage';
 import LoginPage from './components/LoginPage';
 import ReturnPage from './components/ReturnPage';
 import RestaurantItemUpstream from './components/RestaurantItemUpstream';
+import { Loader } from '@mantine/core';
 
 const App = () => {
   const [data, error] = useDbData("/");
@@ -16,7 +17,11 @@ const App = () => {
   // const [cart,setCart] = useState({})
 
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
-  if (data === undefined) return <h1>Loading data...</h1>;
+  if (data === undefined) return <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginTop: 100}}>
+ <h1 style={{textAlign: "center"}}>Loading data...</h1>
+ <Loader size="lg"/>
+  </div>
+ 
   if (!data) return <h1>No data found</h1>;
   const userId = 0; ///////////////////////////////////////////////////////////change later
 
