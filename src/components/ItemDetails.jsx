@@ -1,6 +1,4 @@
-// TODO: Format data to add it to the cart
-
-
+import "./ItemDetails.css"
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -17,7 +15,6 @@ import {
   Radio,
 } from "@mantine/core";
 import QuantitySelector from "./QuantitySelector";
-import "./MenuItem.css";
 import uuid from "react-uuid";
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle";
 
@@ -153,7 +150,8 @@ const ItemDetails = ({
             <Text weight={500}>${itemDetails.price}</Text>
           </Group>
           {itemDetails["customizable-categories"] && (
-            <Group position="apart" mt="md" mb="xs">
+
+               <Group  style={{ flexDirection: "column", alignItems: "flex-start" }} position="apart" mt="md" mb="xs">
               <Title size="h3" >Customization Options</Title>
               {itemDetails["customizable-categories"].map((category, index) => {
                 return (
