@@ -19,6 +19,7 @@ const Navbar = () => {
                 onClick={(e) => setSelection(e.target.id)}
                 
             >
+                <img src="./restaurants.png" width={50}/>
                 Browse
             </Link>
 
@@ -31,6 +32,7 @@ const Navbar = () => {
                 id={"events"}
                 style={{ color:"black",textDecoration: "none" }}
                 onClick={(e) => setSelection(e.target.id)}>
+                      <img src="./returns.png" width={50}/>
                 Returns
             </Link>
 

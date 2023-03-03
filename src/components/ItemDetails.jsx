@@ -1,3 +1,6 @@
+// TODO: Format data to add it to the cart
+
+
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -42,6 +45,7 @@ const ItemDetails = ({
         id: new_uuid,
         item: itemDetails.id,
         quantity: quantity,
+        
       };
       if (cartData.orders) {
         console.log("A");
@@ -77,6 +81,7 @@ const ItemDetails = ({
   // Handle AddOns
   const [selectedAddOns, setSelectedAddOns] = useState({});
   const [addOnTotalPrice, setAddOnTotalPrice] = useState(0);
+  const [formattedSelectedAddOns, setFormattedSelectedAddOns] = useState() // format for the DB
 
 
   const handleSelectedAddOnsFormat = (selected, limit, category) => {
@@ -92,7 +97,6 @@ const ItemDetails = ({
     setSelectedAddOns(rawLimitedAddOns);
   }
 
-
   // helper to calculate the total of the add on prices
   const calculateAddOnPrices = (selectedAddOns) => {
     let total = 0;
@@ -105,13 +109,13 @@ const ItemDetails = ({
       })
     })
     return total;
-
   }
 
   // handle price total for add on selections
   useEffect(() => {
     setAddOnTotalPrice(calculateAddOnPrices(selectedAddOns));
   }, [selectedAddOns])
+  let placeholderImage = "https://theme-assets.getbento.com/sensei/f9c493b.sensei/assets/images/catering-item-placeholder-704x520.png";
 
   return (
     <Drawer
@@ -134,7 +138,7 @@ const ItemDetails = ({
       <div className="menu-item" >
         <Card shadow="sm" p="lg" radius="md" withBorder >
           <Card.Section>
-            <Image src={itemDetails.photo} height={160} alt="Menu item image" />
+            <Image src={itemDetails.photo !== "n/a"? itemDetails.photo : placeholderImage} height={160} alt="Menu item image" />
           </Card.Section>
 
           <Group position="apart" mt="md" mb="xs">
