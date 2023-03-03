@@ -48,6 +48,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             let date = moment(desiredDate, "MM/DD/YYYY");
             let time = moment(desiredTime, "hh:mm a");
             let dateTime = date.add(time.hours(), 'hours').add(time.minutes(), 'minutes');
+            console.log(dateTime.toDate().toISOString())
             if (dateTime.unix()) {
                 setFormattedDesiredDateTime(dateTime.unix() * 1000);
             }
@@ -149,9 +150,11 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
 
     useEffect(() => {
         applyFilters();
-    }, [filters, size, filterDate, currTagFilters])
+    }, [filters, size, formattedDesiredDateTime, currTagFilters])
 
-
+    const clearExistingDate = () => {
+        setDesiredDate(null)
+    }
     return (
         <div>
             <Header />
@@ -196,6 +199,10 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                         setDesiredDate(value)
                         parseDesiredTime(desiredTime, value)
                     }}
+                    onAuxClick={(value) => {
+                        setDesiredDate(value)
+                        parseDesiredTime(value, desiredDate)
+                    }}
                     value={desiredDate}
                     minDate={new Date()}
                 />
@@ -203,11 +210,13 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                     className="time-input"
                     label="Delivery Time"
                     format="12"
+                    
                     onChange={(value) => {
 
                         setDesiredTime(value)
                         parseDesiredTime(value, desiredDate)
                     }}
+
                     value={desiredTime}
                 />
                 {/* <DateTimePicker 
