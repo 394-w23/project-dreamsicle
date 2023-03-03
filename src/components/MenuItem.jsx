@@ -11,11 +11,14 @@ const MenuItem = ({ menu_item, setCartData, cartData, setItemDetails, setItemDet
     setItemDetailsOpened(true);
   };
 
+  let placeholderImage = "https://theme-assets.getbento.com/sensei/f9c493b.sensei/assets/images/catering-item-placeholder-704x520.png";
+
+
   return (<div className="menu-item" onClick={openItemDetails}>
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Card.Section>
         <Image
-          src={menu_item.photo}
+          src={menu_item.photo !== "n/a"? menu_item.photo : placeholderImage}
           height={160}
           alt="Menu item image"
         />
