@@ -50,7 +50,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             let dateTime = date.add(time.hours(), 'hours').add(time.minutes(), 'minutes');
             console.log(dateTime.toDate().toISOString())
             if (dateTime.unix()) {
-                setFormattedDesiredDateTime(dateTime.unix() * 1000);
+                setFormattedDesiredDateTime(dateTime);
             }
             if (!filters.includes(typeOfDrawer.TIME)) {
                 setFilters([...filters, typeOfDrawer.TIME]);
@@ -58,7 +58,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
         } else if (desiredDate) {
             let date = moment(desiredDate, "MM/DD/YYYY");
             if (date.unix()) {
-                setFormattedDesiredDateTime(date.unix() * 1000);
+                setFormattedDesiredDateTime(date);
             }
             if (!filters.includes(typeOfDrawer.TIME)) {
                 setFilters([...filters, typeOfDrawer.TIME]);
@@ -116,8 +116,12 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             console.log(new Date(formattedDesiredDateTime).getDate())
             if (desiredTime) {
                 filteredList = filteredList.filter(restaurant => {
-                    if (new Date(restaurant.profile.open_time).getHours() <= new Date(formattedDesiredDateTime).getHours()
-                        && new Date(restaurant.profile.close_time).getHours() >= new Date(formattedDesiredDateTime).getHours()) {
+                    console.log('Poen',new Date(restaurant.profile.open_time).toLocaleString())
+                    console.log('Me',new Date(formattedDesiredDateTime).toLocaleString())
+                    console.log('Closed',new Date(restaurant.profile.close_time).toLocaleString())
+                    //Added +6 to evaluation because of time zone issues when creating restauratn data
+                    if (new Date(restaurant.profile.open_time).getHours()+6 <= new Date(formattedDesiredDateTime).getHours()
+                        && new Date(restaurant.profile.close_time).getHours()+6 >= new Date(formattedDesiredDateTime).getHours()) {
                         //Remove advance notice time from inputted to see if it is far enough in the future
                         let desiredDate = new Date(formattedDesiredDateTime);
                         desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
