@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   Image,
@@ -71,29 +71,47 @@ const ItemDetails = ({
   const closeDrawer = () => {
     setQuantity(0);
     setItemDetailsOpened(false);
+    setSelectedAddOns({})
   };
 
+  // Handle AddOns
+  const [selectedAddOns, setSelectedAddOns] = useState({});
+  const [addOnTotalPrice, setAddOnTotalPrice] = useState(0);
 
-  // handle addons
 
-  const handleAddOns = (selected, b) => {
-    console.log(selected, b)
-  }
-  const [limitedAddOns, setLimitedAddOns] = useState({});
-
-  const handleAddOnsWithLimits = (selected, limit, category) => {
-    let addOns = limitedAddOns[category] || [];
-    if(limit == 0){
+  const handleSelectedAddOnsFormat = (selected, limit, category) => {
+    let addOns = selectedAddOns[category] || [];
+    if (limit == 0) {
       addOns = selected;
-    }else{
-    addOns = selected.splice(selected.length - limit, selected.length)
+    } else {
+      addOns = selected.splice(selected.length - limit, selected.length)
     }
-    let rawLimitedAddOns = { ...limitedAddOns };
+
+    let rawLimitedAddOns = { ...selectedAddOns };
     rawLimitedAddOns[category] = addOns;
-    setLimitedAddOns(rawLimitedAddOns);
+    setSelectedAddOns(rawLimitedAddOns);
   }
 
 
+  // helper to calculate the total of the add on prices
+  const calculateAddOnPrices = (selectedAddOns) => {
+    let total = 0;
+    let arrays = Object.values(selectedAddOns)
+    arrays.map(array=> {
+      array.map(x=> {
+        console.log(JSON.parse(x));
+        let price = Number(JSON.parse(x).price);
+        total += price;
+      })
+    })
+    return total;
+
+  }
+
+  // handle price total for add on selections
+  useEffect(() => {
+    setAddOnTotalPrice(calculateAddOnPrices(selectedAddOns));
+  }, [selectedAddOns])
 
   return (
     <Drawer
@@ -110,11 +128,11 @@ const ItemDetails = ({
       overlayOpacity={0.55}
       overlayBlur={3}
       padding="lg"
-      root={{ backgroundColor: "red" }}
+   
 
     >
-      <div className="menu-item" style={{ overflow: "scroll" }}>
-        <Card shadow="sm" p="lg" radius="md" withBorder>
+      <div className="menu-item" >
+        <Card shadow="sm" p="lg" radius="md" withBorder >
           <Card.Section>
             <Image src={itemDetails.photo} height={160} alt="Menu item image" />
           </Card.Section>
@@ -126,24 +144,14 @@ const ItemDetails = ({
           {itemDetails["customizable-categories"] && (
             <Group position="apart" mt="md" mb="xs">
               <Title size="h3" >Customization Options</Title>
-              {itemDetails["customizable-categories"].map((category) => {
+              {itemDetails["customizable-categories"].map((category, index) => {
                 return (
-                  <Group style={{ flexDirection: "column", alignItems: "flex-start" }} position="apart" mt="md" mb="xs">
+                  <Group key={index} style={{ flexDirection: "column", alignItems: "flex-start" }} position="apart" mt="md" mb="xs">
                     <Title size="h4">{category.name}</Title>
-
-                    {/* Radio group or checkbox group */}
-                    {/* {category["required-select-amount"] == 0 ?
-
-                      <Checkbox.Group style={{ flexDirection: "column", alignItems: "flex-start" }} onChange={(e) => { handleAddOns(e, category["customizable-add-ons"]) }}>
-                        {category["customizable-add-ons"].map((addOn, index) =>
-                          <Checkbox key={index} value={addOn.name} label={addOn.name} style={{ width: "100%" }} />)}
-                      </Checkbox.Group>
-                      : */}
-                      <Checkbox.Group style={{ flexDirection: "column", alignItems: "flex-start" }} value={limitedAddOns[category.name]} onChange={(e) => { handleAddOnsWithLimits(e, category["required-select-amount"], category.name)}}>
-                        {category["customizable-add-ons"].map((addOn, index) =>
-                          <Checkbox key={index} value={addOn.name} label={addOn.name} style={{ width: "100%" }} />)}
-                      </Checkbox.Group>
-                    
+                    <Checkbox.Group style={{ flexDirection: "column", alignItems: "flex-start" }} value={selectedAddOns[category.name]} onChange={(e) => { handleSelectedAddOnsFormat(e, category["required-select-amount"], category.name) }}>
+                      {category["customizable-add-ons"].map((addOn, index) =>
+                        <Checkbox key={index} value={JSON.stringify(addOn)} label={ addOn.price ? `${addOn.name} (+$${addOn.price})`: addOn.name} style={{ width: "100%" }} />)}
+                    </Checkbox.Group>
                   </Group>
                 );
               })}
@@ -156,10 +164,10 @@ const ItemDetails = ({
             <QuantitySelector setQuantity={setQuantity} quantity={quantity} />
           </Group>
           <Text position="right">
-            Subtotal: ${quantity * itemDetails.price}
+            Subtotal: ${(quantity * itemDetails.price) + (quantity * addOnTotalPrice)} 
           </Text>
         </Card>
-        <div style={{ textAlign: "center", marginTop: 20 }}>
+        <div style={{ textAlign: "center", marginTop: 20, marginBottom: 100 }}>
           <Button className="submit-button" onClick={addToCart}>
             Add To Cart
           </Button>
