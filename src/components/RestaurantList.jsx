@@ -22,6 +22,7 @@ import moment from 'moment';
 
 
 const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
+    
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
     // const [currTagFilter, setCurrTagFilter] = useState("");
     const [currTagFilters, setCurrTagFilters] = useState([]);
@@ -42,7 +43,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     // TODO: Filtered by other tags
 
     // handle the event date and time
-    useEffect(() => {
+    function parseDesiredTime(desiredTime, desiredDate) {
         if (desiredTime && desiredDate) {
             let date = moment(desiredDate, "MM/DD/YYYY");
             let time = moment(desiredTime, "hh:mm a");
@@ -51,7 +52,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 setFormattedDesiredDateTime(dateTime.unix() * 1000);
             }
             if (!filters.includes(typeOfDrawer.TIME)) {
-                setFilters([...filters, typeOfDrawer.TIME])
+                setFilters([...filters, typeOfDrawer.TIME]);
             }
         } else if (desiredDate) {
             let date = moment(desiredDate, "MM/DD/YYYY");
@@ -59,12 +60,17 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 setFormattedDesiredDateTime(date.unix() * 1000);
             }
             if (!filters.includes(typeOfDrawer.TIME)) {
-                setFilters([...filters, typeOfDrawer.TIME])
+                setFilters([...filters, typeOfDrawer.TIME]);
             }
         } else {
-            let newFilters = filters.filter(x => x != typeOfDrawer.TIME)
+            let newFilters = filters.filter(x => x != typeOfDrawer.TIME);
             setFilters(newFilters);
         }
+    }
+
+
+    useEffect(() => {
+        parseDesiredTime(desiredTime, desiredDate);
     }, [desiredTime, desiredDate]);
 
     const removeFilterTag = (tag) => {
@@ -130,7 +136,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                     return (desiredDate >= new Date());
                 });
             }
-            
+
         }
 
         if (filters.includes('size') && size) {
@@ -167,7 +173,10 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                     label="Delivery Date"
                     placeholder="Select Delivery Date"
                     firstDayOfWeek="sunday"
-                    onChange={(value) => setDesiredDate(value)}
+                    onChange={(value) => {
+                        setDesiredDate(value)
+                        parseDesiredTime(desiredTime, value)
+                    }}
                     value={desiredDate}
                     minDate={new Date()}
                 />
@@ -175,7 +184,11 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                     className="time-input"
                     label="Delivery Time"
                     format="12"
-                    onChange={(value) => setDesiredTime(value)}
+                    onChange={(value) => {
+
+                        setDesiredTime(value)
+                        parseDesiredTime(value, desiredDate)
+                    }}
                     value={desiredTime}
                 />
                 {/* <DateTimePicker 
