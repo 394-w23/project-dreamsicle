@@ -38,6 +38,16 @@ const ItemDetails = ({
   const addToCart = () => {
     const new_uuid = uuid();
     // console.log("quantity before new_order",quantity)
+
+
+    let addOnsList = [];
+    Object.values(selectedAddOns).map(array=> {
+      array.map(addOn=> {
+        addOnsList.push(JSON.parse(addOn).id)
+      })
+    })
+    // console.log(addOnsList);
+
     if (quantity === 0) {
       setRaiseAlert(true);
     } else {
@@ -45,10 +55,9 @@ const ItemDetails = ({
         id: new_uuid,
         item: itemDetails.id,
         quantity: quantity,
-        
+        add_ons: addOnsList
       };
       if (cartData.orders) {
-        console.log("A");
         console.log(new_order);
         // append to existing orders
         const new_data = {
@@ -59,7 +68,6 @@ const ItemDetails = ({
         setCartData(new_data);
         updateOrders({ ...cartData.orders, [new_uuid]: new_order });
       } else {
-        console.log("B");
         // create new orders attribute thingy
         const new_data = { ...cartData, orders: { [new_uuid]: new_order } };
         // console.log("new_data to nonexisting orders",new_data)
@@ -81,7 +89,6 @@ const ItemDetails = ({
   // Handle AddOns
   const [selectedAddOns, setSelectedAddOns] = useState({});
   const [addOnTotalPrice, setAddOnTotalPrice] = useState(0);
-  const [formattedSelectedAddOns, setFormattedSelectedAddOns] = useState() // format for the DB
 
 
   const handleSelectedAddOnsFormat = (selected, limit, category) => {
@@ -103,7 +110,7 @@ const ItemDetails = ({
     let arrays = Object.values(selectedAddOns)
     arrays.map(array=> {
       array.map(x=> {
-        console.log(JSON.parse(x));
+
         let price = Number(JSON.parse(x).price);
         total += price;
       })
@@ -152,10 +159,12 @@ const ItemDetails = ({
                 return (
                   <Group key={index} style={{ flexDirection: "column", alignItems: "flex-start" }} position="apart" mt="md" mb="xs">
                     <Title size="h4">{category.name}</Title>
+
                     <Checkbox.Group style={{ flexDirection: "column", alignItems: "flex-start" }} value={selectedAddOns[category.name]} onChange={(e) => { handleSelectedAddOnsFormat(e, category["required-select-amount"], category.name) }}>
                       {category["customizable-add-ons"].map((addOn, index) =>
                         <Checkbox key={index} value={JSON.stringify(addOn)} label={ addOn.price ? `${addOn.name} (+$${addOn.price})`: addOn.name} style={{ width: "100%" }} />)}
                     </Checkbox.Group>
+
                   </Group>
                 );
               })}
@@ -168,7 +177,7 @@ const ItemDetails = ({
             <QuantitySelector setQuantity={setQuantity} quantity={quantity} />
           </Group>
           <Text position="right">
-            Subtotal: ${(quantity * itemDetails.price) + (quantity * addOnTotalPrice)} 
+            Subtotal: ${((quantity * itemDetails.price) + (quantity * addOnTotalPrice)).toFixed(2) } 
           </Text>
         </Card>
         <div style={{ textAlign: "center", marginTop: 20, marginBottom: 100 }}>
