@@ -100,8 +100,8 @@ const RestaurantPage = ({ restaurants, cart }) => {
           <MenuSection key={s.id} setItemDetails={setItemDetails} setItemDetailsOpened={setItemDetailsOpened} menu_section={s} cartData={cartData} setCartData={setCartData} />
         ))}
       </div>
-      <div className="open-cart">
-        <Button leftIcon={<FaShoppingCart size="20" />} className="submit-button" onClick={openCart}>View Cart</Button>
+      <div className="submit-button">
+        <Button leftIcon={<FaShoppingCart size="20" />}  onClick={openCart}>View Cart</Button>
       </div>
       {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Minimum Order" color="red">
                     You must add at least one item to cart!

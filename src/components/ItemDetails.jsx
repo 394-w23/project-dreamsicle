@@ -179,7 +179,9 @@ const ItemDetails = ({
           </Text>
         </Card>
         <div style={{ textAlign: "center", marginTop: 20, marginBottom: 100 }}>
-          <Button className="submit-button" onClick={addToCart}>
+        </div>
+        <div className="submit-button" >
+          <Button onClick={addToCart}>
             Add To Cart
           </Button>
         </div>
