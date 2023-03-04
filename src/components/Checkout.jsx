@@ -98,8 +98,9 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
                 <Link
                     to={`/${restaurant.id}/${transactionID}`} //placeholder
                     style={{ textDecoration: "none" }}
+                    className="floating-submit-button"
                 >
-                    <Button className="submit-button" style={{ marginTop: 20 }} onClick={placeOrder}>Place Order</Button>
+                    <Button style={{ marginTop: 20 }} onClick={placeOrder}>Place Order</Button>
                 </Link>
             </div>
         </div>)

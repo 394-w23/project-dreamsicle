@@ -238,7 +238,7 @@ const ItemDetails = ({
 
         </Card>
 
-        <div className="submit-button" >
+        <div className="floating-submit-button" >
           <Button onClick={addToCart}>
             Add To Cart
           </Button>
