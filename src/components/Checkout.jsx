@@ -95,12 +95,14 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
                     preview={true}
                     issuer={"Visa"}
                 />
+                <div className="submit-button">
                 <Link
                     to={`/${restaurant.id}/${transactionID}`} //placeholder
                     style={{ textDecoration: "none" }}
                 >
-                    <Button className="submit-button" style={{ marginTop: 20 }} onClick={placeOrder}>Place Order</Button>
+                    <Button onClick={placeOrder}>Place Order</Button>
                 </Link>
+                </div>
             </div>
         </div>)
 }
