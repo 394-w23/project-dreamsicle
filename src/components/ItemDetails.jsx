@@ -4,7 +4,6 @@ import { Card, Image, Text, Badge, Alert, Drawer, Group, Button, useMantineTheme
 import QuantitySelector from "./QuantitySelector";
 import uuid from "react-uuid";
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle";
-import { hideNotification, showNotification } from '@mantine/notifications';
 
 const ItemDetails = ({
   updateOrders,
@@ -50,16 +49,7 @@ const ItemDetails = ({
     }
 
     if (quantity === 0) {
-      // setRaiseAlert(true);
-      hideNotification("min-quantity");
-      showNotification({
-        title: "Minimum Order",
-        message: 'Order at least 1 to add to cart!',
-        icon: <BiErrorCircle size={20} />,
-        autoClose: 3500,
-        color: 'red',
-        id: "min-quantity"
-      });
+      setRaiseAlert(true);
       errorsRef.current.scrollIntoView({ behavior: 'smooth' });
     } else {
       const new_order = {
@@ -88,7 +78,7 @@ const ItemDetails = ({
       // console.log(cartData.orders)
       setQuantity(1);
       setItemDetailsOpened(false);
-      // setRaiseAlert(false);
+      setRaiseAlert(false);
     }
   };
   const closeDrawer = () => {
