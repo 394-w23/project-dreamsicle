@@ -13,11 +13,13 @@ const Navbar = () => {
                 to={`/browse`}
                 className="nav-button"
                 key={"hobbies"}
-                style={{ textDecoration: "none" }}
+                style={{ color:"black",textDecoration: "none" }}
                 // underline={selection == "hobbies"}
                 id={"hobbies"}
                 onClick={(e) => setSelection(e.target.id)}
+                
             >
+                <img src="./restaurants.png" width={50}/>
                 Browse
             </Link>
 
@@ -28,8 +30,9 @@ const Navbar = () => {
                 key={"events"}
                 // underline={selection == "events"}
                 id={"events"}
-                style={{ textDecoration: "none" }}
+                style={{ color:"black",textDecoration: "none" }}
                 onClick={(e) => setSelection(e.target.id)}>
+                      <img src="./returns.png" width={50}/>
                 Returns
             </Link>
 

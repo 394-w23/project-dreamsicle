@@ -11,7 +11,7 @@ import FilterItem from './FilterItem';
 import TimeFilter from './TimeFilter';
 import SizeFilter from './SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
-import { Button, NumberInput, Text, Title, TextInput } from '@mantine/core';
+import { Button, NumberInput, Text, Title,  TextInput } from '@mantine/core';
 import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
 import { useFilterStore } from '../store/filterStore';
@@ -35,7 +35,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     const [desiredTime, setDesiredTime] = useState("");
     const [formattedDesiredDateTime, setFormattedDesiredDateTime] = useState("");
     const [filterDate, setFilterDate] = useState(null);
-    const [size, setSize] = useState(0);
+    const [size, setSize] = useState(10);
     const [address, setAddress] = useState("");
 
     // const [filteredByTime, setFilteredByTime] = useState([]); // restaurants filtered by time
@@ -168,8 +168,8 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             <div className="main-filters">
                 <NumberInput
                     className="size-input"
-                    value={size}////////////////////////// Change to size or empty
                     onChange={(val) => setSize(val)}
+                    value={size}////////////////////////// Change to size or empty
                     placeholder="Size"
                     label="Party Size"
                     styles={{ input: { textAlign: 'center' } }}
@@ -229,6 +229,24 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 /> */}
             </div>
 
+            <div className="address-and-filter">
+                <TextInput
+                    className="address-input"
+                    onChange={(event) => setAddress(event.target.value)}
+                    value={address}////////////////////////// Change to size or empty
+                    placeholder="Address"
+                    label="Address"
+                    hideControls
+                />
+                <div className="filter-div">
+                <Button className="filter-button" onClick={openFilterDrawer}>
+                    <FaFilter></FaFilter>
+                    <div className="filter-name">Filter</div>
+                </Button>
+                </div>
+                
+
+            </div>
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>

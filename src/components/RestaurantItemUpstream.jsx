@@ -101,15 +101,15 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     }
 
     const createItem = () => {
-        if (customizableCategories.length === 0) {
-            showNotification({
-                message: 'Must create at least one customizable category to create an item',
-                autoClose: 3000,
-                color: 'red'
-            });
-            return;
-        }
-        if (currentItem.name === "" || currentItem.tags === "" || currentItem.photo === "" || currentItem.ingredients === "" || !(currentItem.price > -1) || !(currentItem.servings > -1)) {
+        // if (customizableCategories.length === 0) {
+        //     showNotification({
+        //         message: 'Must create at least one customizable category to create an item',
+        //         autoClose: 3000,
+        //         color: 'red'
+        //     });
+        //     return;
+        // }
+        if (currentItem.name === "" || !(currentItem.price > -1) || !(currentItem.servings > -1)) {
             showNotification({
                 message: 'Fill in required fields',
                 autoClose: 3000,

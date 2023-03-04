@@ -12,9 +12,9 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
     const theme = useMantineTheme();
 
     const validateInput = () => {
-        console.log("size", size)
-        console.log("address", address)
-        let alarm = size === null || size <= 0 || address === ""
+        console.log("size",size)
+        console.log("address",address)
+        let alarm = size === null || size < 10 || address === "" 
         // || desiredDate === "" || desiredTime === ""
         setRaiseAlert(alarm)
 
@@ -22,8 +22,8 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
             setOnboardOpen(false)
         }
     }
-    const initializeDefaultValues = () => {
-        setSize(0)
+    const initializeDefaultValues= () => {
+        setSize(10)
         setAddress("")
         setOnboardOpen(false)
     }
@@ -52,9 +52,9 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
                 <Input.Wrapper className="delivery-address" label="Delivery Zip Code" size="3.5vh">
                     <NumberInput value={address} onChange={(value) => setAddress(value)} maxLength={5} hideControls />
                 </Input.Wrapper>
-                <Input.Wrapper className="party-size" label="Party Size" size="3.5vh">
+                <Input.Wrapper className="party-size" label="How many people are you expecting? (10 person minimum)" size="3.5vh">
                     <div className="quantity-buttons">
-                        <QuantitySelector quantity={size} setQuantity={setSize} />
+                        <QuantitySelector quantity={size} setQuantity={setSize} minAllowedAmount={10}/>
                     </div>
 
                 </Input.Wrapper>

@@ -10,9 +10,21 @@
     margin-bottom: 2vh;
 }
 
-/* .submit-button {
-    margin-top: 10px;
-} */
+.open-cart {
+    /* position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-100%); */
+}
+
+.submit-button{
+    position: fixed;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+
 
 .restaurant-description {
     padding: 2.5vh;
