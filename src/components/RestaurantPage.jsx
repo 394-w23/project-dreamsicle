@@ -102,13 +102,15 @@ const RestaurantPage = ({ restaurants, cart }) => {
           <MenuSection key={s.id} setItemDetails={setItemDetails} setItemDetailsOpened={setItemDetailsOpened} menu_section={s} cartData={cartData} setCartData={setCartData} />
         ))}
       </div>
-      <div style={{ textAlign: "center", marginTop: 20, marginBottom: 100, }} >
-        {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Minimum Order" color="red">
-          You must add at least one item to cart!
-        </Alert>}
-      </div>
 
-      
+      {raiseAlert && <div style={{ textAlign: "center", marginTop: 20, marginBottom: 100, }} >
+        <Alert icon={
+          <BiErrorCircle size={16} />} title="Minimum Order" color="red">
+          You must add at least one item to cart!
+        </Alert>
+      </div>}
+
+
       <div className="floating-submit-button">
         <Button leftIcon={<FaShoppingCart size="20" />} onClick={openCart}>View Cart</Button>
       </div>
