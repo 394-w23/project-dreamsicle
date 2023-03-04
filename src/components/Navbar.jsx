@@ -20,7 +20,7 @@ const Navbar = () => {
                 
             >
                 <img src="./restaurants.png" width={50}/>
-                Browse
+                {/* Browse */}
             </Link>
 
             <Link
@@ -33,7 +33,7 @@ const Navbar = () => {
                 style={{ color:"black",textDecoration: "none" }}
                 onClick={(e) => setSelection(e.target.id)}>
                       <img src="./returns.png" width={50}/>
-                Returns
+                {/* Returns */}
             </Link>
 
             {/* {displayOptions.map(opt=> <StyledNavButton key={opt} underline={selection == opt} id={opt} onClick={(e)=> setSelection(e.target.id)} >{opt}</StyledNavButton>)} */}
