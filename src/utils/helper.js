@@ -27,18 +27,21 @@ export const itemAddOnParser = (order, item) => {
   let customizableCategories = item["customizable-categories"];
   let addOnsIds=order.add_ons;
   let addOnsOutput=[];
-  try {
-    for (let categoryIndex = 0; categoryIndex < customizableCategories.length; categoryIndex++) {
-      let addOns = customizableCategories[categoryIndex]["customizable-add-ons"];
-      for (let addOnIndex = 0; addOnIndex < addOns.length; addOnIndex++) {
-        if (addOnsIds.includes(addOns[addOnIndex].id)) {
-          addOnsOutput.push(addOns[addOnIndex]);
+  // console.log(customizableCategories);
+  if (customizableCategories!==undefined && addOnsIds!==undefined) {
+    try {  
+      for (let categoryIndex = 0; categoryIndex < customizableCategories.length; categoryIndex++) {
+        let addOns = customizableCategories[categoryIndex]["customizable-add-ons"];
+        for (let addOnIndex = 0; addOnIndex < addOns.length; addOnIndex++) {
+          if (addOnsIds.includes(addOns[addOnIndex].id)) {
+            addOnsOutput.push(addOns[addOnIndex]);
+          }
         }
+        // break
       }
-      // break
+    } catch (e) {
+      console.log(e);
     }
-  } catch (e) {
-    console.log(e);
   }
   return addOnsOutput;
 };

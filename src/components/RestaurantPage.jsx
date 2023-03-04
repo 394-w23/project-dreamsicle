@@ -15,7 +15,7 @@ import ItemDetails from './ItemDetails.jsx';
 import RestaurantDrawer from './RestaurantDrawer.jsx';
 import Checkout from './Checkout.jsx';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
-
+import { hideNotification, showNotification } from '@mantine/notifications';
 
 const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
@@ -24,7 +24,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
   const [updateCart, cartResult] = useDbUpdate(`/users/${userId}/cart/`);
 
   const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
-  const [raiseAlert, setRaiseAlert] = useState(false);
+  // const [raiseAlert, setRaiseAlert] = useState(false);
   const [itemDetails, setItemDetails] = useState({});
   const [drawerState, setDrawerState] = useState("");
 
@@ -55,13 +55,22 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
 
   let openCart = () => {
-    console.log("cartData.orders",cartData.orders)
+    // console.log("cartData.orders",cartData.orders)
     // console.log("Object.values(cartData.orders)",Object.values(cartData.orders))
     if(cartData.orders && Object.values(cartData.orders).length>0) {
-      setRaiseAlert(false)
+      // setRaiseAlert(false)
       setDrawerState("cart");
     } else {
-      setRaiseAlert(true);
+      // setRaiseAlert(true);
+      hideNotification("min-item");
+      showNotification({
+        title: "Minimum Order",
+        message: 'Add at least one item to cart!',
+        icon: <BiErrorCircle size={20} />,
+        autoClose: 3500,
+        color: 'red',
+        id: "min-item"
+    });
     }
   };
 
@@ -103,9 +112,9 @@ const RestaurantPage = ({ restaurants, cart }) => {
       <div className="floating-submit-button">
         <Button leftIcon={<FaShoppingCart size="20" />}  onClick={openCart}>View Cart</Button>
       </div>
-      {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Minimum Order" color="red">
+      {/* {raiseAlert && <Alert icon={<BiErrorCircle size={16} />} title="Minimum Order" color="red">
                     You must add at least one item to cart!
-                </Alert>}
+                </Alert>} */}
     </div>
   );
 };

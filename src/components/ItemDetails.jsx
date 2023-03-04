@@ -1,22 +1,10 @@
 import "./ItemDetails.css"
 import { useEffect, useRef, useState } from "react";
-import {
-  Card,
-  Image,
-  Text,
-  Badge,
-  Alert,
-  Drawer,
-  Group,
-  Button,
-  useMantineTheme,
-  Title,
-  Checkbox,
-  Radio,
-} from "@mantine/core";
+import { Card, Image, Text, Badge, Alert, Drawer, Group, Button, useMantineTheme, Title, Checkbox, Radio, } from "@mantine/core";
 import QuantitySelector from "./QuantitySelector";
 import uuid from "react-uuid";
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle";
+import { hideNotification, showNotification } from '@mantine/notifications';
 
 const ItemDetails = ({
   updateOrders,
@@ -29,7 +17,7 @@ const ItemDetails = ({
 }) => {
   const theme = useMantineTheme();
   const id = 0; ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO: Hardcoded user ID
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [raiseAlert, setRaiseAlert] = useState(false);
   const errorsRef = useRef(null)
 
@@ -62,7 +50,16 @@ const ItemDetails = ({
     }
 
     if (quantity === 0) {
-      setRaiseAlert(true);
+      // setRaiseAlert(true);
+      hideNotification("min-quantity");
+      showNotification({
+        title: "Minimum Order",
+        message: 'Order at least 1 to add to cart!',
+        icon: <BiErrorCircle size={20} />,
+        autoClose: 3500,
+        color: 'red',
+        id: "min-quantity"
+      });
       errorsRef.current.scrollIntoView({ behavior: 'smooth' });
     } else {
       const new_order = {
@@ -89,16 +86,16 @@ const ItemDetails = ({
         updateOrders({ [new_uuid]: new_order });
       }
       // console.log(cartData.orders)
-      setQuantity(0);
+      setQuantity(1);
       setItemDetailsOpened(false);
-      setRaiseAlert(false);
+      // setRaiseAlert(false);
     }
   };
   const closeDrawer = () => {
     setCombinedAddOns({})
-    setQuantity(0);
+    setQuantity(1);
     setItemDetailsOpened(false);
-   
+
   };
 
   // Handle AddOns
@@ -219,20 +216,20 @@ const ItemDetails = ({
           </Text>
 
           <div style={{ textAlign: "center", marginTop: 20, marginBottom: 100, }} >
-            {Object.values(finalAddOnErrors).map((error, index) => <Alert key={index} style={{marginBottom: 10}} title="There was a problem" color="red">
+            {Object.values(finalAddOnErrors).map((error, index) => <Alert key={index} style={{ marginBottom: 10 }} title="There was a problem" color="red">
               {error}
             </Alert>)}
             {raiseAlert && (
-          <Alert
-            icon={<BiErrorCircle size={16} />}
-            title="Minimum Order"
-            color="red"
-          >
-            You must order at least 1 to add to cart!
-          </Alert>
-        )}
+              <Alert
+                icon={<BiErrorCircle size={16} />}
+                title="Minimum Order"
+                color="red"
+              >
+                You must order at least 1 to add to cart!
+              </Alert>
+            )}
           </div>
-         
+
 
           <div ref={errorsRef}></div>
 
@@ -243,7 +240,7 @@ const ItemDetails = ({
             Add To Cart
           </Button>
         </div>
-        
+
       </div>
     </Drawer>
   );
