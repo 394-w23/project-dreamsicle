@@ -228,25 +228,6 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                     name="Delivery Time"
                 /> */}
             </div>
-
-            <div className="address-and-filter">
-                <TextInput
-                    className="address-input"
-                    onChange={(event) => setAddress(event.target.value)}
-                    value={address}////////////////////////// Change to size or empty
-                    placeholder="Address"
-                    label="Address"
-                    hideControls
-                />
-                <div className="filter-div">
-                <Button className="filter-button" onClick={openFilterDrawer}>
-                    <FaFilter></FaFilter>
-                    <div className="filter-name">Filter</div>
-                </Button>
-                </div>
-                
-
-            </div>
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>
