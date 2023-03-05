@@ -10,7 +10,7 @@ export default function OrderTable({ restaurant, cartData, deletable, removeOrde
 
 
   let total_price = getTotalOrderPrice(restaurant, cartData);
-  console.log(total_price)
+  // console.log(total_price)
   // Object.values(cartData.orders).forEach(i => {
   //   let item = menuItemParser(i, restaurant);
   //   let addOnList = itemAddOnParser(i, item);
