@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from "react-router-dom";
 import logo from '../logo.svg';
-import './Restaurant.css';
+import './Transaction.css';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 
@@ -13,18 +13,20 @@ const Transaction = ({ transaction, restaurant }) => {
         <div className='transaction'>
             <Link to={`/${restaurant.id}`} style={{ textDecoration: 'none' }}>
 
-                <Card shadow="sm" p="lg" radius="md" withBorder>
-                    <Card.Section>
+                <Card className="transaction-card" shadow="sm" p="lg" radius="md" withBorder>
+                    <Card.Section style={{ margin: "0px 20px 0px 0px" }}>
                         <Image
                             src={restaurant.profile.photo}
-                            height={160}
-
+                            height={110}
+                            width={110}
                             alt="Restaurant image"
                         />
                     </Card.Section>
 
                     <Group position="apart" mt="md" mb="xs">
                         <Text weight={500}>{restaurant.profile.name}</Text>
+                        <Text size={12}>{new Date(transaction.datetime).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) }</Text>
+                        <Text>ADDDD PRICE TO TRANSACTION</Text>
                     </Group>
                 </Card>
 

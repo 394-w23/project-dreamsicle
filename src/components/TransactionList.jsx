@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from "react-router-dom";
 import Restaurant from './Restaurant';
 import logo from '../logo.svg';
-import './RestaurantList.css';
 import Header from './Header';
-import "./RestaurantPage.css";
 import Navbar from './Navbar';
 import { tags } from '../utils/helper';
 import FilterItem from './FilterItem';
@@ -27,6 +25,7 @@ const TransactionList = ({ transactions, restaurants }) => {
         <div>
             <Header />
 
+            <Title style={{color: "black", textAlign: "center"}}>Orders</Title>
             <div className='transaction-list'>
                 {transactions.length > 0
                     ? transactions.map(transaction => <Transaction key={transaction.id} transaction={transaction} restaurant={restaurants[transaction.restaurant]} />)
