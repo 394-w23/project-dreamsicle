@@ -64,7 +64,7 @@ const App = () => {
               />}
             />
             <Route
-              path="/transactions"
+              path="/orders"
               element={<TransactionList transactions={transactions} restaurants={restaurants}
               />}
             />

@@ -1,6 +1,6 @@
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import { Button, Table } from "@mantine/core";
-import { menuItemParser, itemAddOnParser } from '../utils/helper'
+import { menuItemParser, itemAddOnParser,getTotalOrderPrice } from '../utils/helper'
 import "./OrderTable.css";
 
 export default function OrderTable({ restaurant, cartData, deletable, removeOrder }) {
@@ -9,17 +9,18 @@ export default function OrderTable({ restaurant, cartData, deletable, removeOrde
 
 
 
-  let total_price = 0
-  Object.values(cartData.orders).forEach(i => {
-    let item = menuItemParser(i, restaurant);
-    let addOnList = itemAddOnParser(i, item);
-    let full_item_price=item.price;
-    for (let j=0;j<addOnList.length;j++) {
-      full_item_price+=addOnList[j].price;
-    }
-    total_price += (i.quantity * full_item_price)
+  let total_price = getTotalOrderPrice(restaurant,cartData);
+  console.log(total_price)
+  // Object.values(cartData.orders).forEach(i => {
+  //   let item = menuItemParser(i, restaurant);
+  //   let addOnList = itemAddOnParser(i, item);
+  //   let full_item_price=item.price;
+  //   for (let j=0;j<addOnList.length;j++) {
+  //     full_item_price+=addOnList[j].price;
+  //   }
+  //   total_price += (i.quantity * full_item_price)
 
-  })
+  // })
 
 
 
@@ -27,7 +28,7 @@ export default function OrderTable({ restaurant, cartData, deletable, removeOrde
   rows = Object.values(cartData.orders).map((order) => {
     let item = menuItemParser(order, restaurant);
     let addOnList = itemAddOnParser(order, item);
-    console.log("addOnList", addOnList);
+    // console.log("addOnList", addOnList);
     let full_item_price=item.price;
     for (let i=0;i<addOnList.length;i++) {
       full_item_price+=addOnList[i].price;

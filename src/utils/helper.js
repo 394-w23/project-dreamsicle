@@ -24,21 +24,40 @@ export const menuItemParser = (order, restaurant) => {
 };
 
 export const itemAddOnParser = (order, item) => {
+  let addOnsOutput = [];
+  // if (item.hasOwnProperty("customizable-categories")) {
   let customizableCategories = item["customizable-categories"];
-  let addOnsIds=order.add_ons;
-  let addOnsOutput=[];
+  let addOnsIds = order.add_ons;
   try {
-    for (let categoryIndex = 0; categoryIndex < customizableCategories.length; categoryIndex++) {
-      let addOns = customizableCategories[categoryIndex]["customizable-add-ons"];
-      for (let addOnIndex = 0; addOnIndex < addOns.length; addOnIndex++) {
-        if (addOnsIds.includes(addOns[addOnIndex].id)) {
-          addOnsOutput.push(addOns[addOnIndex]);
+    if (customizableCategories !== undefined) {
+      for (let categoryIndex = 0; categoryIndex < customizableCategories.length; categoryIndex++) {
+        let addOns = customizableCategories[categoryIndex]["customizable-add-ons"];
+        for (let addOnIndex = 0; addOnIndex < addOns.length; addOnIndex++) {
+          if (addOnsIds.includes(addOns[addOnIndex].id)) {
+            addOnsOutput.push(addOns[addOnIndex]);
+          }
         }
+        // break
       }
-      // break
     }
+
   } catch (e) {
     console.log(e);
   }
   return addOnsOutput;
 };
+
+export const getTotalOrderPrice = (restaurant,cartData) => {
+  let total_price = 0
+  Object.values(cartData.orders).forEach(i => {
+    let item = menuItemParser(i, restaurant);
+    let addOnList = itemAddOnParser(i, item);
+    let full_item_price=item.price;
+    for (let j=0;j<addOnList.length;j++) {
+      full_item_price+=addOnList[j].price;
+    }
+    total_price += (i.quantity * full_item_price)
+
+  })
+  return total_price;
+}

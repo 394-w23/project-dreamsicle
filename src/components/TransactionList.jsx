@@ -25,10 +25,10 @@ const TransactionList = ({ transactions, restaurants }) => {
         <div>
             <Header />
 
-            <Title style={{color: "black", textAlign: "center"}}>Orders</Title>
+            <Title style={{color: "black"}}>Orders</Title>
             <div className='transaction-list'>
                 {transactions.length > 0
-                    ? transactions.map(transaction => <Transaction key={transaction.id} transaction={transaction} restaurant={restaurants[transaction.restaurant]} />)
+                    ? transactions.sort((x, y) => (new Date(y.datetime))-new Date(x.datetime)).map(transaction => <Transaction key={transaction.id} transaction={transaction} restaurant={restaurants[transaction.restaurant]} />)
                     : <div style={{ marginTop: 100 }}>
                         <Title align='center'>No Order History</Title>
                     </div>

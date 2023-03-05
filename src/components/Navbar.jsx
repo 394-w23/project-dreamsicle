@@ -1,39 +1,38 @@
 // import styled from "styled-components";
 import "./Navbar.css";
 import { RiAddCircleLine } from "@react-icons/all-files/ri/RiAddCircleLine";
-import { ActionIcon, Menu, Button } from "@mantine/core";
+import { ActionIcon, Menu, Button,Text } from "@mantine/core";
 import { HiOutlineUserGroup } from "@react-icons/all-files/hi/HiOutlineUserGroup";
 import { HiOutlineCalendar } from "@react-icons/all-files/hi/HiOutlineCalendar";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 const Navbar = () => {
+    let selection = useLocation().pathname.split("/")[1];
+    // console.log(selection)
+    // const [selection,setSelection]=useState("browse");
     return (
         <div className="navbar">
             <Link
                 to={`/browse`}
                 className="nav-button"
                 key={"browse"}
-                style={{ color: "black", textDecoration: "none" }}
-                // underline={selection == "hobbies"}
                 id={"browse"}
-                onClick={(e) => setSelection(e.target.id)}
-
+                // onClick={(e) => setSelection("browse")}
             >
-                <img src="./restaurants.png" width={50} />
-                Browse
+                <img className="nav-icon" src="./restaurants.png" width={25} />
+                <Text size="xs" underline={selection === "browse"}>Browse</Text>
             </Link>
 
             <Link
-                to={`/transactions`}
+                to={`/orders`}
                 className="nav-button"
-                key={"transactions"}
-                style={{ color: "black", textDecoration: "none" }}
-                // underline={selection == "hobbies"}
-                id={"transactions"}
-                onClick={(e) => setSelection(e.target.id)}
+                key={"orders"}
+                id={"orders"}
+                // onClick={(e) => setSelection("orders")}
             >
-                <img src="./orders.png" width={50} />
-                Orders
+                <img className="nav-icon" src="./orders.png" width={25} />
+                <Text size="xs" underline={selection === "orders"}>Orders</Text>
             </Link>
 
             <Link
@@ -41,12 +40,11 @@ const Navbar = () => {
                 data-cy="to-event-button"
                 className="nav-button"
                 key={"returns"}
-                // underline={selection == "events"}
-                style={{ color: "black", textDecoration: "none" }}
                 id={"returns"}
-                onClick={(e) => setSelection(e.target.id)}>
-                <img src="./returns.png" width={50} />
-                Returns
+                // onClick={() => setSelection("returns")}
+                >
+                <img className="nav-icon" src="./returns.png" width={25} />
+                <Text size="xs" underline={selection === "returns"}>Returns</Text>
             </Link>
 
             {/* {displayOptions.map(opt=> <StyledNavButton key={opt} underline={selection == opt} id={opt} onClick={(e)=> setSelection(e.target.id)} >{opt}</StyledNavButton>)} */}
