@@ -12,27 +12,40 @@ const Navbar = () => {
             <Link
                 to={`/browse`}
                 className="nav-button"
-                key={"hobbies"}
-                style={{ color:"black",textDecoration: "none" }}
+                key={"browse"}
+                style={{ color: "black", textDecoration: "none" }}
                 // underline={selection == "hobbies"}
-                id={"hobbies"}
+                id={"browse"}
                 onClick={(e) => setSelection(e.target.id)}
-                
+
             >
-                <img src="./restaurants.png" width={50}/>
+                <img src="./restaurants.png" width={50} />
                 Browse
+            </Link>
+
+            <Link
+                to={`/transactions`}
+                className="nav-button"
+                key={"transactions"}
+                style={{ color: "black", textDecoration: "none" }}
+                // underline={selection == "hobbies"}
+                id={"transactions"}
+                onClick={(e) => setSelection(e.target.id)}
+            >
+                <img src="./orders.png" width={50} />
+                Orders
             </Link>
 
             <Link
                 to={`/returns`}
                 data-cy="to-event-button"
                 className="nav-button"
-                key={"events"}
+                key={"returns"}
                 // underline={selection == "events"}
-                id={"events"}
-                style={{ color:"black",textDecoration: "none" }}
+                style={{ color: "black", textDecoration: "none" }}
+                id={"returns"}
                 onClick={(e) => setSelection(e.target.id)}>
-                      <img src="./returns.png" width={50}/>
+                <img src="./returns.png" width={50} />
                 Returns
             </Link>
 

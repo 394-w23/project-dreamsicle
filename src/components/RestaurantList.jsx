@@ -16,7 +16,6 @@ import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
 import { useFilterStore } from '../store/filterStore';
 import { typeOfDrawer } from './FilterDrawer';
-import DateTimePicker from 'react-datetime-picker';
 import { DatePicker, TimeInput } from '@mantine/dates';
 import moment from 'moment';
 

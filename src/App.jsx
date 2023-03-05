@@ -8,6 +8,7 @@ import './App.css';
 import OrderPage from './components/OrderPage';
 import LoginPage from './components/LoginPage';
 import ReturnPage from './components/ReturnPage';
+import TransactionList from './components/TransactionList';
 import RestaurantItemUpstream from './components/RestaurantItemUpstream';
 import { Loader } from '@mantine/core';
 
@@ -17,25 +18,26 @@ const App = () => {
   // const [cart,setCart] = useState({})
 
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
-  if (data === undefined) return <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginTop: 100}}>
- <h1 style={{textAlign: "center"}}>Loading data...</h1>
- <Loader size="lg"/>
+  if (data === undefined) return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 100 }}>
+    <h1 style={{ textAlign: "center" }}>Loading data...</h1>
+    <Loader size="lg" />
   </div>
- 
+
   if (!data) return <h1>No data found</h1>;
   const userId = 0; ///////////////////////////////////////////////////////////change later
 
-  let restaurants = Object.values(data.restaurants)
   // let users = Object.values(data.users).filter(user =>(user.id===userId))
-  let user = data.users[userId]
-  // console.log("User test:", user)  
+  let user = data.users[userId];
+  // console.log("User test:", user)
+  let restaurants = Object.values(data.restaurants);
+  let transactions = Object.values(data.transactions).filter(transaction => transaction.user === user.id);  
 
   return (
     <div className='App'>
       <BrowserRouter>
         <div>
           <Routes>
-          <Route
+            <Route
               path="/"
               element={<LoginPage setOnboardOpen={setOnboardOpen}
               />}
@@ -43,7 +45,7 @@ const App = () => {
             <Route
               path="/browse"
               element={<RestaurantList setOnboardOpen={setOnboardOpen} onboardOpen={onboardOpen}
-              restaurants={restaurants}
+                restaurants={restaurants}
               />}
             />
             <Route
@@ -51,16 +53,22 @@ const App = () => {
               element={<RestaurantPage
                 restaurants={restaurants}
                 cart={user.cart}
-                // setCart={setCart}
-                // cart={cart}
+              // setCart={setCart}
+              // cart={cart}
               />}
             />
             <Route
               path="/:restaraunt_id/:transaction_id"
               element={<OrderPage
                 restaurants={restaurants}
-              />}/>
-              {/* TODO: put the actual route */}
+              />}
+            />
+            <Route
+              path="/transactions"
+              element={<TransactionList transactions={transactions} restaurants={restaurants}
+              />}
+            />
+            {/* TODO: put the actual route */}
             <Route
               path="/returns"
               element={<ReturnPage
@@ -71,7 +79,7 @@ const App = () => {
               element={<RestaurantItemUpstream
               />}
             />
-            
+
           </Routes>
         </div>
       </BrowserRouter>

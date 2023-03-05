@@ -29,12 +29,12 @@
 }
 
 .date-input {
-    width: 60%;
+    width: 65%;
     margin-right: 5px;
 }
 
 .time-input {
-    width: 30%;
+    width: 35%;
 }
 .address-and-filter {
     display: flex;
@@ -44,9 +44,8 @@
     width: 100%;
 }
 .filter-button {
-    /* margin-top:2.9vh; */
-    margin-left: 2vh;
-
+    margin-top: 24px;
+    margin-left: 3vw;
 }
 
 .filter-div {
