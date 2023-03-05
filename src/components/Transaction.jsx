@@ -11,7 +11,7 @@ const Transaction = ({ transaction, restaurant }) => {
 
     return (
         <div className='transaction'>
-            <Link to={`/${restaurant.id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/${restaurant.id}/${transaction.id}`} style={{ textDecoration: 'none' }}>
 
                 <Card className="transaction-card" shadow="sm" p="lg" radius="md" withBorder>
                     <Card.Section style={{ margin: "0px 20px 0px 0px" }}>
