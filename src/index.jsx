@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <MantineProvider withNormalizeCSS withGlobalStyles>
-      <NotificationsProvider position="top-right">
+      <NotificationsProvider position="top-right" limit={1}>
         <App />
       </NotificationsProvider>
     </MantineProvider>

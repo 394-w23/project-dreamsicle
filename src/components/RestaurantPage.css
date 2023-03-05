@@ -17,12 +17,11 @@
   transform: translateX(-100%); */
 }
 
-.submit-button{
-    position: fixed;
+.floating-submit-button{
+  position: fixed;
   bottom: 3%;
   left: 50%;
   transform: translateX(-50%);
-
 }
 
 

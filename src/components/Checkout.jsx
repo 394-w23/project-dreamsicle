@@ -13,7 +13,7 @@ import moment from 'moment';
 import OrderTable from './OrderTable';
 
 export default function Checkout({ restaurant, cartData, updateCart, setCartData, setDrawerState }) {
-    const [wantReturnableItems, setWantReturnableItems] = useState("No")
+    const [wantReturnableItems, setWantReturnableItems] = useState("Yes")
     const transactionID = uuid();
     const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
@@ -81,8 +81,8 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
                 <Radio value="Yes" label="Yes" />
                 <Radio value="No" label="No" />
             </Radio.Group>
-            <div style={{ textAlign: "center",paddingTop: 20, paddingBottom: 40 }}>
-                        <FaLocationArrow />  Deliver to: 1234 Sheridan Rd, Evanston IL
+            <div style={{ textAlign: "center", paddingTop: 20, paddingBottom: 40 }}>
+                <FaLocationArrow />  Deliver to: 1234 Sheridan Rd, Evanston IL
             </div>
             <div style={{ textAlign: "center", paddingTop: 20 }}>
                 <Title size="medium">Card on file</Title>
@@ -95,12 +95,15 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
                     preview={true}
                     issuer={"Visa"}
                 />
-                <Link
-                    to={`/${restaurant.id}/${transactionID}`} //placeholder
-                    style={{ textDecoration: "none" }}
-                >
-                    <Button className="submit-button" style={{ marginTop: 20 }} onClick={placeOrder}>Place Order</Button>
-                </Link>
+                <div className="floating-submit-button">
+                    <Link
+                        to={`/${restaurant.id}/${transactionID}`} //placeholder
+                        style={{ textDecoration: "none" }}>
+                        <Button style={{ marginTop: 20 }} onClick={placeOrder}>Place Order</Button>
+                    </Link>
+                </div>
+                <div style={{height: "15vh"}}></div>
+
             </div>
         </div>)
 }
