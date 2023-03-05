@@ -20,7 +20,7 @@ const Navbar = () => {
                 id={"browse"}
                 // onClick={(e) => setSelection("browse")}
             >
-                <img className="nav-icon" src="./restaurants.png" width={25} />
+                <img className="nav-icon" src="../restaurants.png" width={25} />
                 <Text size="xs" underline={selection === "browse"}>Browse</Text>
             </Link>
 
@@ -31,7 +31,7 @@ const Navbar = () => {
                 id={"orders"}
                 // onClick={(e) => setSelection("orders")}
             >
-                <img className="nav-icon" src="./orders.png" width={25} />
+                <img className="nav-icon" src="../orders.png" width={25} />
                 <Text size="xs" underline={selection === "orders"}>Orders</Text>
             </Link>
 
@@ -43,7 +43,7 @@ const Navbar = () => {
                 id={"returns"}
                 // onClick={() => setSelection("returns")}
                 >
-                <img className="nav-icon" src="./returns.png" width={25} />
+                <img className="nav-icon" src="../returns.png" width={25} />
                 <Text size="xs" underline={selection === "returns"}>Returns</Text>
             </Link>
 

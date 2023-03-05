@@ -15,6 +15,7 @@ import ItemDetails from './ItemDetails.jsx';
 import RestaurantDrawer from './RestaurantDrawer.jsx';
 import Checkout from './Checkout.jsx';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
+import Navbar from "./Navbar";
 
 const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
@@ -103,7 +104,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
         ))}
       </div>
 
-      {raiseAlert && <div style={{ textAlign: "center", marginTop: 20, marginBottom: 100, }} >
+      {raiseAlert && <div style={{ textAlign: "center", marginTop: 20, marginBottom: 10, }} >
         <Alert icon={
           <BiErrorCircle size={16} />} title="Minimum Order" color="red">
           You must add at least one item to cart!
@@ -114,7 +115,8 @@ const RestaurantPage = ({ restaurants, cart }) => {
       <div className="floating-submit-button">
         <Button leftIcon={<FaShoppingCart size="20" />} onClick={openCart}>View Cart</Button>
       </div>
-      <div ref={errorsRef}></div>
+      <div style={{height:"8vh"}} ref={errorsRef}></div>
+      <Navbar />
     </div>
   );
 };

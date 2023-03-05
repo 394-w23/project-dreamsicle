@@ -95,7 +95,7 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
                     preview={true}
                     issuer={"Visa"}
                 />
-                <div className="floating-submit-button">
+                <div className="floating-submit-button" style={{bottom:"3%"}}>
                     <Link
                         to={`/${restaurant.id}/${transactionID}`} //placeholder
                         style={{ textDecoration: "none" }}>

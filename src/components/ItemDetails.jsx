@@ -5,20 +5,22 @@ import QuantitySelector from "./QuantitySelector";
 import uuid from "react-uuid";
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle";
 
-const ItemDetails = ({
-  updateOrders,
-  itemDetails,
-  itemDetailsOpened,
-  setItemDetailsOpened,
-  setCartData,
-  cartData,
+const ItemDetails = ({updateOrders,itemDetails,itemDetailsOpened,setItemDetailsOpened,setCartData,cartData,
   setItemDetails,
 }) => {
+  // Handle AddOns
+  const [addOnTotalPrice, setAddOnTotalPrice] = useState(0);
+  const [combinedAddOns, setCombinedAddOns] = useState({});
+  const [initialAddOnErrors, setInitialAddOnErrors] = useState({}); // generated on open cart
+  const [finalAddOnErrors, setFinalAddOnErrors] = useState({}); // generated on final submission
+
   const theme = useMantineTheme();
   const id = 0; ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO: Hardcoded user ID
   const [quantity, setQuantity] = useState(1);
   const [raiseAlert, setRaiseAlert] = useState(false);
   const errorsRef = useRef(null)
+  console.log(finalAddOnErrors)
+  console.log(initialAddOnErrors)
 
   const addToCart = () => {
     const new_uuid = uuid();
@@ -35,7 +37,7 @@ const ItemDetails = ({
       if (Object.values(initialErrors).length > 0) {
         addOnErrors = initialErrors;
         setFinalAddOnErrors(addOnErrors);
-      }else{
+      } else {
         addOnErrors = {}
       }
       cValue.ids.map(addOn => {
@@ -84,15 +86,13 @@ const ItemDetails = ({
   const closeDrawer = () => {
     setCombinedAddOns({})
     setQuantity(1);
+    setRaiseAlert(false);
+    setInitialAddOnErrors({})
+    setFinalAddOnErrors({})
     setItemDetailsOpened(false);
-
   };
 
-  // Handle AddOns
-  const [addOnTotalPrice, setAddOnTotalPrice] = useState(0);
-  const [combinedAddOns, setCombinedAddOns] = useState({});
-  const [initialAddOnErrors, setInitialAddOnErrors] = useState({}); // generated on open cart
-  const [finalAddOnErrors, setFinalAddOnErrors] = useState({}); // generated on final submission
+
 
 
   // initialize required amount errors to use when validating selctions on add to cart
@@ -225,7 +225,7 @@ const ItemDetails = ({
 
         </Card>
 
-        <div className="floating-submit-button" >
+        <div className="floating-submit-button" style={{ bottom: "5%" }}>
           <Button onClick={addToCart}>
             Add To Cart
           </Button>

@@ -13,6 +13,7 @@ import { GiCookingPot } from "@react-icons/all-files/gi/GiCookingPot"
 import { menuItemParser } from "../utils/helper";
 import OrderTable from "./OrderTable";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 
 const OrderPage = ({ restaurants }) => {
@@ -78,7 +79,8 @@ const OrderPage = ({ restaurants }) => {
                     </Timeline.Item>
                 </Timeline>
             </div>
-
+            
+            <Navbar />
         </div>
     );
 };

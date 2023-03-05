@@ -19,7 +19,7 @@
 
 .floating-submit-button{
   position: fixed;
-  bottom: 3%;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
 }
