@@ -9,7 +9,7 @@ import { getTotalOrderPrice } from '../utils/helper';
 
 const Transaction = ({ transaction, restaurant }) => {
     //   let navigate = useNavigate();
-    let total_price=getTotalOrderPrice(restaurant,transaction);
+    let total_price = getTotalOrderPrice(restaurant, transaction);
 
     return (
         <div className='transaction'>
@@ -25,9 +25,11 @@ const Transaction = ({ transaction, restaurant }) => {
                         />
                     </Card.Section>
 
-                    <Group position="apart" mt="md" mb="xs">
-                        <Text weight={500}>{restaurant.profile.name}</Text>
-                        <Text size={12}>{new Date(transaction.datetime).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) }</Text>
+                    <Group className="basic-order-info" position="apart" mt="md" mb="xs">
+                        <div>
+                            <Text className="basic-order-name" weight={500}>{restaurant.profile.name}</Text>
+                            <Text size={12}>{new Date(transaction.datetime).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })}</Text>
+                        </div>
                         <Text>${total_price}</Text>
                     </Group>
                 </Card>

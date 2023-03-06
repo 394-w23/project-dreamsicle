@@ -6,3 +6,9 @@
     display: flex;
     flex-direction: row;
 }
+
+.basic-order-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
