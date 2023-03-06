@@ -6,6 +6,9 @@ import { HiOutlineUserGroup } from "@react-icons/all-files/hi/HiOutlineUserGroup
 import { HiOutlineCalendar } from "@react-icons/all-files/hi/HiOutlineCalendar";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import orders_icon from "../assets/orders.png"
+import returns_icon from "../assets/returns.png"
+import restaurants_icon from "../assets/restaurants.png"
 
 const Navbar = () => {
     let selection = useLocation().pathname.split("/")[1];
@@ -20,7 +23,7 @@ const Navbar = () => {
                 id={"browse"}
                 // onClick={(e) => setSelection("browse")}
             >
-                <img className="nav-icon" src="./restaurants.png" width={25} />
+                <img className="nav-icon" src={restaurants_icon} width={25} />
                 <Text size="xs" underline={selection === "browse"}>Browse</Text>
             </Link>
 
@@ -31,7 +34,7 @@ const Navbar = () => {
                 id={"orders"}
                 // onClick={(e) => setSelection("orders")}
             >
-                <img className="nav-icon" src="./orders.png" width={25} />
+                <img className="nav-icon" src={orders_icon} width={25} />
                 <Text size="xs" underline={selection === "orders"}>Orders</Text>
             </Link>
 
@@ -43,7 +46,7 @@ const Navbar = () => {
                 id={"returns"}
                 // onClick={() => setSelection("returns")}
                 >
-                <img className="nav-icon" src="./returns.png" width={25} />
+                <img className="nav-icon" src={returns_icon} width={25} />
                 <Text size="xs" underline={selection === "returns"}>Returns</Text>
             </Link>
 
