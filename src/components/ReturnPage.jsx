@@ -38,12 +38,12 @@ export default function ReturnPage() {
         <div className="inputs">
           <div className="phone-name">
             <TextInput
-              placeholder="Insert Name Here"
+              placeholder="Name"
               label="Name"
               className="name"
             />
             <NumberInput
-              placeholder="Write Phone Number Here"
+              placeholder="Phone Number"
               label="Phone Number"
               hideControls
             />
@@ -53,10 +53,10 @@ export default function ReturnPage() {
             label="Address"
           />
           <div className="date-time">
-            <DatePicker className="date" label="Pick a date" minDate={moment(new Date()).toDate()} value={returnDate} onChange={setReturnDate} />
+            <DatePicker className="date" label="Pickup Date" placeholder="Pick a Date" minDate={moment(new Date()).toDate()} value={returnDate} onChange={setReturnDate} />
             <Select
-              label="Pickup time range"
-              placeholder="Pick a time range"
+              label="Pickup Time Range"
+              placeholder="Pick a Time Range"
               data={[
                 { value: 8, label: '8:00am-9:00am' },
                 { value: 9, label: '9:00am-10:00am' },
@@ -83,12 +83,12 @@ export default function ReturnPage() {
         {/* <Title style={{ paddingTop: 10, paddingBottom: 10 }} order={2}>Return Checklist</Title> */}
         <Checkbox.Group
           defaultValue={[]}
-          label="Please return the following items: "
+          label="Please Return the Following Items: "
           orientation='vertical'
           value={returnItems}
           onChange={setReturnItems}
         >
-          {["food containers", "utensils", "plates"].map((x, key) =>
+          {["5 Serving Platters", "20 Utensil Packs (Fork, Knife, Spoon)", "20 Plates"].map((x, key) =>
             <Checkbox key={key} value={`item${x}`} label={x} />
           )
           }
@@ -96,12 +96,12 @@ export default function ReturnPage() {
       </Card>
 
       <div style={{ textAlign: "center" }}>
-        <Checkbox label="I acknowledge that failure to return any item will result in an additional fee" onChange={() => setValidateReturn(validateReturn => !validateReturn)}>
+        <Checkbox label="I acknowledge that missing items will result in a fee from my $50 deposit." onChange={() => setValidateReturn(validateReturn => !validateReturn)} style={{ marginBottom: "10px" }}>
         </Checkbox>
         <div>{
           validateReturn
-          ?<Button>Start Return</Button>
-          :<Button disabled>Start Return</Button>
+          ?<Button>Schedule Return</Button>
+          :<Button disabled>Schedule Return</Button>
           }
         </div>
       </div>

@@ -14,6 +14,7 @@ import { menuItemParser } from "../utils/helper";
 import OrderTable from "./OrderTable";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import Navbar from "./Navbar";
 
 
 const OrderPage = ({ restaurants }) => {
@@ -24,8 +25,6 @@ const OrderPage = ({ restaurants }) => {
     if ((transaction === undefined)) return <h1>Loading data...</h1>;
     if (!transaction) return <h1>No data found</h1>;
     const restaurant = restaurants[transaction.restaurant]
-
-
 
 
     // const rows=order.map(itemObj => <OrderItem key={itemObj.item.id} item={itemObj.item} quantity={itemObj.quantity} />)
