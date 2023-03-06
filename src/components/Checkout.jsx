@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import uuid from 'react-uuid';
-import { Button, Text, Group, Modal, Table, Drawer, useMantineTheme, Title, Checkbox, Radio } from "@mantine/core";
+import { Button, Switch, Text, Group, Modal, Table, Drawer, useMantineTheme, Title, Checkbox, Radio } from "@mantine/core";
 import { useForm } from '@mantine/form';
 import { useDbUpdate } from "../utils/firebase";
 import { Link } from "react-router-dom";
@@ -11,9 +11,11 @@ import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 import moment from 'moment';
 import OrderTable from './OrderTable';
+import './Checkout.css';
 
 export default function Checkout({ restaurant, cartData, updateCart, setCartData, setDrawerState }) {
     const [wantReturnableItems, setWantReturnableItems] = useState("Yes")
+    
     const transactionID = uuid();
     const [updateTransactions, result] = useDbUpdate(`/transactions/${transactionID}`);
 
@@ -69,19 +71,10 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
 
         <div>
             <OrderTable restaurant={restaurant} cartData={cartData} />
+            
 
-            <Radio.Group
-                name="favoriteFramework"
-                label="Would you like to rent some returnable utensils?"
-                // description="This is anonymous"
-                value={wantReturnableItems}
-                onChange={setWantReturnableItems}
-                orientation='vertical'
-            >
-                <Radio value="Yes" label="Yes" />
-                <Radio value="No" label="No" />
-            </Radio.Group>
-            <div style={{ textAlign: "center", paddingTop: 20, paddingBottom: 40 }}>
+
+            <div style={{ textAlign: "center", paddingTop: 40, paddingBottom: 40 }}>
                 <FaLocationArrow />  Deliver to: 1234 Sheridan Rd, Evanston IL
             </div>
             <div style={{ textAlign: "center", paddingTop: 20 }}>
@@ -95,14 +88,14 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
                     preview={true}
                     issuer={"Visa"}
                 />
-                <div className="floating-submit-button" style={{bottom:"3%"}}>
+                <div className="floating-submit-button" style={{ bottom: "3%" }}>
                     <Link
                         to={`/${restaurant.id}/${transactionID}`} //placeholder
                         style={{ textDecoration: "none" }}>
                         <Button style={{ marginTop: 20 }} onClick={placeOrder}>Place Order</Button>
                     </Link>
                 </div>
-                <div style={{height: "15vh"}}></div>
+                <div style={{ height: "15vh" }}></div>
 
             </div>
         </div>)

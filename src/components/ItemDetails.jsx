@@ -19,8 +19,8 @@ const ItemDetails = ({updateOrders,itemDetails,itemDetailsOpened,setItemDetailsO
   const [quantity, setQuantity] = useState(1);
   const [raiseAlert, setRaiseAlert] = useState(false);
   const errorsRef = useRef(null)
-  console.log(finalAddOnErrors)
-  console.log(initialAddOnErrors)
+  // console.log(finalAddOnErrors)
+  // console.log(initialAddOnErrors)
 
   const addToCart = () => {
     const new_uuid = uuid();

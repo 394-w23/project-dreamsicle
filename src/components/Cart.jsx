@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Text, Group, Modal, Table, Drawer, useMantineTheme, Title, Checkbox, Radio } from "@mantine/core";
+import { Button, Text, Switch, Group, Modal, Table, Drawer, useMantineTheme, Title, Checkbox, Radio } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import Cards from 'react-credit-cards-2';
@@ -11,7 +11,7 @@ import OrderTable from './OrderTable';
 
 export default function Cart({ restaurant, cartData, setCartData, updateOrders, setDrawerState }) {
   const restaurantDetailsHelper = menuItemParser
-
+  const [checked, setChecked] = useState(true)
 
   let rows = []
 
@@ -47,7 +47,7 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
     updateOrders({
       [order.id]: null,
     });
-    console.log("length thing",cartData.orders.length)
+    console.log("length thing", cartData.orders.length)
     if (Object.values(cartData.orders).length === 0) {
       setDrawerState("")
     }
@@ -57,11 +57,30 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
     <div>
       <div className="table">
         <OrderTable deletable restaurant={restaurant} removeOrder={removeOrder} cartData={cartData} />
-        <div className="floating-submit-button">
+        <div className="reserve-question">
+          <Text size="lg">Do you want to rent serveware?</Text>
+          <Switch size="md" className="reserve-switch" onLabel="YES" offLabel="NO" checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)} />
+        </div>
+
+        {checked &&
+          <Checkbox.Group className="reserve-checkboxes"
+            orientation='vertical'
+            size="xs"
+            defaultValue={['utensils', 'plates', 'platters']}>
+
+            <Checkbox value="utensils" label="20 Utensil packs (fork, knife, spoon)" />
+            <Checkbox value="plates" label="20 Plates" />
+            <Checkbox value="platters" label="5 Serving platters" />
+          </Checkbox.Group>}
+        <Text className="disclaimer" color="#777777" size="xs">
+          A $50 refundable deposit is required and will be chargeed to your credit card on file.
+          In the event that all rental is not returned, you will be charged for the missing items.
+        </Text>
+        <div className="floating-submit-button" style={{bottom:"5%"}}>
           <Button style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
         </div>
-        <div style={{height:"8vh"}}></div>
-        
+        <div style={{ height: "10vh" }}></div>
+
       </div>
     </div>
 
