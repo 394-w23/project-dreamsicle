@@ -30,10 +30,10 @@ export const itemAddOnParser = (order, item) => {
   let addOnsIds = order.add_ons;
   try {
     if (customizableCategories !== undefined) {
-      for (let categoryIndex = 0; categoryIndex < customizableCategories.length; categoryIndex++) {
+      for (let categoryIndex = 0; categoryIndex < customizableCategories.length - 1; categoryIndex++) {
         let addOns = customizableCategories[categoryIndex]["customizable-add-ons"];
         for (let addOnIndex = 0; addOnIndex < addOns.length; addOnIndex++) {
-          if (addOnsIds.includes(addOns[addOnIndex].id)) {
+          if (addOnsIds.length && addOnsIds.includes(addOns[addOnIndex].id)) {
             addOnsOutput.push(addOns[addOnIndex]);
           }
         }
@@ -47,14 +47,14 @@ export const itemAddOnParser = (order, item) => {
   return addOnsOutput;
 };
 
-export const getTotalOrderPrice = (restaurant,cartData) => {
+export const getTotalOrderPrice = (restaurant, cartData) => {
   let total_price = 0
   Object.values(cartData.orders).forEach(i => {
     let item = menuItemParser(i, restaurant);
     let addOnList = itemAddOnParser(i, item);
-    let full_item_price=item.price;
-    for (let j=0;j<addOnList.length;j++) {
-      full_item_price+=addOnList[j].price;
+    let full_item_price = item.price;
+    for (let j = 0; j < addOnList.length; j++) {
+      full_item_price += addOnList[j].price;
     }
     total_price += (i.quantity * full_item_price)
 
