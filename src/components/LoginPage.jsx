@@ -29,7 +29,7 @@ const LoginPage = ({setOnboardOpen}) => {
             <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWM4ZmJiNGVkNjIyZjk3ZDdiNzdlMzM5ZmNhNjU5NDIxZDY3MGFjMSZjdD1z/kC9CzOnDVMj2QGIwEh/giphy.gif" height="300" />
             <Text >Welcome to</Text>
             <Title>Platter Pal</Title>
-            <Text style={{ marginTop: 20 }}>Find your caterer!</Text>
+            <Text style={{ margin: 20, textAlign: "center" }}>Over its lifespan, one reusable takeout container can save up to 1,000 others types of takeout containers from entering our landfills. By using Platter Pal's reusable containers for your large order, you are making a difference.</Text>
             <div style={{ height: 70 }}></div>
             <Link to={"/browse"}><Button leftIcon={<RiGoogleFill data-testid="sign-in"/>}>Sign in with Google</Button></Link>
         </div>
