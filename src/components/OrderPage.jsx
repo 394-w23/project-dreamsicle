@@ -72,12 +72,12 @@ const OrderPage = ({ restaurants }) => {
 
                     <Timeline.Item bullet={<FaRegSmileBeam size={12} />} title="Delivered">
                         {currentState >= 4 ? <><Text color="dimmed" size="sm">Your order has been delivered!</Text>
-                             </> : <></>}
+                            <Text size="xs" mt={4}>12 minutes ago</Text></> : <></>}
 
                     </Timeline.Item>
                 </Timeline>
             </div>
-            <Navbar/>
+
         </div>
     );
 };

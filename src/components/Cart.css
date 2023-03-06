@@ -1,0 +1,17 @@
+.reserve-question {
+    display: flex;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+.reserve-switch {
+    margin-left: 20px;
+}
+
+.reserve-checkboxes {
+    margin-left: 5vw;
+}
+
+.disclaimer {
+    margin-top: 2vh;
+}

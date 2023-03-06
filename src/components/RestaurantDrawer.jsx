@@ -6,7 +6,7 @@ import 'react-credit-cards-2/es/styles-compiled.css';
 
 export default function RestaurantDrawer({ drawerState, setDrawerState, children }) {
     const theme = useMantineTheme();
-
+    const drawerStateToTitle={"cart":"Your Cart","checkout":"Checkout"}
 
 
     return (
@@ -14,7 +14,7 @@ export default function RestaurantDrawer({ drawerState, setDrawerState, children
         <Drawer
             opened={drawerState !== ""}
             onClose={() => setDrawerState("")}
-            title="Your cart"
+            title={drawerStateToTitle[drawerState]}
             position="bottom"
             size="93%"
             className='restaurant-drawer'
