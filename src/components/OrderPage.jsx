@@ -14,6 +14,7 @@ import { menuItemParser } from "../utils/helper";
 import OrderTable from "./OrderTable";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import BackButton from "./BackButton";
 
 
 const OrderPage = ({ restaurants }) => {
@@ -40,6 +41,8 @@ const OrderPage = ({ restaurants }) => {
     return (
         <div className="order-page">
             <Header />
+            <BackButton />
+
             <div className="table">
                 <OrderTable restaurant={restaurant} cartData={transaction} />
 
