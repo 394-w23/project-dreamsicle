@@ -11,9 +11,6 @@
     margin-left: -5%;
 }
 
-.nav-button:hover {
-    background: #fff;
-}
 
 .nav-button {
     display: flex;
@@ -27,4 +24,21 @@
     text-decoration: none;
     display:flex;
     flex-direction:column;
+    width: 33%;
+}
+.nav-button-active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    height: 100%;
+    padding: 0 20px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    display:flex;
+    flex-direction:column;
+    background: #fff;
+    width: 33%;
+
 }

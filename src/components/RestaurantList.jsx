@@ -47,7 +47,6 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             let date = moment(desiredDate, "MM/DD/YYYY");
             let time = moment(desiredTime, "hh:mm a");
             let dateTime = date.add(time.hours(), 'hours').add(time.minutes(), 'minutes');
-            console.log(dateTime.toDate().toISOString())
             if (dateTime.unix()) {
                 setFormattedDesiredDateTime(dateTime);
             }
@@ -88,7 +87,6 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
 
         filteredList = restaurants.filter(restaurant => {
             for (let filter of currTagFilters) {
-                console.log(restaurant)
                 if (restaurant.profile.tags && !restaurant.profile.tags || !restaurant.profile.tags.includes(filter)) {
                     return false;
                 }
@@ -108,16 +106,8 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
         // }
 
         if (filters.includes('time') && formattedDesiredDateTime) {
-            console.log('hi')
-            console.log(new Date(formattedDesiredDateTime).toISOString())
-            console.log(new Date(formattedDesiredDateTime).getHours())
-            console.log(new Date(formattedDesiredDateTime).getMinutes())
-            console.log(new Date(formattedDesiredDateTime).getDate())
             if (desiredTime) {
                 filteredList = filteredList.filter(restaurant => {
-                    console.log('Poen', new Date(restaurant.profile.open_time).toLocaleString())
-                    console.log('Me', new Date(formattedDesiredDateTime).toLocaleString())
-                    console.log('Closed', new Date(restaurant.profile.close_time).toLocaleString())
                     //Added +6 to evaluation because of time zone issues when creating restauratn data
                     if (100 * (new Date(restaurant.profile.open_time).getHours() + 6) + new Date(restaurant.profile.open_time).getMinutes() <= 100 * (new Date(formattedDesiredDateTime).getHours()) + new Date(formattedDesiredDateTime).getMinutes()
                         && 100 * (new Date(restaurant.profile.close_time).getHours() + 6) + new Date(restaurant.profile.close_time).getMinutes() >= 100 * (new Date(formattedDesiredDateTime).getHours()) + new Date(formattedDesiredDateTime).getMinutes()) {
@@ -133,10 +123,8 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 filteredList = filteredList.filter(restaurant => {
                     //Remove advance notice time from inputted to see if it is far enough in the future
                     let desiredDate = new Date(formattedDesiredDateTime);
-                    console.log(desiredDate.toISOString())
                     desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
                     //If the date is still in the future (there is enough time to fulfill order)
-                    console.log(desiredDate.toISOString())
                     return (desiredDate >= new Date());
                 });
             }
