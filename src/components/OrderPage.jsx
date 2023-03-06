@@ -41,32 +41,32 @@ const OrderPage = ({ restaurants }) => {
         <div className="order-page">
             <Header />
             <div className="table">
-            <OrderTable restaurant={restaurant} cartData={transaction}/>
+                <OrderTable restaurant={restaurant} cartData={transaction} />
 
             </div>
             <div className="timeline" onClick={nextState}>
                 <Timeline active={currentState} bulletSize={24} lineWidth={2}>
                     <Timeline.Item bullet={<RiMailSendLine size={12} />} title="Submitted">
                         {currentState >= 0 ? <><Text color="dimmed" size="sm">Your order has been submitted to {restaurants[transaction.restaurant].profile.name}!</Text>
-                            </> : <></>}
+                        </> : <></>}
 
                     </Timeline.Item>
 
                     <Timeline.Item bullet={<RiCheckboxCircleLine size={12} />} title="Accepted">
                         {currentState >= 1 ? <><Text color="dimmed" size="sm">Your order has been accepted! If you would like to schedule a return now, you can do that <Link to={'/returns'}>Here</Link></Text>
-                            </> : <></>}
+                        </> : <></>}
 
                     </Timeline.Item>
 
                     <Timeline.Item bullet={<GiCookingPot size={12} />} title="Preparing">
                         {currentState >= 2 ? <><Text color="dimmed" size="sm">{restaurants[transaction.restaurant].profile.name} is currently preparing your order!</Text>
-                            </> : <></>}
+                        </> : <></>}
 
                     </Timeline.Item>
 
                     <Timeline.Item bullet={<RiTruckLine size={12} />} title="Delivering">
                         {currentState >= 3 ? <><Text color="dimmed" size="sm">The delivery driver is on their way to your location!</Text>
-                            </> : <></>}
+                        </> : <></>}
 
                     </Timeline.Item>
 
@@ -77,7 +77,7 @@ const OrderPage = ({ restaurants }) => {
                     </Timeline.Item>
                 </Timeline>
             </div>
-
+            <Navbar />
         </div>
     );
 };

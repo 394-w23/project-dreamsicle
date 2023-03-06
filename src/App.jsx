@@ -11,7 +11,7 @@ import ReturnPage from './components/ReturnPage';
 import TransactionList from './components/TransactionList';
 import RestaurantItemUpstream from './components/RestaurantItemUpstream';
 import { Loader } from '@mantine/core';
-
+import ReturnConfirmationPage from './components/ReturnConfirmationPage';
 const App = () => {
   const [data, error] = useDbData("/");
   const [onboardOpen, setOnboardOpen] = useState(false);
@@ -49,7 +49,7 @@ const App = () => {
               />}
             />
             <Route
-              path="/:restaurant_id"
+              path="/browse/:restaurant_id"
               element={<RestaurantPage
                 restaurants={restaurants}
                 cart={user.cart}
@@ -58,7 +58,7 @@ const App = () => {
               />}
             />
             <Route
-              path="/:restaraunt_id/:transaction_id"
+              path="/orders/:restaraunt_id/:transaction_id"
               element={<OrderPage
                 restaurants={restaurants}
               />}
@@ -77,6 +77,11 @@ const App = () => {
             <Route
               path="/upstream"
               element={<RestaurantItemUpstream
+              />}
+            />
+            <Route
+              path="/returns/return-confirmation"
+              element={<ReturnConfirmationPage
               />}
             />
 

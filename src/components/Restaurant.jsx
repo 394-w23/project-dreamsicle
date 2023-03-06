@@ -44,7 +44,7 @@ const Restaurant = ({ restaurant }) => {
 
   return (
     <div className='restaurant'>
-      <Link onClick={clearCart} to={`/${restaurant.id}`} style={{ textDecoration: 'none' }}
+      <Link onClick={clearCart} to={`/browse/${restaurant.id}`} style={{ textDecoration: 'none' }}
       >
 
         <Card shadow="sm" p="lg" radius="md" withBorder>

@@ -8,6 +8,7 @@ import { RiTruckLine } from '@react-icons/all-files/ri/RiTruckLine';
 import dayjs from 'dayjs';
 import moment from 'moment';
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import Header from './Header'
 import Navbar from './Navbar';
 import "./ReturnPage.css";
@@ -100,7 +101,7 @@ export default function ReturnPage() {
         </Checkbox>
         <div>{
           validateReturn
-          ?<Button>Schedule Return</Button>
+          ?<Link to="/returns/return-confirmation"><Button>Schedule Return</Button></Link>
           :<Button disabled>Schedule Return</Button>
           }
         </div>
