@@ -6,7 +6,7 @@ import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 import OrderTable from './OrderTable';
-
+import './Cart.css';
 
 
 export default function Cart({ restaurant, cartData, setCartData, updateOrders, setDrawerState }) {
@@ -57,12 +57,12 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
     <div>
       <div className="table">
         <OrderTable deletable restaurant={restaurant} removeOrder={removeOrder} cartData={cartData} />
-        <div className="reserve-question">
+      </div>
+      <div className="reserve-question">
           <Text size="lg">Do you want to rent serveware?</Text>
           <Switch size="md" className="reserve-switch" onLabel="YES" offLabel="NO" checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)} />
         </div>
-
-        {checked &&
+      {checked &&
           <Checkbox.Group className="reserve-checkboxes"
             orientation='vertical'
             size="xs"
@@ -76,12 +76,10 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
           A $50 refundable deposit is required and will be chargeed to your credit card on file.
           In the event that all rental is not returned, you will be charged for the missing items.
         </Text>
-        <div className="floating-submit-button" style={{bottom:"5%"}}>
+        <div className="floating-submit-button" style={{bottom:"3%"}}>
           <Button style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
         </div>
-        <div style={{ height: "10vh" }}></div>
-
-      </div>
+        <div style={{ height: "15vh" }}></div>
     </div>
 
   )

@@ -11,7 +11,7 @@ import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 import moment from 'moment';
 import OrderTable from './OrderTable';
-import './Checkout.css';
+
 
 export default function Checkout({ restaurant, cartData, updateCart, setCartData, setDrawerState }) {
     const [wantReturnableItems, setWantReturnableItems] = useState("Yes")
