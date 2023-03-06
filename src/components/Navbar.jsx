@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="navbar">
             <Link
                 to={`/browse`}
-                className="nav-button"
+                className={`nav-button${selection==="browse" ? "-active" : ""}`}
                 key={"browse"}
                 id={"browse"}
                 // onClick={(e) => setSelection("browse")}
@@ -26,7 +26,7 @@ const Navbar = () => {
 
             <Link
                 to={`/orders`}
-                className="nav-button"
+                className={`nav-button${selection==="orders" ? "-active" : ""}`}
                 key={"orders"}
                 id={"orders"}
                 // onClick={(e) => setSelection("orders")}
@@ -38,7 +38,7 @@ const Navbar = () => {
             <Link
                 to={`/returns`}
                 data-cy="to-event-button"
-                className="nav-button"
+                className={`nav-button${selection==="returns" ? "-active" : ""}`}
                 key={"returns"}
                 id={"returns"}
                 // onClick={() => setSelection("returns")}
