@@ -33,7 +33,7 @@ const Transaction = ({ transaction, restaurant }) => {
                                 {"    ·   " + new Date(transaction.datetime).toLocaleTimeString('en-us', { hour: "2-digit", minute: "2-digit" })}
                             </Text>
                         </div>
-                        <Text>${total_price}</Text>
+                        <Text>${(total_price).toFixed(2)}</Text>
                     </Group>
                 </Card>
 
