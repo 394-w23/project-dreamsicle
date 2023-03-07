@@ -2,7 +2,7 @@ import Header from './Header';
 import { useDbData } from '../utils/firebase';
 import { useParams } from "react-router";
 import { useState } from "react";
-import { Timeline, Text, Table } from '@mantine/core';
+import { Timeline, Text, Table, Card } from '@mantine/core';
 import { RiMailSendLine } from "@react-icons/all-files/ri/RiMailSendLine"
 import { RiCheckboxCircleLine } from "@react-icons/all-files/ri/RiCheckboxCircleLine"
 import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"
@@ -34,6 +34,9 @@ const ReturnConfirmationPage = () => {
         <div className="order-page">
             <Header />
             <h1>Confirmation</h1>
+            <Card className="return-blurb">
+                Congratulations for helping to keep single-use plastic out of the landfill! <br></br><br></br> Did you know that a single reusable container reduces solid waste by up to 86%. By doing this for your large order, you've reduced a lot of waste!
+            </Card>
             <div className="">
                 <div>{currentState >= 4 ? "Returned Items" : "Items to be Returned"}
                     <ul>

@@ -97,7 +97,7 @@ export default function ReturnPage() {
       </Card>
 
       <div style={{ textAlign: "center" }}>
-        <Checkbox label="I acknowledge that missing items will result in a fee from my $50 deposit." onChange={() => setValidateReturn(validateReturn => !validateReturn)}>
+        <Checkbox label="I acknowledge that missing items will result in a fee from my $50 deposit." onChange={() => setValidateReturn(validateReturn => !validateReturn)} style={{ marginBottom: "10px" }}>
         </Checkbox>
         <div>{
           validateReturn
