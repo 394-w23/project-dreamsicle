@@ -28,7 +28,10 @@ const Transaction = ({ transaction, restaurant }) => {
                     <Group className="basic-order-info" position="apart" mt="md" mb="xs">
                         <div>
                             <Text className="basic-order-name" weight={500}>{restaurant.profile.name}</Text>
-                            <Text size={12}>{new Date(transaction.datetime).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })}</Text>
+                            <Text size={12}>
+                                {new Date(transaction.datetime).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })}  
+                                {"    ·   " + new Date(transaction.datetime).toLocaleTimeString('en-us', { hour: "2-digit", minute: "2-digit" })}
+                            </Text>
                         </div>
                         <Text>${total_price}</Text>
                     </Group>

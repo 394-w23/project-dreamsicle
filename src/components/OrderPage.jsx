@@ -57,7 +57,7 @@ const OrderPage = ({ restaurants }) => {
 
                     <Timeline.Item bullet={<RiCheckboxCircleLine size={12} />} title="Accepted">
                         {currentState >= 1 ? <><Text color="dimmed" size="sm">Your order has been accepted! If you would like to schedule a return now, click below. </Text>
-                            <Link to={'/returns'}><Button size="sm">Schedule Return</Button></Link>
+                            <Link to={'/returns'}><Button size="sm">Schedule Return Now</Button></Link>
                         </> : <></>}
 
                     </Timeline.Item>
