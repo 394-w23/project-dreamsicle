@@ -9,7 +9,8 @@ export default function OrderTable({ restaurant, cartData, deletable, removeOrde
 
 
 
-  let total_price = getTotalOrderPrice(restaurant, cartData);
+  let total_price = getTotalOrderPrice(restaurant, cartData) ;
+  total_price += deletable ? 0 : 50
   // console.log(total_price)
   // Object.values(cartData.orders).forEach(i => {
   //   let item = menuItemParser(i, restaurant);
@@ -41,22 +42,35 @@ export default function OrderTable({ restaurant, cartData, deletable, removeOrde
           <td>${(full_item_price * order.quantity).toFixed(2)}</td>
           {deletable && <td><Button compact variant="subtle" onClick={() => removeOrder(order)}><FaTrash /></Button></td>}
         </tr>
-        {addOnList.map((addOn) => {
-          return (
-            <div className="addOn">
-              {addOn.name}{addOn.price ? ` (+$${addOn.price})` : ""}
-            </div>)
-        })}
+        {addOnList.map((addOn) =>
+        (
+          <div className="addOn">
+            {addOn.name}{addOn.price ? ` (+$${addOn.price})` : ""}
+          </div>)
+        )}
 
 
       </>
 
     )
   });
+  if (!deletable) {
+    rows.push(
+      // [["Utensil Packs", 20],["Plates",20],["Serving Platters", 10]].map(pair => (
+      <tr key={1}>
+        <td>Rented Serveware</td>
+        <td></td>
+        <td>${(50).toFixed(2)}</td>
+        {false && <td><Button compact variant="subtle" onClick={() => removeOrder(order)}><FaTrash /></Button></td>}
+      </tr>
+      // ))
+
+    )
+  }
   rows.push(<tr key={0}>
     <td><span style={{ fontWeight: 'bold' }}>Total</span></td>
     <td></td>
-    <td><span style={{ fontWeight: 'bold' }}>${total_price.toFixed(2)}</span></td>
+    <td><span style={{ fontWeight: 'bold' }}>${(total_price).toFixed(2)}</span></td>
     {deletable && <td></td>}
   </tr>)
   return (

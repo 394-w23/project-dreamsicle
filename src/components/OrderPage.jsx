@@ -4,7 +4,7 @@ import { useDbData } from '../utils/firebase';
 import OrderItem from "./OrderItem";
 import { useParams } from "react-router";
 import { useState } from "react";
-import { Timeline, Text, Table } from '@mantine/core';
+import { Timeline, Text, Table, Button } from '@mantine/core';
 import { RiMailSendLine } from "@react-icons/all-files/ri/RiMailSendLine"
 import { RiCheckboxCircleLine } from "@react-icons/all-files/ri/RiCheckboxCircleLine"
 import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"
@@ -56,7 +56,8 @@ const OrderPage = ({ restaurants }) => {
                     </Timeline.Item>
 
                     <Timeline.Item bullet={<RiCheckboxCircleLine size={12} />} title="Accepted">
-                        {currentState >= 1 ? <><Text color="dimmed" size="sm">Your order has been accepted! If you would like to schedule a return now, you can do that <Link to={'/returns'}>Here</Link></Text>
+                        {currentState >= 1 ? <><Text color="dimmed" size="sm">Your order has been accepted! If you would like to schedule a return now, click below. </Text>
+                            <Link to={'/returns'}><Button size="sm">Schedule Return</Button></Link>
                         </> : <></>}
 
                     </Timeline.Item>

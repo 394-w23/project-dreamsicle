@@ -13,7 +13,7 @@ import moment from 'moment';
 import OrderTable from './OrderTable';
 
 
-export default function Checkout({ restaurant, cartData, updateCart, setCartData, setDrawerState,utensiles }) {
+export default function Checkout({ restaurant, cartData, updateCart, setCartData, setDrawerState }) {
     const [wantReturnableItems, setWantReturnableItems] = useState("Yes")
     
     const transactionID = uuid();
