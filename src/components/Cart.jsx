@@ -7,11 +7,13 @@ import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 import OrderTable from './OrderTable';
 import './Cart.css';
+import { set } from 'firebase/database';
 
 
-export default function Cart({ restaurant, cartData, setCartData, updateOrders, setDrawerState }) {
+export default function Cart({ updateCart, restaurant, cartData, setCartData, updateOrders, setDrawerState }) {
   const restaurantDetailsHelper = menuItemParser
   const [checked, setChecked] = useState(true)
+  const [utensils, setUtensils] = useState({utensils:['utensils', 'plates', 'platters']})
 
   let rows = []
 
@@ -34,14 +36,15 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
   }
 
   const gotoCheckout = () => {
+    // updateCart(utensils)
+    // setCartData({...cartData,utensils:utensils.utensils})
+    // console.log(cartData)
+    // console.log(utensils)
     setDrawerState("checkout") //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
   }
   const removeOrder = (order) => {
     let tempCart = cartData
-    console.log("Befor", tempCart.orders)
     delete tempCart.orders[order.id]
-    console.log("Do something", tempCart.orders)
-    console.log("Arf", tempCart.orders)
     setCartData(tempCart)
     // tempCart.orders[order.id] = null
     updateOrders({
@@ -52,6 +55,9 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
       setDrawerState("")
     }
   }
+  // onChange={(e) => {setUtensils({utensils:e.target})}}
+  // setUtensils(event.currentTarget.checked ? utensils : {utensils:[]})
+
   return (
 
     <div>
@@ -59,27 +65,29 @@ export default function Cart({ restaurant, cartData, setCartData, updateOrders, 
         <OrderTable deletable restaurant={restaurant} removeOrder={removeOrder} cartData={cartData} />
       </div>
       <div className="reserve-question">
-          <Text size="lg">Do you want to rent serveware?</Text>
-          <Switch size="md" className="reserve-switch" onLabel="YES" offLabel="NO" checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)} />
-        </div>
+        <Text size="lg">Do you want to rent serveware?</Text>
+        <Switch size="md" className="reserve-switch" onLabel="YES" offLabel="NO" checked={checked} onChange={(event) => {
+          setChecked(event.currentTarget.checked)
+        }} />
+      </div>
       {checked &&
-          <Checkbox.Group className="reserve-checkboxes"
-            orientation='vertical'
-            size="xs"
-            defaultValue={['utensils', 'plates', 'platters']}>
-
-            <Checkbox value="utensils" label="20 Utensil packs (fork, knife, spoon)" />
-            <Checkbox value="plates" label="20 Plates" />
-            <Checkbox value="platters" label="5 Serving platters" />
-          </Checkbox.Group>}
-        <Text className="disclaimer" color="#777777" size="xs">
-          A $50 refundable deposit is required and will be chargeed to your credit card on file.
-          In the event that all rental is not returned, you will be charged for the missing items.
-        </Text>
-        <div className="floating-submit-button" style={{bottom:"3%"}}>
-          <Button style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
-        </div>
-        <div style={{ height: "15vh" }}></div>
+        <Checkbox.Group className="reserve-checkboxes"
+          orientation='vertical'
+          size="xs"
+          value={utensils.utensils}
+          >
+          <Checkbox value="utensils" label="20 Utensil packs (fork, knife, spoon)" />
+          <Checkbox value="plates" label="20 Plates" />
+          <Checkbox value="platters" label="5 Serving platters" />
+        </Checkbox.Group>}
+      <Text className="disclaimer" color="#777777" size="xs">
+        A $50 refundable deposit is required and will be chargeed to your credit card on file.
+        In the event that all rental is not returned, you will be charged for the missing items.
+      </Text>
+      <div className="floating-submit-button" style={{ bottom: "3%" }}>
+        <Button style={{ marginTop: 20 }} onClick={gotoCheckout}>Go to checkout</Button>
+      </div>
+      <div style={{ height: "15vh" }}></div>
     </div>
 
   )

@@ -20,9 +20,11 @@ import Navbar from "./Navbar";
 const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
 
+  const [updateUtensils, orderUtensilsResult] = useDbUpdate(`/users/${userId}/cart/utensils`);
   const [updateOrders, orderResult] = useDbUpdate(`/users/${userId}/cart/orders`);
   const [updateCart, cartResult] = useDbUpdate(`/users/${userId}/cart/`);
 
+  const [utensils, setItemDetailssetUtensils] = useState({});
   const [itemDetailsOpened, setItemDetailsOpened] = useState(false);
   const [raiseAlert, setRaiseAlert] = useState(false);
   const [itemDetails, setItemDetails] = useState({});
@@ -47,7 +49,8 @@ const RestaurantPage = ({ restaurants, cart }) => {
       console.log("resetting cart")
       const newRestaurantCart = {
         restaurant: restaurantID,
-        orders: {}
+        orders: {},
+        utensils: {},
       }
       updateCart(newRestaurantCart)
       setCartData(newRestaurantCart);
@@ -80,8 +83,8 @@ const RestaurantPage = ({ restaurants, cart }) => {
       <RestaurantDrawer setDrawerState={setDrawerState} drawerState={drawerState}>
 
         {
-          drawerState === "checkout" ? <Checkout restaurant={restaurant} setCartData={setCartData} cartData={cartData} updateCart={updateCart} setDrawerState={setDrawerState} />
-            : <Cart restaurant={restaurant} updateOrders={updateOrders} setCartData={setCartData} cartData={cartData} setDrawerState={setDrawerState} />
+          drawerState === "checkout" ? <Checkout  restaurant={restaurant} setCartData={setCartData} cartData={cartData} updateCart={updateCart} setDrawerState={setDrawerState} />
+            : <Cart restaurant={restaurant} updateCart={updateCart} updateOrders={updateOrders} setCartData={setCartData} cartData={cartData} setDrawerState={setDrawerState} />
         }
 
       </RestaurantDrawer>
