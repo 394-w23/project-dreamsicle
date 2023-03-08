@@ -4,8 +4,9 @@ import { Badge } from '@mantine/core';
 import { FilterDrawer, typeOfDrawer } from './FilterDrawer';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { TiDelete } from '@react-icons/all-files/ti/TiDelete';
 
-const SizeFilter = ({ size, setSize, numberOfRestaurantsFound }) => {
+const SizeFilter = ({ size, clearSize, numberOfRestaurantsFound }) => {
 
     // const [filterSize, setFilterSize] = useState();
     const [opened, setOpened] = useState();
@@ -13,10 +14,13 @@ const SizeFilter = ({ size, setSize, numberOfRestaurantsFound }) => {
 
     return (
         <>
-            <div onClick={() => setOpened(true)} className="filter-tag">
-                <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>SIZE FILTER {!size? '':`(${size})`}</Badge>
+            <div onClick={() => clearSize()} className="filter-tag">
+                <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>
+                    SIZE FILTER {!size ? '':`(${size})`} 
+                    <TiDelete size="16" />
+                </Badge>
             </div>
-            <FilterDrawer opened={opened} setOpened={setOpened} filterVariable={size} filterFunction={setSize} numberOfRestaurantsFound={numberOfRestaurantsFound} typeOfDrawer={typeOfDrawer.SIZE} />
+            {/* <FilterDrawer opened={opened} setOpened={setOpened} filterVariable={size} filterFunction={setSize} numberOfRestaurantsFound={numberOfRestaurantsFound} typeOfDrawer={typeOfDrawer.SIZE} /> */}
         </>
     );
 

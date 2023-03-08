@@ -10,9 +10,9 @@ const BackButton = () => {
 
   return (<div style={{ display: "flex" }}>
     <div >
-      <Link to={`/${selection}`} style={{ textDecoration: 'none' }}><Button style={{ padding: "0vh 1.2vh 0vh 1.2vh" }}><RiArrowLeftLine style={{ padding: "0" }} size={20} /></Button></Link>
-    </div>
-  </div>);
+      <Link to={`/${selection}`} style={{ textDecoration: 'none' }}><Button leftIcon={<RiArrowLeftLine style={{ padding: '0' }} size={20} />} style={{ padding: '0vh 1.2vh 0vh 1.2vh' }}>{selection.charAt(0).toUpperCase() + selection.slice(1)}</Button></Link>
+    </div >
+  </div >);
 }
 
 export default BackButton;
