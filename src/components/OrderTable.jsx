@@ -58,7 +58,7 @@ export default function OrderTable({ restaurant, cartData, deletable, removeOrde
     rows.push(
       // [["Utensil Packs", 20],["Plates",20],["Serving Platters", 10]].map(pair => (
       <tr key={1}>
-        <td>Rented Serveware</td>
+        <td>Rented Serveware (Deposit)</td>
         <td></td>
         <td>${(50).toFixed(2)}</td>
         {false && <td><Button compact variant="subtle" onClick={() => removeOrder(order)}><FaTrash /></Button></td>}
