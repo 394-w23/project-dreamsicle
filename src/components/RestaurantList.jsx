@@ -18,9 +18,11 @@ import { useFilterStore } from '../store/filterStore';
 import { typeOfDrawer } from './FilterDrawer';
 import { DatePicker, TimeInput } from '@mantine/dates';
 import moment from 'moment';
+import { useScrollLock } from '@mantine/hooks';
 
 
 const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
+    useScrollLock(onboardOpen);
 
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
     // const [currTagFilter, setCurrTagFilter] = useState("");
