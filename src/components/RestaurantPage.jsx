@@ -33,7 +33,12 @@ const RestaurantPage = ({ restaurants, cart }) => {
   const [cartOpened, setCartOpened] = useState(false);
   const [cartData, setCartData] = useState(cart);
 
-  const errorsRef = useRef(null)
+  const topRef = useRef(null);
+  useEffect(() => {
+    topRef.current.scrollIntoView();
+  }, []);
+
+  const errorsRef = useRef(null);
   // const [cartData, cartError] = useDbData(`/users/${userId}/cart/`);
   // console.log("cart",cart)
   // console.log("cartData",cartData)
@@ -77,7 +82,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
     section.items.forEach(item => menu.push(item)));
 
   return (
-    <div className="restaurant-page">
+    <div ref={topRef} className="restaurant-page">
       <Header />
 
       <RestaurantDrawer setDrawerState={setDrawerState} drawerState={drawerState}>
