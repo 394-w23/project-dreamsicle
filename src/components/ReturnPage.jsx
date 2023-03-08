@@ -42,10 +42,12 @@ export default function ReturnPage() {
               placeholder="Name"
               label="Name"
               className="name"
+              defaultValue={"Cameron Smith"}
             />
-            <NumberInput
+            <TextInput
               placeholder="Phone Number"
               label="Phone Number"
+              defaultValue={"(929) 504-6377"}
               hideControls
             />
           </div>
@@ -106,6 +108,9 @@ export default function ReturnPage() {
           }
         </div>
       </div>
+      <Text className="blurb" style={{ margin: 20, textAlign: "center", width: "90%", bottom: 0}}>
+      <em>Did you know that due to complications in the recycling process, only 9% of plastic actually ends up being recycled?</em>
+      </Text>
       {/* <div className="timeline" onClick={nextState}>
         <Timeline active={currentState} bulletSize={24} lineWidth={2}>
           <Timeline.Item bullet={<RiMailSendLine size={12} />} title="Submitted">
