@@ -9,8 +9,10 @@ import dayjs from 'dayjs';
 import moment from 'moment';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useReturnsStore } from '../store/returnsStore';
 import Header from './Header'
 import Navbar from './Navbar';
+import ReturnConfirmationPage from './ReturnConfirmationPage';
 import "./ReturnPage.css";
 
 export default function ReturnPage() {
@@ -31,8 +33,12 @@ export default function ReturnPage() {
     }
   }
 
+ const {showReturnConfirmation, setShowReturnConfirmation} = useReturnsStore();
+
+
   return (
-    <div className="return-page">
+ !showReturnConfirmation ? 
+   <div className="return-page">
       <Header />
       <div>
         <Title style={{ color: "black", marginBottom: "2vh" }} order={2}>Schedule Return</Title>
@@ -54,6 +60,7 @@ export default function ReturnPage() {
           <TextInput
             placeholder="Address"
             label="Address"
+            defaultValue="2245 Sheridan Rd, Evanston, IL 60201"
           />
           <div className="date-time">
             <DatePicker className="date" label="Pickup Date" placeholder="Pick a Date" minDate={moment(new Date()).toDate()} value={returnDate} onChange={setReturnDate} />
@@ -103,7 +110,7 @@ export default function ReturnPage() {
         </Checkbox>
         <div>{
           validateReturn
-          ?<Link to="/returns/return-confirmation"><Button>Schedule Return</Button></Link>
+          ?<Link to="/returns/return-confirmation"><Button onClick={()=> setShowReturnConfirmation(true)}>Schedule Return</Button></Link>
           :<Button disabled>Schedule Return</Button>
           }
         </div>
@@ -142,5 +149,7 @@ export default function ReturnPage() {
 
       <Navbar />
     </div>
+ : 
+ <ReturnConfirmationPage/>
   )
 }
