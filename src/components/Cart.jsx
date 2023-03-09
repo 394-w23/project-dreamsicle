@@ -74,7 +74,7 @@ export default function Cart({ updateCart, restaurant, cartData, setCartData, up
         <Checkbox.Group className="reserve-checkboxes"
           orientation='vertical'
           size="xs"
-          value={utensils.utensils}
+          defaultValue={utensils.utensils}
           >
           <Checkbox value="utensils" label="20 Utensil packs (fork, knife, spoon)" />
           <Checkbox value="plates" label="20 Plates" />
