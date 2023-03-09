@@ -19,33 +19,30 @@ const ItemDetails = ({updateOrders,itemDetails,itemDetailsOpened,setItemDetailsO
   const [quantity, setQuantity] = useState(1);
   const [raiseAlert, setRaiseAlert] = useState(false);
   const errorsRef = useRef(null)
-  // console.log(finalAddOnErrors)
-  // console.log(initialAddOnErrors)
 
   const addToCart = () => {
     const new_uuid = uuid();
     let addOnsList = [];
     let categoryKeys = Object.keys(combinedAddOns)
     let initialErrors = { ...initialAddOnErrors }
-    let addOnErrors = {}
-
+    setFinalAddOnErrors(initialErrors);
     categoryKeys.map(cKey => {
       let cValue = combinedAddOns[cKey];
       if (cValue.valid) {
         delete initialErrors[cKey] // delete from errors because it's not an error now
       }
       if (Object.values(initialErrors).length > 0) {
-        addOnErrors = initialErrors;
-        setFinalAddOnErrors(addOnErrors);
+        setFinalAddOnErrors(initialErrors);
       } else {
-        addOnErrors = {}
+        setFinalAddOnErrors({});
+        initialErrors ={}
       }
       cValue.ids.map(addOn => {
         addOnsList.push(JSON.parse(addOn).id)
       })
     })
 
-    if (Object.values(addOnErrors).length > 0) {
+    if (Object.values(initialErrors).length > 0) {
       errorsRef.current.scrollIntoView({ behavior: 'smooth' });
       return
     }
