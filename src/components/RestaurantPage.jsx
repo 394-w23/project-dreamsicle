@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
-import { Button, Text, Group, Modal, Table, Alert } from "@mantine/core";
+import { Card, Image, Button, Text, Group, Title, Modal, Table, Alert } from "@mantine/core";
 import uuid from 'react-uuid';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 import { useForm } from '@mantine/form';
@@ -88,7 +88,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
       <RestaurantDrawer setDrawerState={setDrawerState} drawerState={drawerState}>
 
         {
-          drawerState === "checkout" ? <Checkout  restaurant={restaurant} setCartData={setCartData} cartData={cartData} updateCart={updateCart} setDrawerState={setDrawerState} />
+          drawerState === "checkout" ? <Checkout restaurant={restaurant} setCartData={setCartData} cartData={cartData} updateCart={updateCart} setDrawerState={setDrawerState} />
             : <Cart restaurant={restaurant} updateCart={updateCart} updateOrders={updateOrders} setCartData={setCartData} cartData={cartData} setDrawerState={setDrawerState} />
         }
 
@@ -100,11 +100,39 @@ const RestaurantPage = ({ restaurants, cart }) => {
         <BackButton />
         <Text className="restaurant-address">{restaurant.profile.contact_info.address.street}, {restaurant.profile.contact_info.address.city}</Text>
       </Group>
+      <Card shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section>
+            <Image
+              src={restaurant.profile.photo}
+              height={160}
 
-      <div className="restaurant-description">
-        <img className="restaurant-logo" src={restaurant.profile.photo} style={{ width: '20em' }} ></img>
-        <div>{restaurant.profile.description}</div>
-      </div>
+              alt="Restaurant image"
+            />
+          </Card.Section>
+
+          <Group position="apart" mt="md" mb="xs">
+            <Title>{restaurant.profile.name}</Title>
+          </Group>
+          {/* <Group position="apart" mt="md" mb="xs">
+            <Text>Advance notice: {restaurant.profile.advance_notice} hours</Text>
+            <Text>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound} people</Text>
+          </Group> */}
+          <Text color="dimmed">{restaurant.profile.description}</Text>
+        </Card>
+      {/* <div className="restaurant-description">
+        <Card className="restaurant-menu-description" shadow="sm" p="lg" radius="md" withBorder>
+          <Card.Section style={{ margin: "0px 20px 0px 0px" }}>
+            <Image
+              src={restaurant.profile.photo}
+              height={110}
+              width={110}
+              alt="Restaurant image"
+            />
+            <Title className="basic-order-name" >{restaurant.profile.name}</Title>
+          </Card.Section>
+            <Text>{restaurant.profile.description}</Text>
+        </Card>
+      </div> */}
 
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (
@@ -123,7 +151,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
       <div className="floating-submit-button">
         <Button leftIcon={<FaShoppingCart size="20" />} onClick={openCart}>View Cart</Button>
       </div>
-      <div style={{height:"8vh"}} ref={errorsRef}></div>
+      <div style={{ height: "8vh" }} ref={errorsRef}></div>
       <Navbar />
     </div>
   );

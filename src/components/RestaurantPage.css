@@ -10,6 +10,10 @@
     margin-bottom: 2vh;
 }
 
+.restaurant-description {
+    margin-top: 2vh;
+}
+
 .open-cart {
     /* position: fixed;
   bottom: 10%;
@@ -25,15 +29,6 @@
 }
 
 
-.restaurant-description {
-    padding: 2.5vh;
-    /* padding-left:  2.5; */
-    background: white;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .restaurant-logo {
     max-height: 200px;
