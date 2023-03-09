@@ -28,6 +28,9 @@ const ReturnConfirmationPage = () => {
         }
     }
 
+
+
+
     //TODO: Hardcoded delivery time
     let minutes = 34;
     return (
