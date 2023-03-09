@@ -17,18 +17,24 @@ import { typeOfDrawer } from './FilterDrawer';
 import { DatePicker, TimeInput } from '@mantine/dates';
 import moment from 'moment';
 import Transaction from './Transaction';
+import { useRef } from 'react';
 
 
 const TransactionList = ({ transactions, restaurants }) => {
+    // const topRef = useRef(null);
+    // useEffect(() => {
+    //     topRef.current.scrollIntoView();
+    // }, []);
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
 
     return (
-        <div>
-            <Header />
+        <div  >
+            < Header  />
 
-            <Title style={{color: "black"}}>Orders</Title>
-            <div className='transaction-list'>
+            <Title style={{ color: "black" }} >Orders</Title>
+            <div  className='transaction-list'>
                 {transactions.length > 0
-                    ? transactions.sort((x, y) => (new Date(y.datetime))-new Date(x.datetime)).map((transaction, index) => <Transaction key={transaction.id} recent={index === 0} transaction={transaction} restaurant={restaurants[transaction.restaurant]} />)
+                    ? transactions.sort((x, y) => (new Date(y.datetime)) - new Date(x.datetime)).map((transaction, index) => <Transaction key={transaction.id} recent={index === 0} transaction={transaction} restaurant={restaurants[transaction.restaurant]} />)
                     : <div style={{ marginTop: 100 }}>
                         <Title align='center'>No Order History</Title>
                     </div>
