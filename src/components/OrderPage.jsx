@@ -15,9 +15,13 @@ import OrderTable from "./OrderTable";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import BackButton from "./BackButton";
+import { useReturnsStore } from "../store/returnsStore";
 
 
 const OrderPage = ({ restaurants }) => {
+
+     const {showReturnConfirmation, setShowReturnConfirmation} = useReturnsStore();
+     
     const transactionID = useParams().transaction_id
     const [currentState, setCurrentState] = useState(0);
     const [transaction, error] = useDbData(`/transactions/${transactionID}`);
@@ -35,6 +39,9 @@ const OrderPage = ({ restaurants }) => {
             setCurrentState(0)
         }
     }
+
+   
+
 
     //TODO: Hardcoded delivery time
     let minutes = 34;
@@ -58,7 +65,7 @@ const OrderPage = ({ restaurants }) => {
 
                         <Timeline.Item bullet={<RiCheckboxCircleLine size={12} />} title="Accepted">
                             {currentState >= 1 ? <><Text color="dimmed" size="sm">Your order has been accepted! If you would like to schedule a return now, click below. </Text>
-                                <Link to={'/returns'}><Button size="sm">Schedule Return Now</Button></Link>
+                                <Link to={'/returns'}><Button size="sm" onClick={()=> setShowReturnConfirmation(false)}>Schedule Return Now</Button></Link>
                             </> : <></>}
 
                         </Timeline.Item>
