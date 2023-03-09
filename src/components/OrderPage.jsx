@@ -3,7 +3,7 @@ import Header from './Header';
 import { useDbData } from '../utils/firebase';
 import OrderItem from "./OrderItem";
 import { useParams } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Timeline, Text, Table, Button } from '@mantine/core';
 import { RiMailSendLine } from "@react-icons/all-files/ri/RiMailSendLine"
 import { RiCheckboxCircleLine } from "@react-icons/all-files/ri/RiCheckboxCircleLine"
@@ -16,12 +16,19 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import BackButton from "./BackButton";
 import { useReturnsStore } from "../store/returnsStore";
-
+import { useTransactionStore } from "../store/transactionsStore";
 
 const OrderPage = ({ restaurants }) => {
 
-     const {showReturnConfirmation, setShowReturnConfirmation} = useReturnsStore();
-     
+    const { setShowReturnConfirmation } = useReturnsStore();
+    const { latestTransaction } = useTransactionStore();// to show that the item has been delivered already
+
+    useEffect(() => {
+        if (latestTransaction !== transactionID) {
+            setCurrentState(4)
+        }
+    }, [])
+
     const transactionID = useParams().transaction_id
     const [currentState, setCurrentState] = useState(0);
     const [transaction, error] = useDbData(`/transactions/${transactionID}`);
@@ -29,6 +36,7 @@ const OrderPage = ({ restaurants }) => {
     if ((transaction === undefined)) return <h1>Loading data...</h1>;
     if (!transaction) return <h1>No data found</h1>;
     const restaurant = restaurants[transaction.restaurant]
+
 
 
     // const rows=order.map(itemObj => <OrderItem key={itemObj.item.id} item={itemObj.item} quantity={itemObj.quantity} />)
@@ -39,9 +47,6 @@ const OrderPage = ({ restaurants }) => {
             setCurrentState(0)
         }
     }
-
-   
-
 
     //TODO: Hardcoded delivery time
     let minutes = 34;
@@ -65,7 +70,7 @@ const OrderPage = ({ restaurants }) => {
 
                         <Timeline.Item bullet={<RiCheckboxCircleLine size={12} />} title="Accepted">
                             {currentState >= 1 ? <><Text color="dimmed" size="sm">Your order has been accepted! If you would like to schedule a return now, click below. </Text>
-                                <Link to={'/returns'}><Button size="sm" onClick={()=> setShowReturnConfirmation(false)}>Schedule Return Now</Button></Link>
+                                <Link to={'/returns'}><Button size="sm" onClick={() => setShowReturnConfirmation(false)}>Schedule Return Now</Button></Link>
                             </> : <></>}
 
                         </Timeline.Item>

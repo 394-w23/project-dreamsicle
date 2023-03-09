@@ -5,16 +5,29 @@ import './Transaction.css';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 import { getTotalOrderPrice } from '../utils/helper';
+import { useTransactionStore } from '../store/transactionsStore';
 
 
 const Transaction = ({ transaction, restaurant, recent }) => {
     //   let navigate = useNavigate();
     let total_price = getTotalOrderPrice(restaurant, transaction);
 
+    const {latestTransaction, setLatestTransaction} =  useTransactionStore();
+
+    useEffect(()=>{
+
+    },[])
+    
+
+    const handleLatestTransaction = ()=> {
+        if(recent){
+            setLatestTransaction(transaction.id) // assuming that this id is always unique
+        }
+    }
 
     return (
         <div className='transaction'>
-            <Link to={`/orders/${restaurant.id}/${transaction.id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/orders/${restaurant.id}/${transaction.id}`} style={{ textDecoration: 'none' }} onClick={handleLatestTransaction}>
 
                 <Card className="transaction-card" shadow="sm" p="lg" radius="md" withBorder>
                     <Card.Section style={{ margin: "0px 20px 0px 0px" }}>
