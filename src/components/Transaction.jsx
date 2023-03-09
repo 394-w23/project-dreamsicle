@@ -7,9 +7,10 @@ import { useDbData, useDbUpdate } from '../utils/firebase';
 import { getTotalOrderPrice } from '../utils/helper';
 
 
-const Transaction = ({ transaction, restaurant }) => {
+const Transaction = ({ transaction, restaurant, recent }) => {
     //   let navigate = useNavigate();
     let total_price = getTotalOrderPrice(restaurant, transaction);
+
 
     return (
         <div className='transaction'>
@@ -33,7 +34,8 @@ const Transaction = ({ transaction, restaurant }) => {
                                 {"    ·   " + new Date(transaction.datetime).toLocaleTimeString('en-us', { hour: "2-digit", minute: "2-digit" })}
                             </Text>
                         </div>
-                        <Text>${(total_price).toFixed(2)}</Text>
+                        {recent ? <Text>${(total_price + 50).toFixed(2)} (Including $50 deposit)</Text> :
+                        <Text>${(total_price).toFixed(2) } </Text>}
                     </Group>
                 </Card>
 
