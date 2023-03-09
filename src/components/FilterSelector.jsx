@@ -16,7 +16,10 @@ const FilterSelector = ({ setFilterOpen, filterOpen, tags, setCurrTagFilters, te
             setTempFilters([...tempFilters, tag])
         }
     };
-
+    const setCurrTagFiltersAndCloseDrawer = (tempFilters) => {
+        setFilterOpen(false);
+        setCurrTagFilters(tempFilters)
+    }
     return (
         <div>
             <Drawer
@@ -35,7 +38,7 @@ const FilterSelector = ({ setFilterOpen, filterOpen, tags, setCurrTagFilters, te
                 
                 { tags.map(tag => <Checkbox className="checkbox" checked={tempFilters.includes(tag)} onChange={(event) => event.currentTarget.checked} label={tag} key={tag} tag={tag} onClick={() => updateFilters(tag)} />) }
 
-                <Button className="apply-button" onClick={() => setCurrTagFilters(tempFilters)}>Apply Filters</Button>
+                <Button className="apply-button" onClick={() => setCurrTagFiltersAndCloseDrawer(tempFilters)}>Apply Filters</Button>
 
             </Drawer>
 
