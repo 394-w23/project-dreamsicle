@@ -32,12 +32,19 @@ const OrderPage = ({ restaurants }) => {
     const transactionID = useParams().transaction_id
     const [currentState, setCurrentState] = useState(0);
     const [transaction, error] = useDbData(`/transactions/${transactionID}`);
+    useEffect(() => {
+        if (transaction && ((new Date())-(new Date(transaction.datetime)))<1000000) {
+            setCurrentState(0)
+        }
+    }, [transaction])
+
     if (error) return <h1>Error loading data: {error.toString()}</h1>;
     if ((transaction === undefined)) return <h1>Loading data...</h1>;
     if (!transaction) return <h1>No data found</h1>;
     const restaurant = restaurants[transaction.restaurant]
+    
 
-
+    
 
     // const rows=order.map(itemObj => <OrderItem key={itemObj.item.id} item={itemObj.item} quantity={itemObj.quantity} />)
     const nextState = () => {
