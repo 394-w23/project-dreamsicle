@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Badge, Button, Drawer, Input, useMantineTheme, NumberInput, Text } from '@mantine/core';
+import { Button, Drawer, Input, useMantineTheme, NumberInput, Text } from '@mantine/core';
 import { useFilterStore } from '../store/filterStore';
 
 
@@ -29,7 +29,6 @@ export const FilterDrawer = ({ opened, setOpened, numberOfRestaurantsFound, type
      */
 
     useEffect(() => {
-        // console.log(filterVariable)
         if (filterVariable !== undefined) {
             if (!filters.includes(typeOfDrawer)) {
                 setFilters([...filters, typeOfDrawer])

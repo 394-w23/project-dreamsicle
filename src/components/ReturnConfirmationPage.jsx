@@ -1,6 +1,4 @@
 import Header from './Header';
-import { useDbData } from '../utils/firebase';
-import { useParams } from "react-router";
 import { useState } from "react";
 import { Timeline, Text, Table, Card } from '@mantine/core';
 import { RiMailSendLine } from "@react-icons/all-files/ri/RiMailSendLine"
@@ -14,12 +12,7 @@ import './ReturnConfirmationPage.css'
 
 const ReturnConfirmationPage = () => {
     const [currentState, setCurrentState] = useState(0);
-    // if (error) return <h1>Error loading data: {error.toString()}</h1>;
-    // if ((transaction === undefined)) return <h1>Loading data...</h1>;
-    // if (!transaction) return <h1>No data found</h1>;
 
-
-    // const rows=order.map(itemObj => <OrderItem key={itemObj.item.id} item={itemObj.item} quantity={itemObj.quantity} />)
     const nextState = () => {
         if (currentState < 4) {
             setCurrentState(currentState + 1)

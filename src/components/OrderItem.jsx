@@ -1,5 +1,3 @@
-import './OrderItem.css'
-
 const OrderItem = ({item, quantity}) => {
 
     

@@ -36,17 +36,13 @@ export default function Cart({ updateCart, restaurant, cartData, setCartData, up
   }
 
   const gotoCheckout = () => {
-    // updateCart(utensils)
-    // setCartData({...cartData,utensils:utensils.utensils})
-    // console.log(cartData)
-    // console.log(utensils)
-    setDrawerState("checkout") //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
+
+    setDrawerState("checkout") 
   }
   const removeOrder = (order) => {
     let tempCart = cartData
     delete tempCart.orders[order.id]
     setCartData(tempCart)
-    // tempCart.orders[order.id] = null
     updateOrders({
       [order.id]: null,
     });
@@ -55,8 +51,7 @@ export default function Cart({ updateCart, restaurant, cartData, setCartData, up
       setDrawerState("")
     }
   }
-  // onChange={(e) => {setUtensils({utensils:e.target})}}
-  // setUtensils(event.currentTarget.checked ? utensils : {utensils:[]})
+
 
   return (
 

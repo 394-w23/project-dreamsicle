@@ -1,7 +1,4 @@
-import Restaurant from "./Restaurant";
-import { useState } from 'react';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
-import QuantitySelector from "./QuantitySelector";
 import './MenuItem.css';
 
 
@@ -28,13 +25,6 @@ const MenuItem = ({ menu_item, setCartData, cartData, setItemDetails, setItemDet
         <Text weight={500}>{menu_item.name}</Text>
         <Text weight={500}>${menu_item.price}</Text>
       </Group>
-
-      {/* <Group position="apart" mt="md" mb="xs">
-        <Text>
-          {menu_item.servings} servings</Text>
-        <QuantitySelector setQuantity={updateCart} quantity={quantity} />
-      </Group>
-      <Text position="right">Subtotal: ${(isNaN(cart[menu_item.id]) ? 0 : cart[menu_item.id]) * menu_item.price}</Text> */}
     </Card>
   </div>
   );

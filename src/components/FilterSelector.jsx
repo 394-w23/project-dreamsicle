@@ -1,18 +1,14 @@
 import './FilterSelector.css'
 import { Button, Checkbox, Drawer, useMantineTheme } from '@mantine/core';
-import { useState } from 'react';
 
 const FilterSelector = ({ setFilterOpen, filterOpen, tags, setCurrTagFilters, tempFilters, setTempFilters }) => {
-    // const [filters, setFilters] = useState(currTagFilters);
 
     const theme = useMantineTheme();
     
     const updateFilters = (tag) => {
         if (tempFilters.includes(tag)) {
-            // filters.splice(filters.indexOf(tag), 1);
             setTempFilters(tempFilters.filter(f => f !== tag));
         } else {
-            // filters.push(tag);
             setTempFilters([...tempFilters, tag])
         }
     };
@@ -41,10 +37,6 @@ const FilterSelector = ({ setFilterOpen, filterOpen, tags, setCurrTagFilters, te
                 <Button className="apply-button" onClick={() => setCurrTagFiltersAndCloseDrawer(tempFilters)}>Apply Filters</Button>
 
             </Drawer>
-
-            {/* <div onClick={() => setTagFilter(tag)} className="filter-tag">
-                <Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}>{tag}</Badge>
-            </div> */}
         </div>
 
     );

@@ -39,9 +39,7 @@ const RestaurantPage = ({ restaurants, cart }) => {
   }, []);
 
   const errorsRef = useRef(null);
-  // const [cartData, cartError] = useDbData(`/users/${userId}/cart/`);
-  // console.log("cart",cart)
-  // console.log("cartData",cartData)
+
   const restaurantID = useParams().restaurant_id
   const restaurant = restaurants.filter(r => r.id.toString() === restaurantID)[0]
 
@@ -65,8 +63,6 @@ const RestaurantPage = ({ restaurants, cart }) => {
 
 
   let openCart = () => {
-    // console.log("cartData.orders",cartData.orders)
-    // console.log("Object.values(cartData.orders)",Object.values(cartData.orders))
     if (cartData.orders && Object.values(cartData.orders).length > 0) {
       setRaiseAlert(false)
       setDrawerState("cart");
@@ -113,26 +109,9 @@ const RestaurantPage = ({ restaurants, cart }) => {
           <Group position="apart" mt="md" mb="xs">
             <Title>{restaurant.profile.name}</Title>
           </Group>
-          {/* <Group position="apart" mt="md" mb="xs">
-            <Text>Advance notice: {restaurant.profile.advance_notice} hours</Text>
-            <Text>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound} people</Text>
-          </Group> */}
+
           <Text color="dimmed">{restaurant.profile.description}</Text>
         </Card>
-      {/* <div className="restaurant-description">
-        <Card className="restaurant-menu-description" shadow="sm" p="lg" radius="md" withBorder>
-          <Card.Section style={{ margin: "0px 20px 0px 0px" }}>
-            <Image
-              src={restaurant.profile.photo}
-              height={110}
-              width={110}
-              alt="Restaurant image"
-            />
-            <Title className="basic-order-name" >{restaurant.profile.name}</Title>
-          </Card.Section>
-            <Text>{restaurant.profile.description}</Text>
-        </Card>
-      </div> */}
 
       <div>
         {Object.values(restaurant.menu_sections).map((s) => (

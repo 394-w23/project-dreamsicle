@@ -7,7 +7,6 @@
     width: 100%;
     bottom: -1px;
     background-color: #efefef;
-    /* padding-bottom: 10px; */
     margin-left: -5%;
 }
 
@@ -22,10 +21,11 @@
     cursor: pointer;
     color: black;
     text-decoration: none;
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     width: 33%;
 }
+
 .nav-button-active {
     display: flex;
     align-items: center;
@@ -36,9 +36,8 @@
     cursor: pointer;
     color: black;
     text-decoration: none;
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     background: #fff;
     width: 33%;
-
 }

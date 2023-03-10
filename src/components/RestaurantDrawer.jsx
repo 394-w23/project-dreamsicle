@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollArea, Drawer, useMantineTheme } from "@mantine/core";
+import { Drawer, useMantineTheme } from "@mantine/core";
 import './RestaurantDrawer.css'
 import 'react-credit-cards-2/es/styles-compiled.css';
 

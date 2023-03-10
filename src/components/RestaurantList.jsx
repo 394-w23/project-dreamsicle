@@ -25,7 +25,6 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     useScrollLock(onboardOpen);
 
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
-    // const [currTagFilter, setCurrTagFilter] = useState("");
     const [currTagFilters, setCurrTagFilters] = useState([]);
     const [tempFilters, setTempFilters] = useState(currTagFilters);
     let { filters, setFilters } = useFilterStore(); /////////////////// using zustand store
@@ -39,9 +38,6 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
     const [size, setSize] = useState(10);
     const [address, setAddress] = useState("");
 
-    // const [filteredByTime, setFilteredByTime] = useState([]); // restaurants filtered by time
-    // const [filteredBySize, setFilteredBySize] = useState([]);
-    // TODO: Filtered by other tags
 
     // handle the event date and time
     function parseDesiredTime(desiredTime, desiredDate) {
@@ -95,17 +91,6 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             }
             return true;
         });
-
-        // if (filters.includes('time') && filterDate) {
-        //     filteredList = filteredList.filter(restaurant => {
-        //         let desiredDate = new Date();
-        //         desiredDate.setHours(desiredDate.getHours() + filterDate)
-        //         //Remove advance notice time from inputted to see if it is far enough in the future
-        //         desiredDate.setHours(desiredDate.getHours() - restaurant.profile.advance_notice)
-        //         //If the date is still in the future (there is enough time to fulfill order)
-        //         return (desiredDate >= new Date())
-        //     });
-        // }
 
         if (filters.includes('time') && formattedDesiredDateTime) {
             if (desiredTime) {
@@ -168,7 +153,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
                 <NumberInput
                     className="size-input"
                     onChange={(val) => setSize(val)}
-                    value={size}////////////////////////// Change to size or empty
+                    value={size}
                     placeholder="Size"
                     label="Party Size"
                     styles={{ input: { textAlign: 'center' } }}
@@ -222,10 +207,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
 
                     value={desiredTime}
                 />
-                {/* <DateTimePicker 
-                    className="datetime-input"
-                    name="Delivery Time"
-                /> */}
+
             </div>
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 

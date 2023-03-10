@@ -1,6 +1,5 @@
-import "./ItemDetails.css"
 import { useEffect, useRef, useState } from "react";
-import { Card, Image, Text, Badge, Alert, Drawer, Group, Button, useMantineTheme, Title, Checkbox, Radio, } from "@mantine/core";
+import { Card, Image, Text, Alert, Drawer, Group, Button, useMantineTheme, Title, Checkbox } from "@mantine/core";
 import QuantitySelector from "./QuantitySelector";
 import uuid from "react-uuid";
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle";
@@ -15,7 +14,7 @@ const ItemDetails = ({updateOrders,itemDetails,itemDetailsOpened,setItemDetailsO
   const [finalAddOnErrors, setFinalAddOnErrors] = useState({}); // generated on final submission
 
   const theme = useMantineTheme();
-  const id = 0; ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TODO: Hardcoded user ID
+  const id = 0; ////// TODO: Hardcoded user ID
   const [quantity, setQuantity] = useState(1);
   const [raiseAlert, setRaiseAlert] = useState(false);
   const errorsRef = useRef(null)
@@ -64,17 +63,14 @@ const ItemDetails = ({updateOrders,itemDetails,itemDetailsOpened,setItemDetailsO
           ...cartData,
           orders: { ...cartData.orders, [new_uuid]: new_order },
         };
-        // console.log("new_data to existing orders",new_data)
         setCartData(new_data);
         updateOrders({ ...cartData.orders, [new_uuid]: new_order });
       } else {
         // create new orders attribute thingy
         const new_data = { ...cartData, orders: { [new_uuid]: new_order } };
-        // console.log("new_data to nonexisting orders",new_data)
         setCartData(new_data);
         updateOrders({ [new_uuid]: new_order });
       }
-      // console.log(cartData.orders)
       setQuantity(1);
       setItemDetailsOpened(false);
       setRaiseAlert(false);
@@ -89,9 +85,7 @@ const ItemDetails = ({updateOrders,itemDetails,itemDetailsOpened,setItemDetailsO
     setItemDetailsOpened(false);
   };
 
-
-
-
+  
   // initialize required amount errors to use when validating selctions on add to cart
   useEffect(() => {
     if (itemDetails && itemDetails["customizable-categories"]) {

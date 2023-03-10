@@ -3,26 +3,17 @@ import { Link } from "react-router-dom";
 import "./LoginPage.css"
 import React, { useEffect } from 'react'
 import { RiGoogleFill } from "@react-icons/all-files/ri/RiGoogleFill"
-// import { FirebaseSignIn, useAuth, useDbData, useDbUpdate } from '../utils/firebase';
 
 const LoginPage = ({ setOnboardOpen }) => {
     useEffect(() => {
         setOnboardOpen(true);
     }, []);
 
-    // Sign in the user if they are not signed in already
-    // const user = useAuth();
-    // const [data, error] = useDbData("/");
-    // const [update, result] = useDbUpdate(`/users/${user? user.uid : "unknown"}`);
-
-
 
     //TODO: Auth emulator on port 9099
     //TODO: DB emulator port 9000
     //TODO: Hosting port 8080
     //TODO: Storage on 9199
-
-
 
     return (
         <div data-cy="login-page" className="login">

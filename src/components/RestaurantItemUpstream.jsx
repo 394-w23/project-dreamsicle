@@ -1,8 +1,7 @@
 import { Textarea, Text, Button, NumberInput, TextInput } from '@mantine/core';
-import { useDbData, useDbUpdate, getDbStorage } from '../utils/firebase';
+import { useDbData, useDbUpdate } from '../utils/firebase';
 import uuid from 'react-uuid';
 import { useEffect, useRef, useState } from 'react';
-import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 
 
@@ -25,7 +24,6 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     useEffect(() => {
         setNewMenuSections(menu_sections)
     },[menu_sections])
-    // console.log(newMenuSections)
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -101,14 +99,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
     }
 
     const createItem = () => {
-        // if (customizableCategories.length === 0) {
-        //     showNotification({
-        //         message: 'Must create at least one customizable category to create an item',
-        //         autoClose: 3000,
-        //         color: 'red'
-        //     });
-        //     return;
-        // }
+
         if (currentItem.name === "" || !(currentItem.price > -1) || !(currentItem.servings > -1)) {
             showNotification({
                 message: 'Fill in required fields',
@@ -221,11 +212,7 @@ export const RestaurantItemUpstream = ({ user, setCurrDisplay }) => {
                         value={currentCustomizableCategory.name}
                         onChange={(event) => setCurrentCustomizableCategory({ ...currentCustomizableCategory, name: event.currentTarget.value })}
                     />
-                    {/* <TextInput
-                        label="Description"
-                        value={currentCustomizableCategory.desc}
-                        onChange={(event) => setCurrentCustomizableCategory({ ...currentCustomizableCategory, desc: event.currentTarget.value })}
-                    /> */}
+
                     <NumberInput
                         label="Required amount"
                         required

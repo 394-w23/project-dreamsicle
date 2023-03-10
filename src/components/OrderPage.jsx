@@ -1,16 +1,14 @@
 import "./OrderPage.css";
 import Header from './Header';
 import { useDbData } from '../utils/firebase';
-import OrderItem from "./OrderItem";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { Timeline, Text, Table, Button } from '@mantine/core';
+import { Timeline, Text, Button } from '@mantine/core';
 import { RiMailSendLine } from "@react-icons/all-files/ri/RiMailSendLine"
 import { RiCheckboxCircleLine } from "@react-icons/all-files/ri/RiCheckboxCircleLine"
 import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"
 import { FaRegSmileBeam } from "@react-icons/all-files/fa/FaRegSmileBeam"
 import { GiCookingPot } from "@react-icons/all-files/gi/GiCookingPot"
-import { menuItemParser } from "../utils/helper";
 import OrderTable from "./OrderTable";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -21,7 +19,7 @@ import { useTransactionStore } from "../store/transactionsStore";
 const OrderPage = ({ restaurants }) => {
 
     const { setShowReturnConfirmation } = useReturnsStore();
-    const { latestTransaction } = useTransactionStore();// to show that the item has been delivered already
+    const { latestTransaction } = useTransactionStore(); // to show that the item has been delivered already
 
     useEffect(() => {
         if (latestTransaction !== transactionID) {
@@ -46,7 +44,6 @@ const OrderPage = ({ restaurants }) => {
 
     
 
-    // const rows=order.map(itemObj => <OrderItem key={itemObj.item.id} item={itemObj.item} quantity={itemObj.quantity} />)
     const nextState = () => {
         if (currentState < 4) {
             setCurrentState(currentState + 1)

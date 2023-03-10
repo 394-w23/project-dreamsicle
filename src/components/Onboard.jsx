@@ -1,6 +1,5 @@
 import QuantitySelector from './QuantitySelector';
-import { DatePicker, TimeInput } from '@mantine/dates'
-import { Button, Drawer, useMantineTheme, TextInput, Alert, Input, NumberInput } from '@mantine/core';
+import { Button, Drawer, useMantineTheme, Alert, Input, NumberInput } from '@mantine/core';
 import { useState } from 'react';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 import "./Onboard.css";
@@ -15,7 +14,6 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
         console.log("size",size)
         console.log("address",address)
         let alarm = size === null || size < 10 || address === "" 
-        // || desiredDate === "" || desiredTime === ""
         setRaiseAlert(alarm)
 
         if (!alarm) {
@@ -40,14 +38,6 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
             padding="lg"
         >
             <div className="onboard-content">
-                {/* <Input.Wrapper style={{ marginBottom: 10 }} label="Schedule Delivery">
-                <div className="date-time">
-                    <DatePicker required onChange={(value) => setDesiredDate(value)} value={desiredDate} placeholder="Select date" firstDayOfWeek="sunday" withAsterisk minDate={new Date()} />
-                    <TimeInput data-cy="add-event-start-time" onChange={(value) => setDesiredTime(value)} value={desiredTime} format="12"
-                        required
-                    />
-                </div>
-            </Input.Wrapper> */}
 
                 <Input.Wrapper className="delivery-address" label="Delivery Zip Code" size="3.5vh">
                     <NumberInput value={address} onChange={(value) => setAddress(value)} maxLength={5} hideControls />
@@ -70,11 +60,6 @@ const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, s
             </div>
         </Drawer>
     );
-
-    // return (
-    //      <div onClick={() => setTimeFilter(date)} className="filter-item"><RiTruckLine size={12} />
-    //      TIME TIME</div>
-    // );
 }
 
 export default Onboard

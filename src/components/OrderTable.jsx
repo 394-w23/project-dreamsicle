@@ -5,31 +5,15 @@ import "./OrderTable.css";
 
 export default function OrderTable({ restaurant, cartData, deletable, removeOrder }) {
   let rows = []
-  // console.log(cartData.orders, " =-------- ", restaurant)
-
 
 
   let total_price = getTotalOrderPrice(restaurant, cartData) ;
   total_price += deletable ? 0 : 50
-  // console.log(total_price)
-  // Object.values(cartData.orders).forEach(i => {
-  //   let item = menuItemParser(i, restaurant);
-  //   let addOnList = itemAddOnParser(i, item);
-  //   let full_item_price=item.price;
-  //   for (let j=0;j<addOnList.length;j++) {
-  //     full_item_price+=addOnList[j].price;
-  //   }
-  //   total_price += (i.quantity * full_item_price)
-
-  // })
-
-
 
 
   rows = Object.values(cartData.orders).map((order) => {
     let item = menuItemParser(order, restaurant);
     let addOnList = itemAddOnParser(order, item);
-    // console.log("addOnList", addOnList);
     let full_item_price = item.price;
     for (let i = 0; i < addOnList.length; i++) {
       full_item_price += addOnList[i].price;
@@ -56,15 +40,12 @@ export default function OrderTable({ restaurant, cartData, deletable, removeOrde
   });
   if (!deletable) {
     rows.push(
-      // [["Utensil Packs", 20],["Plates",20],["Serving Platters", 10]].map(pair => (
       <tr key={1}>
         <td>Rented Serveware (Deposit)</td>
         <td></td>
         <td>${(50).toFixed(2)}</td>
         {false && <td><Button compact variant="subtle" onClick={() => removeOrder(order)}><FaTrash /></Button></td>}
       </tr>
-      // ))
-
     )
   }
   rows.push(<tr key={0}>

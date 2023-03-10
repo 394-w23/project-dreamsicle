@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from "react-router-dom";
-import logo from '../logo.svg';
 import './Transaction.css';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import { useDbData, useDbUpdate } from '../utils/firebase';
@@ -9,7 +8,6 @@ import { useTransactionStore } from '../store/transactionsStore';
 
 
 const Transaction = ({ transaction, restaurant, recent }) => {
-    //   let navigate = useNavigate();
     let total_price = getTotalOrderPrice(restaurant, transaction);
 
     const {latestTransaction, setLatestTransaction} =  useTransactionStore();
@@ -51,22 +49,6 @@ const Transaction = ({ transaction, restaurant, recent }) => {
                         <Text>${(total_price).toFixed(2) } </Text>}
                     </Group>
                 </Card>
-
-
-                {/*                
-                <div className="">
-                    <img className='photo' src={`${restaurant.profile.photo}`}></img>
-                </div>
-                <div className="details">
-
-
-                    <div className='name'>{restaurant.profile.name}</div>
-                 
-                    <div className='notice'>Notice Time: 24 hrs</div>
-                    <div className='person-range'>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound}</div>
-                    <div onClick={onClick}>Click Me</div>
-
-                </div> */}
 
 
             </Link>

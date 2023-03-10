@@ -14,21 +14,12 @@
     margin-top: 2vh;
 }
 
-.open-cart {
-    /* position: fixed;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-100%); */
-}
-
 .floating-submit-button{
   position: fixed;
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
 }
-
-
 
 .restaurant-logo {
     max-height: 200px;
@@ -37,7 +28,6 @@
 
 .restaurant-address {
     padding: 1vh;
-    /* padding-left:  2.5; */
     background: white;
     border-radius: 12px;
 }

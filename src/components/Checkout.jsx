@@ -26,14 +26,13 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
             id: transactionID,
             datetime: "",
             restaurant: restaurant.id,
-            user: 0, ////////////////////////////////////////////////////////////////// HARD CODED USER
+            user: 0, ///// HARD CODED USER
             orders: {}
         },
     });
 
     let rows = []
 
-    // console.log(cartData.orders, " =-------- ", restaurant)
     if (cartData.orders) {
         rows = Object.values(cartData.orders).map((order) => {
             let item = restaurantDetailsHelper(order, restaurant);
@@ -50,7 +49,7 @@ export default function Checkout({ restaurant, cartData, updateCart, setCartData
     }
 
     const placeOrder = () => {
-        setDrawerState("") //  /////////////////////////////////////////////////////////////// also, the id nested within the item of the order is different than the name of the order
+        setDrawerState("") 
 
         // if there are any orders to submit, we should submit; otherwise do nothing
         if (Object.values(cartData.orders).length > 0) {

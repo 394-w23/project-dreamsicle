@@ -1,6 +1,4 @@
-import { useRef, useState } from 'react';
 import { useParams, Link } from "react-router-dom";
-import logo from '../logo.svg';
 import './Restaurant.css';
 import { Button, NumberInput, Group, ActionIcon } from '@mantine/core';
 

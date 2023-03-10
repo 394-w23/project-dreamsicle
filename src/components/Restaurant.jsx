@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from "react-router-dom";
-import logo from '../logo.svg';
 import './Restaurant.css';
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import { useDbData, useDbUpdate } from '../utils/firebase';
@@ -11,7 +10,7 @@ const Restaurant = ({ restaurant }) => {
 
   // when you click on another restaurant, clear cart
 
-  let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!
+  let userId = 0 ///////// Hard Coded, change later !!!!!!!!
   const [updateCart, cartResult] = useDbUpdate(`/users/${userId}/cart/`);
   const [data, error] = useDbData('/');
   const [cartData, setCartData] = useState();
@@ -66,23 +65,6 @@ const Restaurant = ({ restaurant }) => {
             <Text>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound} people</Text>
           </Group>
         </Card>
-
-
-        {/*                
-                <div className="">
-                    <img className='photo' src={`${restaurant.profile.photo}`}></img>
-                </div>
-                <div className="details">
-
-
-                    <div className='name'>{restaurant.profile.name}</div>
-                 
-                    <div className='notice'>Notice Time: 24 hrs</div>
-                    <div className='person-range'>{restaurant.profile.lower_order_bound}-{restaurant.profile.upper_order_bound}</div>
-                    <div onClick={onClick}>Click Me</div>
-
-                </div> */}
-
 
       </Link>
     </div>);
