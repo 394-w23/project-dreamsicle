@@ -2,17 +2,20 @@ import { useState } from 'react';
 import logo from './logo.svg';
 import { useDbData } from './utils/firebase';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import RestaurantPage from './components/RestaurantPage';
-import RestaurantList from './components/RestaurantList';
+import RestaurantPage from './components/Restaurants/RestaurantPage';
+import RestaurantList from './components/Restaurants/RestaurantList';
 import './App.css';
-import OrderPage from './components/OrderPage';
-import LoginPage from './components/LoginPage';
-import ReturnPage from './components/ReturnPage';
-import TransactionList from './components/TransactionList';
-import RestaurantItemUpstream from './components/RestaurantItemUpstream';
 import { Loader } from '@mantine/core';
-import ReturnConfirmationPage from './components/ReturnConfirmationPage';
+import OrderPage from './components/Orders/OrderPage';
+import LoginPage from './components/Login/LoginPage';
+import ReturnPage from './components/Returns/ReturnPage';
+import TransactionList from './components/Transactions/TransactionList';
+import RestaurantItemUpstream from './components/Restaurants/RestaurantItemUpstream';
+import ReturnConfirmationPage from './components/Returns/ReturnConfirmationPage';
+
+
 const App = () => {
+
   const [data, error] = useDbData("/");
   const [onboardOpen, setOnboardOpen] = useState(false);
   // const [cart,setCart] = useState({})

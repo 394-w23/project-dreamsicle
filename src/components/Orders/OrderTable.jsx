@@ -1,6 +1,6 @@
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import { Button, Table } from "@mantine/core";
-import { menuItemParser, itemAddOnParser, getTotalOrderPrice } from '../utils/helper'
+import { menuItemParser, itemAddOnParser, getTotalOrderPrice } from '../../utils/helper'
 import "./OrderTable.css";
 
 export default function OrderTable({ restaurant, cartData, deletable, removeOrder }) {

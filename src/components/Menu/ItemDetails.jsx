@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Card, Image, Text, Alert, Drawer, Group, Button, useMantineTheme, Title, Checkbox } from "@mantine/core";
-import QuantitySelector from "./QuantitySelector";
+import QuantitySelector from "../Cart/QuantitySelector";
 import uuid from "react-uuid";
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle";
 

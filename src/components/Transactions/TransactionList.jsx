@@ -1,5 +1,5 @@
-import Header from './Header';
-import Navbar from './Navbar';
+import Header from '../Navigation/Header';
+import Navbar from '../Navigation/Navbar';
 import { Title } from '@mantine/core';
 import Transaction from './Transaction';
 

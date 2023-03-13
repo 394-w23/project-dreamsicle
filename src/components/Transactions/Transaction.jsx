@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { Link} from "react-router-dom";
 import './Transaction.css';
 import { Card, Image, Text, Group } from '@mantine/core';
-import { getTotalOrderPrice } from '../utils/helper';
-import { useTransactionStore } from '../store/transactionsStore';
+import { getTotalOrderPrice } from '../../utils/helper';
+import { useTransactionStore } from '../../store/transactionsStore';
 
 
 const Transaction = ({ transaction, restaurant, recent }) => {

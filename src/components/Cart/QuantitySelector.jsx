@@ -1,7 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import './Restaurant.css';
 import { Button, NumberInput, Group, ActionIcon } from '@mantine/core';
-
+import "../Restaurants/Restaurant.css"
 
 const QuantitySelector = ({ quantity, setQuantity, minAllowedAmount }) => {
   const { number } = useParams();

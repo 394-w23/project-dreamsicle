@@ -1,9 +1,10 @@
 import "./Navbar.css";
 import { Text } from "@mantine/core";
 import { Link, useLocation } from "react-router-dom";
-import orders_icon from "../assets/orders.png"
-import returns_icon from "../assets/returns.png"
-import restaurants_icon from "../assets/restaurants.png"
+import orders_icon from "../../assets/orders.png"
+import returns_icon from "../../assets/returns.png"
+import restaurants_icon from "../../assets/restaurants.png"
+
 
 const Navbar = () => {
     let selection = useLocation().pathname.split("/")[1];

@@ -1,4 +1,3 @@
-import Header from './Header';
 import { useState } from "react";
 import { Timeline, Text, Card } from '@mantine/core';
 import { RiMailSendLine } from "@react-icons/all-files/ri/RiMailSendLine"
@@ -6,9 +5,9 @@ import { RiCheckboxCircleLine } from "@react-icons/all-files/ri/RiCheckboxCircle
 import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"
 import { FaRegSmileBeam } from "@react-icons/all-files/fa/FaRegSmileBeam"
 import { GiCookingPot } from "@react-icons/all-files/gi/GiCookingPot"
-import Navbar from "./Navbar";
+import Navbar from '../Navigation/Navbar';
 import './ReturnConfirmationPage.css'
-
+import Header from '../Navigation/Header';
 
 const ReturnConfirmationPage = () => {
     const [currentState, setCurrentState] = useState(0);

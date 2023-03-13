@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
-import MenuSection from "./MenuSection.jsx";
+import MenuSection from "../Menu/MenuSection.jsx";
 import { Card, Image, Button, Text, Group, Title, Alert } from "@mantine/core";
 import uuid from 'react-uuid';
-import { useDbUpdate } from '../utils/firebase';
+import { useDbUpdate } from '../../utils/firebase';
 import { useParams } from "react-router-dom";
-import Header from './Header';
-import BackButton from "./BackButton.jsx";
+import Header from '../Navigation/Header.jsx';
+import BackButton from '../Navigation/BackButton.jsx';
 import { FaShoppingCart } from "@react-icons/all-files/Fa/FaShoppingCart"
-import Cart from './Cart.jsx';
-import ItemDetails from './ItemDetails.jsx';
 import RestaurantDrawer from './RestaurantDrawer.jsx';
-import Checkout from './Checkout.jsx';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
-import Navbar from "./Navbar";
+import Navbar from '../Navigation/Navbar.jsx';
+import Cart from '../Cart/Cart.jsx';
+import ItemDetails from '../Menu/ItemDetails.jsx';
+import Checkout from '../Cart/Checkout.jsx';
 
 const RestaurantPage = ({ restaurants, cart }) => {
   let userId = 0 //////////////////////////////////////////////////////////////////// Hard Coded, change later !!!!!!!!

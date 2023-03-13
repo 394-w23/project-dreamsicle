@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import uuid from 'react-uuid';
 import { Button, Title } from "@mantine/core";
 import { useForm } from '@mantine/form';
-import { useDbUpdate } from "../utils/firebase";
 import { Link } from "react-router-dom";
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import { FaLocationArrow } from "@react-icons/all-files/Fa/FaLocationArrow"
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/es/styles-compiled.css';
-import { menuItemParser } from '../utils/helper';
 import moment from 'moment';
-import OrderTable from './OrderTable';
+import OrderTable from '../Orders/OrderTable';
+import { menuItemParser } from '../../utils/helper';
+import { useDbUpdate } from '../../utils/firebase';
+
+
 
 
 export default function Checkout({ restaurant, cartData, updateCart, setCartData, setDrawerState }) {

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Button, Drawer,  useMantineTheme, NumberInput, Text } from '@mantine/core';
-import { useFilterStore } from '../store/filterStore';
-
+import { useFilterStore } from '../../store/filterStore';
 
 export const typeOfDrawer = {
     SIZE: "size",

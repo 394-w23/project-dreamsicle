@@ -1,6 +1,6 @@
 import "./OrderPage.css";
-import Header from './Header';
-import { useDbData } from '../utils/firebase';
+import Header from '../Navigation/Header';
+import { useDbData } from '../../utils/firebase';
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { Timeline, Text, Button } from '@mantine/core';
@@ -9,12 +9,12 @@ import { RiCheckboxCircleLine } from "@react-icons/all-files/ri/RiCheckboxCircle
 import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"
 import { FaRegSmileBeam } from "@react-icons/all-files/fa/FaRegSmileBeam"
 import { GiCookingPot } from "@react-icons/all-files/gi/GiCookingPot"
-import OrderTable from "./OrderTable";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
-import BackButton from "./BackButton";
-import { useReturnsStore } from "../store/returnsStore";
-import { useTransactionStore } from "../store/transactionsStore";
+import Navbar from "../Navigation/Navbar";
+import BackButton from "../Navigation/BackButton";
+import { useReturnsStore } from "../../store/returnsStore";
+import { useTransactionStore } from "../../store/transactionsStore";
+import OrderTable from "./OrderTable";
 
 const OrderPage = ({ restaurants }) => {
 

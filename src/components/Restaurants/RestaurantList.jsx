@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 import Restaurant from './Restaurant';
 import './RestaurantList.css';
-import Header from './Header';
+import Header from '../Navigation/Header';
 import "./RestaurantPage.css";
-import Navbar from './Navbar';
-import { tags } from '../utils/helper';
-import FilterItem from './FilterItem';
-import TimeFilter from './TimeFilter';
-import SizeFilter from './SizeFilter';
+import Navbar from '../Navigation/Navbar';
+import { tags } from '../../utils/helper';
+import FilterItem from '../Filters/FilterItem';
+import TimeFilter from '../Filters/TimeFilter';
+import SizeFilter from '../Filters/SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
 import { Button, NumberInput, Text, Title } from '@mantine/core';
-import FilterSelector from './FilterSelector';
-import Onboard from './Onboard';
-import { useFilterStore } from '../store/filterStore';
-import { typeOfDrawer } from './FilterDrawer';
+import FilterSelector from '../Filters/FilterSelector';
+
+import { useFilterStore } from '../../store/filterStore';
 import { DatePicker, TimeInput } from '@mantine/dates';
 import moment from 'moment';
 import { useScrollLock } from '@mantine/hooks';
+import { typeOfDrawer } from '../Filters/FilterDrawer';
+import Onboard from '../Onboard/Onboard';
 
 
 const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {

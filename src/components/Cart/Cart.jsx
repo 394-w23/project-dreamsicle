@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { Button, Text, Switch, Checkbox } from "@mantine/core";
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
 import 'react-credit-cards-2/es/styles-compiled.css';
-import { menuItemParser } from '../utils/helper';
-import OrderTable from './OrderTable';
 import './Cart.css';
-
+import OrderTable from '../Orders/OrderTable';
+import { menuItemParser } from '../../utils/helper';
 
 export default function Cart({ updateCart, restaurant, cartData, setCartData, updateOrders, setDrawerState }) {
   const restaurantDetailsHelper = menuItemParser

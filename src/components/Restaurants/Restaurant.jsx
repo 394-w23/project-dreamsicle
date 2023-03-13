@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import './Restaurant.css';
 import { Card, Image, Text, Group } from '@mantine/core';
-import { useDbData, useDbUpdate } from '../utils/firebase';
+import { useDbData, useDbUpdate } from '../../utils/firebase';
 
 
 const Restaurant = ({ restaurant }) => {

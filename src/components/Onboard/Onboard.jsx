@@ -1,8 +1,8 @@
-import QuantitySelector from './QuantitySelector';
 import { Button, Drawer, useMantineTheme, Alert, Input, NumberInput } from '@mantine/core';
 import { useState } from 'react';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 import "./Onboard.css";
+import QuantitySelector from '../Cart/QuantitySelector';
 
 const Onboard = ({ onboardOpen, setOnboardOpen, setSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
     const [raiseAlert, setRaiseAlert] = useState(false);

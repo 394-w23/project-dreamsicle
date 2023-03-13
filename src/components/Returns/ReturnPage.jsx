@@ -3,11 +3,11 @@ import { DatePicker } from '@mantine/dates';
 import moment from 'moment';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { useReturnsStore } from '../store/returnsStore';
-import Header from './Header'
-import Navbar from './Navbar';
+import { useReturnsStore } from '../../store/returnsStore';
 import ReturnConfirmationPage from './ReturnConfirmationPage';
 import "./ReturnPage.css";
+import Navbar from '../Navigation/Navbar';
+import Header from '../Navigation/Header';
 
 export default function ReturnPage() {
 

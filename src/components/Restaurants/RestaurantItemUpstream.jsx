@@ -1,5 +1,5 @@
 import { Textarea, Text, Button, NumberInput, TextInput } from '@mantine/core';
-import { useDbData, useDbUpdate } from '../utils/firebase';
+import { useDbData, useDbUpdate } from '../../utils/firebase';
 import uuid from 'react-uuid';
 import { useEffect, useRef, useState } from 'react';
 import { showNotification } from '@mantine/notifications';
