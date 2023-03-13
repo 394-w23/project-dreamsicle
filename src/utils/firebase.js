@@ -21,14 +21,14 @@ import { useEffect, useState, useCallback } from 'react';
 //   };
 
   const firebaseConfig = {
-    apiKey: "AIzaSyDB3F9ZbgSz8fkJ4-XU7lPsk43A7w9_bWU",
-    authDomain: "project-dreamsicle.firebaseapp.com",
-    databaseURL: "https://project-dreamsicle-default-rtdb.firebaseio.com",
-    projectId: "project-dreamsicle",
-    storageBucket: "project-dreamsicle.appspot.com",
-    messagingSenderId: "233112252596",
-    appId: "1:233112252596:web:21b88721f5168da89167e1",
-    measurementId: "G-HQ9QGB4353"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
   };
 
 // Initialize Firebase
