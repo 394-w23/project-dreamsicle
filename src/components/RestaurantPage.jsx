@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from "react-router-dom";
 import MenuSection from "./MenuSection.jsx";
-import { Card, Image, Button, Text, Group, Title, Modal, Table, Alert } from "@mantine/core";
+import { Card, Image, Button, Text, Group, Title, Alert } from "@mantine/core";
 import uuid from 'react-uuid';
-import { useDbData, useDbUpdate } from '../utils/firebase';
-import { useForm } from '@mantine/form';
-import moment from 'moment';
+import { useDbUpdate } from '../utils/firebase';
 import { useParams } from "react-router-dom";
 import Header from './Header';
 import BackButton from "./BackButton.jsx";

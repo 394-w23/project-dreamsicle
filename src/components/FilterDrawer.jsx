@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Drawer, Input, useMantineTheme, NumberInput, Text } from '@mantine/core';
+import { Button, Drawer,  useMantineTheme, NumberInput, Text } from '@mantine/core';
 import { useFilterStore } from '../store/filterStore';
 
 

@@ -1,6 +1,6 @@
 import Header from './Header';
 import { useState } from "react";
-import { Timeline, Text, Table, Card } from '@mantine/core';
+import { Timeline, Text, Card } from '@mantine/core';
 import { RiMailSendLine } from "@react-icons/all-files/ri/RiMailSendLine"
 import { RiCheckboxCircleLine } from "@react-icons/all-files/ri/RiCheckboxCircleLine"
 import { RiTruckLine } from "@react-icons/all-files/ri/RiTruckLine"

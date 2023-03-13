@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+import { Link} from "react-router-dom";
 import './Transaction.css';
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
-import { useDbData, useDbUpdate } from '../utils/firebase';
+import { Card, Image, Text, Group } from '@mantine/core';
 import { getTotalOrderPrice } from '../utils/helper';
 import { useTransactionStore } from '../store/transactionsStore';
 

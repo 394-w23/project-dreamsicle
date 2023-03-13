@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Restaurant.css';
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import { Card, Image, Text, Group } from '@mantine/core';
 import { useDbData, useDbUpdate } from '../utils/firebase';
 
 

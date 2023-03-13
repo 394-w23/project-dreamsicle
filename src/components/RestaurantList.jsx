@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from "react-router-dom";
 import Restaurant from './Restaurant';
-import logo from '../logo.svg';
 import './RestaurantList.css';
 import Header from './Header';
 import "./RestaurantPage.css";
@@ -11,7 +9,7 @@ import FilterItem from './FilterItem';
 import TimeFilter from './TimeFilter';
 import SizeFilter from './SizeFilter';
 import { FaFilter } from "@react-icons/all-files/Fa/FaFilter"
-import { Button, NumberInput, Text, Title,  TextInput } from '@mantine/core';
+import { Button, NumberInput, Text, Title } from '@mantine/core';
 import FilterSelector from './FilterSelector';
 import Onboard from './Onboard';
 import { useFilterStore } from '../store/filterStore';
@@ -130,10 +128,6 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
         applyFilters();
     }, [filters, size, formattedDesiredDateTime, currTagFilters])
 
-    const clearExistingDate = () => {
-        setDesiredDate(null)
-    }
-
     const clearDateTime = () => {
         setDesiredDate(null);
         setDesiredTime(null);
@@ -147,7 +141,7 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
         <div>
             <Header />
 
-            <Onboard setOnboardOpen={setOnboardOpen} onboardOpen={onboardOpen} setDesiredDate={setDesiredDate} setSize={setSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime} />
+            <Onboard setOnboardOpen={setOnboardOpen} onboardOpen={onboardOpen} setSize={setSize} size={size} setAddress={setAddress} address={address} setDesiredTime={setDesiredTime} desiredDate={desiredDate} desiredTime={desiredTime} />
 
             <div className="main-filters">
                 <NumberInput
@@ -212,9 +206,9 @@ const RestaurantList = ({ restaurants, onboardOpen, setOnboardOpen }) => {
             <FilterSelector setFilterOpen={setFilterOpen} filterOpen={filterOpen} tags={tags} setCurrTagFilters={setCurrTagFilters} tempFilters={tempFilters} setTempFilters={setTempFilters} />
 
             <div className='tags'>
-                {size !== 0 && <SizeFilter clearSize={clearSize} size={size} numberOfRestaurantsFound={filteredRestaurants.length} />}
+                {size !== 0 && <SizeFilter clearSize={clearSize} size={size} />}
 
-                {desiredDate && <TimeFilter clearDateTime={clearDateTime}  numberOfRestaurantsFound={filteredRestaurants.length} filterDate={filterDate} setFilterDate={setFilterDate} />}
+                {desiredDate && <TimeFilter clearDateTime={clearDateTime} />}
 
                 {tags.filter(tag => currTagFilters.includes(tag)).map(tag => <FilterItem key={tag} tag={tag} removeFilterTag={removeFilterTag} />)}
             </div>

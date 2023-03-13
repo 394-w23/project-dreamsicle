@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Text, Switch, Group, Modal, Table, Drawer, useMantineTheme, Title, Checkbox, Radio } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Button, Text, Switch, Checkbox } from "@mantine/core";
 import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
-import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/es/styles-compiled.css';
 import { menuItemParser } from '../utils/helper';
 import OrderTable from './OrderTable';
 import './Cart.css';
-import { set } from 'firebase/database';
 
 
 export default function Cart({ updateCart, restaurant, cartData, setCartData, updateOrders, setDrawerState }) {

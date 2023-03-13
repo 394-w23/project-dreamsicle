@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import uuid from 'react-uuid';
-import { Button, Switch, Text, Group, Modal, Table, Drawer, useMantineTheme, Title, Checkbox, Radio } from "@mantine/core";
+import { Button, Title } from "@mantine/core";
 import { useForm } from '@mantine/form';
 import { useDbUpdate } from "../utils/firebase";
 import { Link } from "react-router-dom";

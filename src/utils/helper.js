@@ -1,6 +1,3 @@
-import { FaTrash } from "@react-icons/all-files/Fa/FaTrash"
-import { Button, Table } from "@mantine/core";
-
 export const tags = ["vegetarian", "gluten-free", "spicy", "szechuan-cuisine", "chinese-food"]
 
 export const menuItemParser = (order, restaurant) => {

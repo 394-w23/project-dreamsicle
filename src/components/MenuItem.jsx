@@ -1,8 +1,8 @@
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import { Card, Image, Text,  Group } from '@mantine/core';
 import './MenuItem.css';
 
 
-const MenuItem = ({ menu_item, setCartData, cartData, setItemDetails, setItemDetailsOpened }) => {
+const MenuItem = ({ menu_item, setItemDetails, setItemDetailsOpened }) => {
   const openItemDetails = () => {
     setItemDetails(menu_item);
     setItemDetailsOpened(true);

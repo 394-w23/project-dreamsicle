@@ -1,12 +1,7 @@
 import { Badge } from '@mantine/core';
-import { useState } from 'react';
 import { TiDelete } from '@react-icons/all-files/ti/TiDelete';
 
-const SizeFilter = ({ size, clearSize, numberOfRestaurantsFound }) => {
-
-    const [opened, setOpened] = useState();
-
-
+const SizeFilter = ({ size, clearSize }) => {
     return (
         <>
             <div onClick={() => clearSize()} className="filter-tag">

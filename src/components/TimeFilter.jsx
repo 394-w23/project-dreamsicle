@@ -1,11 +1,7 @@
-import { Badge, Button, Drawer, Input, NumberInput, Text } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { Badge } from '@mantine/core';
 import { TiDelete } from '@react-icons/all-files/ti/TiDelete';
 
-const TimeFilter = ({ clearDateTime, numberOfRestaurantsFound, filterDate, setFilterDate }) => {
-
-    const [opened, setOpened] = useState(false);
-
+const TimeFilter = ({ clearDateTime }) => {
     return (
         <>
             <div onClick={() => clearDateTime()} className="filter-tag">

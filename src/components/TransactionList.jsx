@@ -1,6 +1,6 @@
 import Header from './Header';
 import Navbar from './Navbar';
-import { Button, NumberInput, Text, Title, TextInput } from '@mantine/core';
+import { Title } from '@mantine/core';
 import Transaction from './Transaction';
 
 

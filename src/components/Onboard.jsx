@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { BiErrorCircle } from "@react-icons/all-files/Bi/BiErrorCircle"
 import "./Onboard.css";
 
-const Onboard = ({ onboardOpen, setOnboardOpen, setDesiredDate, setSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
+const Onboard = ({ onboardOpen, setOnboardOpen, setSize, size, setAddress, address, setDesiredTime, desiredDate, desiredTime }) => {
     const [raiseAlert, setRaiseAlert] = useState(false);
 
 
