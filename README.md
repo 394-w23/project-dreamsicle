@@ -12,6 +12,14 @@ npx degit criesbeck/react-vitest
 npm install
 ```
 
+## Setting up Firebase
+This app uses Firebase to store all the data in the backend. To use Firebase, you will need to login to Firebase using any Google login. For more information on setting up Firebase click here: https://firebase.google.com/docs/database/
+
+## Configuration Data
+Firebase configuration data should be placed in utils/firebase.js in the const 'firebaseConfig'
+ 
+
+
 ## Test
 
 Verify that the initial app works. Run
@@ -68,6 +76,25 @@ your-app-name
 ├── vite.config.js
 ```
 
+## Known Bugs
+1. Utensil rentals are currently hard coded and need implementation for when not all utensils are rented
+2. Filtering by zip code is not implemented
+3. Information displayed in order screen (order status timeline) is only implemented for the front end and not stored in the Firebase
+4. No information regarding returns are stored in the Firebase (return time/date, return utensils, return confirmation, etc.)
+
+## Future Implementations
+1. Currently only the customer side of the app is implemented, future implementation would include implementing the restaurant side to confirm orders and edit existing menus
+    **Note, you can currently add additional items to a menu by using the /upstream route*
+2. Adding Google authentication for user login (currently no authentication exists)
+3. Implementing order cancellation
+4. Including push notifications
+5. Implementing real payments
+6. Including a page to look at history of returns (similar to order history page)
+7. Allowing messaging between clients and restaurants
+8. Creating a user profile tab
+
+
+
 ## Credits
 
 React-Vitest built and maintained by [Chris Riesbeck](https://github.com/criesbeck).
@@ -79,6 +106,11 @@ Thanks to Rich Harris for [degit](https://www.npmjs.com/package/degit).
 
 Gitignore file created with [the Toptal tool](https://www.toptal.com/developers/gitignore/api/react,firebase,visualstudiocode,macos,windows).
 
+Styled primarily with [Mantine](https://mantine.dev/pages/getting-started/)
+
+Icons taken from [React Icons](https://react-icons.github.io/react-icons/)
+
+Usage of global variables from [Zustand](https://github.com/pmndrs/zustand)
 
 ## License
 
